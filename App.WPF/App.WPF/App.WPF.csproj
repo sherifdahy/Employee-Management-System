@@ -1,0 +1,115 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows8.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>MyApp.WPF</RootNamespace>
+    <EnableDefaultItems>False</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Telerik.UI.for.Wpf.70.Xaml" Version="2023.1.117" />
+  </ItemGroup>
+  
+  <ItemGroup>
+  <ApplicationDefinition Include="App.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    <SubType>Designer</SubType>
+  </ApplicationDefinition>
+  <Page Include="UserControls\Admin\Companies\CompaniesControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Companies\NewCompanyControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Employees\EmployeeAccessControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Employees\EmployeesControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Employees\NewEmployeeControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\HomeControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Organizations\NewOrganizationControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Organizations\OrganizationControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Windows\Employee\MainWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Windows\Identity\LoginWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Windows\Admin\MainWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Windows\Admin\NewEmailWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Windows\Admin\NewOwnerWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Compile Include="App.xaml.cs">
+    <DependentUpon>App.xaml</DependentUpon>
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="ApplicationConfiguration\AutoMapperProfile.cs" />
+  <Compile Include="Services\Encryption\EncryptionService.cs" />
+  <Compile Include="Services\Encryption\IEncryptionService.cs" />
+  <Compile Include="UserControls\Admin\Companies\CompaniesControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Companies\NewCompanyControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Employees\EmployeeAccessControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Employees\EmployeesControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Employees\NewEmployeeControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\HomeControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Organizations\NewOrganizationControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Organizations\OrganizationControl.xaml.cs" />
+  <Compile Include="ViewModels\LoginViewModel.cs" />
+  <Compile Include="ViewModels\BaseViewModel.cs" />
+  <Compile Include="ViewModels\CompanyViewModel.cs" />
+  <Compile Include="ViewModels\EmailViewModel.cs" />
+  <Compile Include="ViewModels\OrganizationViewModel.cs" />
+  <Compile Include="ViewModels\OwnerViewModel.cs" />
+  <Compile Include="ViewModels\RegisterViewModel.cs" />
+  <Compile Include="Windows\Employee\MainWindow.xaml.cs" />
+  <Compile Include="Windows\Identity\LoginWindow.xaml.cs" />
+  <Compile Include="Windows\Admin\MainWindow.xaml.cs" />
+  <Compile Include="Windows\Admin\NewEmailWindow.xaml.cs" />
+  <Compile Include="Windows\Admin\NewOwnerWindow.xaml.cs" />
+</ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="UserControls\Employee\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\App.BLL\App.BLL.csproj" />
+  </ItemGroup>
+
+</Project>

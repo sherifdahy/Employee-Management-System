@@ -1,0 +1,48 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyApp.WPF.Windows.Admin"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:localVM="clr-namespace:MyApp.WPF.ViewModels" 
+        x:Class="MyApp.WPF.Windows.Admin.NewOwnerWindow"
+        mc:Ignorable="d"
+        FlowDirection="RightToLeft"
+        Title="NewOwnerWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <localVM:OwnerViewModel />
+    </Window.DataContext>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            
+            
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
+                <TextBlock Text="اسم العميل:" Margin="0,0,0,5"/>
+                <telerik:RadWatermarkTextBox  Text="{Binding Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="اسم العميل" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
+                <TextBlock Text="معرف العميل:" Margin="0,0,0,5"/>
+                <telerik:RadWatermarkTextBox  Text="{Binding NationalId, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="معرف العميل" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+                <TextBlock Text="رقم التليفون:" Margin="0,0,0,5"/>
+                <telerik:RadWatermarkTextBox  Text="{Binding PhoneNumber, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="رقم التليفون" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+                <TextBlock Text="العنوان:" Margin="0,0,0,5"/>
+                <telerik:RadWatermarkTextBox  Text="{Binding Address, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="العنوان" />
+            </StackPanel>
+
+            <Button Name="AddOwnerBtn" Grid.Row="2" Grid.Column="1" Width="100" telerik:StyleManager.Theme="Fluent" Content="اضافة" HorizontalAlignment="Right" Click="AddOwnerBtn_Click"/>
+        </Grid>
+    </ScrollViewer>
+</Window>

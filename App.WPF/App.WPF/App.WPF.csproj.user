@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="UserControls\Admin\Companies\CompaniesControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Companies\NewCompanyControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Employees\EmployeeAccessControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Employees\EmployeesControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Employees\NewEmployeeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\HomeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Organizations\NewOrganizationControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Organizations\OrganizationControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Employee\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Identity\LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Admin\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Admin\NewEmailWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Admin\NewOwnerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UserControls\Admin\Companies\CompaniesControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Companies\NewCompanyControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Employees\EmployeeAccessControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Employees\EmployeesControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Employees\NewEmployeeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\HomeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Organizations\NewOrganizationControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Organizations\OrganizationControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Employee\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Identity\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Admin\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Admin\NewEmailWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Admin\NewOwnerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

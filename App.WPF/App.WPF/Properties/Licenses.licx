@@ -1,0 +1,5 @@
+Telerik.Windows.Controls.RadButton, Telerik.Windows.Controls, Version=2023.1.117.70, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadWatermarkTextBox, Telerik.Windows.Controls, Version=2023.1.117.70, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadPasswordBox, Telerik.Windows.Controls, Version=2023.1.117.70, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadGridView, Telerik.Windows.Controls.GridView, Version=2023.1.117.70, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadVirtualGrid, Telerik.Windows.Controls.VirtualGrid, Version=2023.1.117.70, Culture=neutral, PublicKeyToken=5803cfa389c90ce7

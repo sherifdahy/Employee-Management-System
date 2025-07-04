@@ -1,0 +1,17 @@
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\App.BLL.deps.json
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\App.BLL.dll
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\App.BLL.pdb
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\App.DAL.dll
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\App.Entities.dll
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\App.DAL.pdb
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\App.Entities.pdb
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.csproj.AssemblyReference.cache
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.GeneratedMSBuildEditorConfig.editorconfig
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.AssemblyInfoInputs.cache
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.AssemblyInfo.cs
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.csproj.CoreCompileInputs.cache
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.csproj.Up2Date
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.dll
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\refint\App.BLL.dll
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.pdb
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\ref\App.BLL.dll

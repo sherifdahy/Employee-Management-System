@@ -1,0 +1,21 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyApp.WPF.Windows"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:localVM="clr-namespace:MyApp.WPF.ViewModels" 
+        x:Class="MyApp.WPF.Windows.LoginWindow"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="252" Width="642">
+    <Window.DataContext>
+        <localVM:LoginViewModel></localVM:LoginViewModel>
+    </Window.DataContext>
+    <Grid FlowDirection="RightToLeft">
+        
+        <telerik:RadButton telerik:StyleManager.Theme="Fluent" Name="LoginBtn" Content="تسجيل دخول" HorizontalAlignment="Left" Height="34" Margin="390,158,0,0" VerticalAlignment="Top" Width="208" Click="LoginBtn_Click"/>
+        <telerik:RadWatermarkTextBox  Style="{DynamicResource ValidationTextBoxStyle}" Text="{Binding Email,ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"  telerik:StyleManager.Theme="Fluent" Name="UsernameTxt" HorizontalAlignment="Left" Margin="390,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Width="208"/>
+        <telerik:RadPasswordBox   Style="{DynamicResource ValidationPasswordBoxStyle}" Text="{Binding Password,NotifyOnValidationError=False,ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}"  telerik:StyleManager.Theme="Fluent" Name="PasswordTxt" HorizontalAlignment="Left" Margin="390,0,0,0"  VerticalAlignment="Center" Width="208" PasswordChanged="PasswordTxt_PasswordChanged" />
+
+    </Grid>
+</Window>

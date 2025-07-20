@@ -10,6 +10,6 @@ namespace App.BLL
     public interface IOrganizationService
     {
         Task<IEnumerable<Organization>> GetAllAsync();
-        Task CreateAsync(Organization organization); 
+        Task CreateAsync(Organization organization);
     }
 }

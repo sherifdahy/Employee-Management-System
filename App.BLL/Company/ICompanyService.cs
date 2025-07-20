@@ -11,7 +11,10 @@ namespace App.BLL
     public interface ICompanyService
     {
         Task CreateAsync(Company company);
-        Task<IEnumerable<Company>> GetAllAsync();
+        Task<Pagination<Company>> GetAllAsync(int currentPage, int displayCount = 10, int userId = 0, string? value = null);
+        Task<OperationResult<string, string>> DeleteAsync(int id);
+        Task<OperationResult<Company, string>> GetByIdAsync(int id);
         Task<IEnumerable<Company>> SearchAsync(string value);
+        Task<IEnumerable<Company>> GetRelatedCompaniesAsync(int userId);
     }
 }

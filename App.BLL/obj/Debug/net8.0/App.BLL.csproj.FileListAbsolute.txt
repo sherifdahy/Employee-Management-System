@@ -15,3 +15,7 @@ E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.dll
 E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\refint\App.BLL.dll
 E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.pdb
 E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\ref\App.BLL.dll
+E:\Saber Eid\Desktop Application\App.BLL\obj\Debug\net8.0\App.BLL.sourcelink.json
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\selenium-manager\linux\selenium-manager
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\selenium-manager\macos\selenium-manager
+E:\Saber Eid\Desktop Application\App.BLL\bin\Debug\net8.0\selenium-manager\windows\selenium-manager.exe

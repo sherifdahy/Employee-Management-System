@@ -30,17 +30,16 @@ namespace MyApp.WPF.UserControls.Admin.Employees
             InitializeComponent();
             _employeeService = employeeService;
             _companyService = companyService;
+            Loaded += UserControl_Loaded;
+            CompaniesDataPager.PageIndexChanged += CompaniesDataPager_PageIndexChanged;
         }
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            
             try
             {
-                var employees = await _employeeService.GetAllAsync();
-                var companies = await _companyService.GetAllAsync();
-                CompaniesDataGrid.Items.AddRange(companies);
-                EmployeesDataGrid.Items.AddRange(employees);
+                await UsePaginationForCompanies();
+                await UsePaginationForEmployees();
             }
             catch (Exception ex)
             {
@@ -52,9 +51,10 @@ namespace MyApp.WPF.UserControls.Admin.Employees
         {
             try
             {
-                RadWatermarkTextBox radWatermarkTextBox = sender as RadWatermarkTextBox;
-                var companies = await _companyService.SearchAsync(radWatermarkTextBox.Text);
-                CompaniesDataGrid.Items.AddRange(companies);
+                var textbox = sender as RadWatermarkTextBox;
+                if (textbox != null) {
+                    await UsePaginationForCompanies(value:textbox.Text);
+                }
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace MyApp.WPF.UserControls.Admin.Employees
                 var employee = EmployeesDataGrid.SelectedItem as ApplicationUser;
                 if (employee != null)
                 {
-                    bool result = employee.Companies.Contains(company);
+                    bool result = employee.Companies.Any(x=>x.Id == company.Id);
                     if (!result)
                     {
                         employee.Companies.Add(company);
@@ -145,6 +145,35 @@ namespace MyApp.WPF.UserControls.Admin.Employees
             {
                 MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+        private async Task UsePaginationForCompanies(int userId = 0,string value = null)
+        {
+            var currentPage = CompaniesDataPager.PageIndex;
+            var pageSize = CompaniesDataPager.PageSize;
+            var paginationResult = await _companyService.GetAllAsync(currentPage, pageSize, userId, value);
+            CompaniesDataGrid.ItemsSource = paginationResult.Items;
+            CompaniesDataPager.ItemCount = paginationResult.TotalCount;
+        }
+
+        private async Task UsePaginationForEmployees(int userId = 0, string value = null)
+        {
+            var currentPage = EmployeesDataPager.PageIndex;
+            var pageSize = EmployeesDataPager.PageSize;
+            var paginationResult = await _employeeService.GetAllAsync(currentPage, pageSize, value);
+            EmployeesDataGrid.ItemsSource = paginationResult.Items;
+            EmployeesDataPager.ItemCount = paginationResult.TotalCount;
+        }
+        private async void CompaniesDataPager_PageIndexChanged(object sender, PageIndexChangedEventArgs e)
+        {
+            var textbox = CompanySearchTxt;
+            await UsePaginationForCompanies(value:textbox.Text);
+        }
+
+        private async void EmployeesDataPager_PageIndexChanging(object sender, PageIndexChangingEventArgs e)
+        {
+            await UsePaginationForCompanies();
         }
     }
 }

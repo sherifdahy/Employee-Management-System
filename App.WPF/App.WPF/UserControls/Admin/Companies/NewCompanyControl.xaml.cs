@@ -43,8 +43,10 @@ namespace MyApp.WPF.UserControls.Admin.Companies
                     "نجاح العملية",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information,
-                    MessageBoxResult.OK,
-                    MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+                    MessageBoxResult.OK);
+
+                    // to reset form
+                    this.DataContext = new CompanyViewModel();
                 }
             }
             catch (Exception ex)
@@ -57,16 +59,10 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             try
             {
-                var newOwnerWindow = _serviceProvider.GetRequiredService<NewOwnerWindow>();
-                if (newOwnerWindow.ShowDialog() == true)
+                var window = _serviceProvider.GetRequiredService<NewOwnerWindow>();
+                if (window.ShowDialog() == true)
                 {
-                    OwnersDataGrid.Items.AddNewItem(newOwnerWindow._owner);
-                    MessageBox.Show(
-                        "تم الإضافة بنجاح.",
-                        "نجاح العملية",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information
-                    );
+                    OwnersDataGrid.Items.AddNewItem(window.DataContext as OwnerViewModel);
                 }
             }
             catch (Exception ex)
@@ -79,17 +75,10 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             try
             {
-                NewEmailWindow newEmailWindow = _serviceProvider.GetRequiredService<NewEmailWindow>();
-                var result = newEmailWindow.ShowDialog();
-                if (result == true)
+                NewEmailWindow window = _serviceProvider.GetRequiredService<NewEmailWindow>();
+                if (window.ShowDialog() == true)
                 {
-                    EmailsDataGrid.Items.AddNewItem(newEmailWindow._email);
-                    MessageBox.Show(
-                        "تم الإضافة بنجاح.",
-                        "نجاح العملية",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information
-                    );
+                    EmailsDataGrid.Items.AddNewItem(window.DataContext as EmailViewModel);
                 }
             }
             catch (Exception ex)

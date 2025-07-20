@@ -34,8 +34,8 @@ namespace MyApp.WPF.UserControls.Admin.Employees
         {
             try
             {
-                var employees = await _employeeService.GetAllAsync();
-                EmployeesDataGrid.Items.AddRange(employees);
+                //var employees = await _employeeService.GetAllAsync();
+                //EmployeesDataGrid.Items.AddRange(employees);
             }
             catch (Exception ex)
             {

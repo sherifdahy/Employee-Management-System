@@ -12,5 +12,6 @@ namespace App.Entities.Models
         public string? Name { get; set; }
         public string? URL { get; set; }
         public virtual ICollection<Email> Emails { get; set; } = new HashSet<Email>();
+        public virtual ICollection<Selector> Selectors { get; set; } = new HashSet<Selector>();
     }
 }

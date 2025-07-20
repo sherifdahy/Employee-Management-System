@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.UserControls.Employee.Companies;
+using MyApp.WPF.UserControls.Employee.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,21 @@ namespace MyApp.WPF.Windows.Employee
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IServiceProvider _serviceProvider;
+        public MainWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
+        }
+
+        private void CompanyPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainSection.Content = _serviceProvider.GetRequiredService<CompaniesControl>();
+        }
+
+        private void HomePageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainSection.Content = _serviceProvider.GetRequiredService<HomeControl>();
         }
     }
 }

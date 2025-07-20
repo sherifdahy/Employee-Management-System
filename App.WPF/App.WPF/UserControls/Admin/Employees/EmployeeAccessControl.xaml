@@ -8,7 +8,6 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:MyApp.WPF.UserControls.Admin.Employees" xmlns:localCompany="clr-namespace:App.Entities.Models;assembly=App.Entities"
     mc:Ignorable="d" 
-             Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <localCompany:Company></localCompany:Company>
@@ -64,6 +63,10 @@
                         <telerik:GridViewDataColumn Header="عنوان" DataMemberBinding="{Binding Address}"  Width="3*"></telerik:GridViewDataColumn>
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
+                <telerik:RadDataPager telerik:StyleManager.Theme="Windows11"
+                                      x:Name="CompaniesDataPager"
+                                      PageSize="5"
+                                      ></telerik:RadDataPager>
             </StackPanel>
             <StackPanel Margin="10" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center">
                 <telerik:RadWatermarkTextBox 
@@ -97,7 +100,12 @@
                         <telerik:GridViewDataColumn Header="عنوان" DataMemberBinding="{Binding Address}"  Width="2*"></telerik:GridViewDataColumn>
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
+                <telerik:RadDataPager telerik:StyleManager.Theme="Windows11"
+                      x:Name="CompaniesAccessDataPager"
+                      PageSize="5"
+                      ></telerik:RadDataPager>
             </StackPanel>
+            
             <StackPanel Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
                 <TextBlock Text="الموظفين" FontSize="20" Foreground="#FF001DAB">
                 </TextBlock>
@@ -121,6 +129,10 @@
                         <telerik:GridViewDataColumn Header="الاسم" DataMemberBinding="{Binding Name}"  Width="3*"></telerik:GridViewDataColumn>
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
+                <telerik:RadDataPager telerik:StyleManager.Theme="Windows11"
+                                      x:Name="EmployeesDataPager"
+                                      PageSize="5"
+                                      ></telerik:RadDataPager>
             </StackPanel>
             <StackPanel Grid.Column="3" Grid.Row="8" Margin="10">
                 <Button x:Name="SaveBtn" Click="SaveBtn_Click" telerik:StyleManager.Theme="Fluent" Width="200" HorizontalAlignment="Right" Content="حفظ"></Button>

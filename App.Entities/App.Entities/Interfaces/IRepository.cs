@@ -23,8 +23,8 @@ namespace Interfaces
 
 		
 
-		Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int skip, int take);
-		Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int? skip, int? take,
+		Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int take, int skip);
+		Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int? take, int? skip,
 			Expression<Func<T, object>> orderBy = null, bool IsDesc = false);
 
 		//IEnumerable<T> FindWithFilters(

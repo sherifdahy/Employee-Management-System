@@ -1,5 +1,8 @@
 ﻿using App.Entities.Models;
 using Interfaces;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +29,7 @@ namespace App.BLL
             var organization = await _unitOfWork.Organizations.GetAllAsync();
             return organization;
         }
+
+        
     }
 }

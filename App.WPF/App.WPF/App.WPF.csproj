@@ -54,6 +54,21 @@
   <Page Include="UserControls\Admin\Organizations\OrganizationControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
+  <Page Include="UserControls\Employee\Companies\CompaniesControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Employee\Home\HomeControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Shared\DisplayCompanyControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Shared\SettingsControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Windows\Admin\AddSelectorWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="Windows\Employee\MainWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
@@ -76,6 +91,8 @@
   <Compile Include="ApplicationConfiguration\AutoMapperProfile.cs" />
   <Compile Include="Services\Encryption\EncryptionService.cs" />
   <Compile Include="Services\Encryption\IEncryptionService.cs" />
+  <Compile Include="Services\State\IStateService.cs" />
+  <Compile Include="Services\State\StateService.cs" />
   <Compile Include="UserControls\Admin\Companies\CompaniesControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Companies\NewCompanyControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Employees\EmployeeAccessControl.xaml.cs" />
@@ -84,13 +101,19 @@
   <Compile Include="UserControls\Admin\HomeControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Organizations\NewOrganizationControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Organizations\OrganizationControl.xaml.cs" />
+  <Compile Include="UserControls\Employee\Companies\CompaniesControl.xaml.cs" />
+  <Compile Include="UserControls\Employee\Home\HomeControl.xaml.cs" />
+  <Compile Include="UserControls\Shared\DisplayCompanyControl.xaml.cs" />
+  <Compile Include="UserControls\Shared\SettingsControl.xaml.cs" />
   <Compile Include="ViewModels\LoginViewModel.cs" />
   <Compile Include="ViewModels\BaseViewModel.cs" />
   <Compile Include="ViewModels\CompanyViewModel.cs" />
   <Compile Include="ViewModels\EmailViewModel.cs" />
   <Compile Include="ViewModels\OrganizationViewModel.cs" />
   <Compile Include="ViewModels\OwnerViewModel.cs" />
-  <Compile Include="ViewModels\RegisterViewModel.cs" />
+  <Compile Include="ViewModels\ApplicationUserViewModel.cs" />
+  <Compile Include="ViewModels\SelectorViewModel.cs" />
+  <Compile Include="Windows\Admin\AddSelectorWindow.xaml.cs" />
   <Compile Include="Windows\Employee\MainWindow.xaml.cs" />
   <Compile Include="Windows\Identity\LoginWindow.xaml.cs" />
   <Compile Include="Windows\Admin\MainWindow.xaml.cs" />
@@ -102,10 +125,7 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="UserControls\Employee\" />
+    <Resource Include="assets\images\login.png" />
   </ItemGroup>
   
   <ItemGroup>

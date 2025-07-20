@@ -1,10 +1,5 @@
 ﻿using App.Entities.Models;
 using Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.BLL
 {
@@ -26,6 +21,24 @@ namespace App.BLL
             {
                 return OperationResult<ApplicationUser, string>.Fail("اسم المستخدمة او كلمة المرور خطأ من فضلك حاول مرة اخري");
             }
+        }
+        public async Task<OperationResult<ApplicationUser,string>> GetByIdAsync(int id)
+        {
+            var user = await _unitOfWork.ApplicationUsers.GetByIdAsync(id);
+            if (user != null)
+            {
+                return OperationResult<ApplicationUser, string>.Ok(user);
+            }
+            else
+            {
+                return OperationResult<ApplicationUser, string>.Fail("المستخدم غير موجود.");
+            }
+        }
+
+        public void Update(ApplicationUser applicationUser)
+        {
+            _unitOfWork.ApplicationUsers.Update(applicationUser);
+            _unitOfWork.Save();
         }
     }
 }

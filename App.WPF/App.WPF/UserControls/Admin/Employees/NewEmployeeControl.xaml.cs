@@ -52,7 +52,7 @@ namespace MyApp.WPF.UserControls.Admin.Employees
         {
             try
             {
-                var registerVM = this.DataContext as RegisterViewModel;
+                var registerVM = this.DataContext as ApplicationUserViewModel;
                 if (registerVM.IsValid)
                 {
                     var appUser = _mapper.Map<ApplicationUser>(registerVM);

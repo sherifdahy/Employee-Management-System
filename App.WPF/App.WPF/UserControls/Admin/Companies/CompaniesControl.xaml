@@ -1,18 +1,106 @@
 ﻿<UserControl
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            FlowDirection="RightToLeft" 
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyApp.WPF.UserControls.Admin.Companies"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="MyApp.WPF.UserControls.Admin.Companies.CompaniesControl"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:localVM="clr-namespace:App.Entities.Models;assembly=App.Entities" x:Class="MyApp.WPF.UserControls.Admin.Companies.CompaniesControl"
              mc:Ignorable="d" 
-             Loaded="UserControl_Loaded"
+             
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid FlowDirection="RightToLeft" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="107*"/>
-            <RowDefinition Height="343*"/>
-        </Grid.RowDefinitions>
-        <telerik:RadGridView x:Name="CompaniesDataGrid" telerik:StyleManager.Theme="Windows11" Grid.RowSpan="2"/>
-    </Grid>
+    <UserControl.DataContext>
+        <localVM:Company/>
+    </UserControl.DataContext>
+
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!-- 🔍 مربع البحث -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                <telerik:RadWatermarkTextBox
+                Width="300"
+                HorizontalAlignment="Left"
+                telerik:StyleManager.Theme="Fluent"
+                x:Name="SearchBox"
+                WatermarkContent="ابحث عن شركة..."
+                
+                />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <telerik:RadGridView 
+                    SelectionUnit="FullRow"
+                    RowActivated="CompaniesDataGrid_RowActivated"
+                    x:Name="CompaniesDataGrid"
+                    IsReadOnly="True"
+                    AutoGenerateColumns="False"
+                    telerik:StyleManager.Theme="Windows11"
+                    ShowGroupPanel="False"
+                    IsFilteringAllowed="False"
+                    AllowDrop="False"
+                    
+
+                    CanUserResizeColumns="True"
+                    Margin="0">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn 
+        DataMemberBinding="{Binding Name}" 
+        Width="3*" 
+        Header="اسم الشركة"/>
+                        <telerik:GridViewDataColumn 
+        DataMemberBinding="{Binding TaxRegistrationNumber}" 
+        Width="2*" 
+        Header="رقم التسجيل"/>
+                        <telerik:GridViewDataColumn 
+        DataMemberBinding="{Binding Address}" 
+        Width="3*" 
+        Header="العنوان"/>
+
+                        <telerik:GridViewDataColumn Width="1*">
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="تعديل" 
+                        telerik:StyleManager.Theme="Office2013" 
+                        x:Name="EditBtn" 
+                        Click="EditBtn_Click" 
+                        Margin="2" 
+                        Padding="4,2"
+                        MinWidth="50"/>
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+
+                        <telerik:GridViewDataColumn Width="1*">
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="حذف" 
+                        x:Name="DeleteBtn" 
+                        telerik:StyleManager.Theme="Office2013" 
+                        Click="DeleteBtn_Click" 
+                        Margin="2" 
+                        Padding="4,2"
+                        MinWidth="50"
+                        Foreground="Red"/>
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+                
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <telerik:RadDataPager telerik:StyleManager.Theme="Windows11"
+                      x:Name="CompaniesDataPager"
+                      PageSize="14"
+                      ></telerik:RadDataPager>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+
 </UserControl>

@@ -26,6 +26,21 @@
     <Compile Update="UserControls\Admin\Organizations\OrganizationControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Employee\Companies\CompaniesControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Employee\Home\HomeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Shared\DisplayCompanyControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Shared\SettingsControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Admin\AddSelectorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\Employee\MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -65,6 +80,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\Admin\Organizations\OrganizationControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Employee\Companies\CompaniesControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Employee\Home\HomeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Shared\DisplayCompanyControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Shared\SettingsControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Admin\AddSelectorWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Employee\MainWindow.xaml">

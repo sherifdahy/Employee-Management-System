@@ -39,6 +39,11 @@
                     Text="{Binding URL, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
                     WatermarkContent="عنوان المنظمة" />
             </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="10">
+                <Button Content="اضافة" x:Name="AddSelectorBtn" Click="AddSelectorBtn_Click"></Button>
+                <telerik:RadGridView x:Name="SelectorDataGrid" telerik:StyleManager.Theme="Windows11"  ItemsSource="{Binding Selectors, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" >
+                </telerik:RadGridView>
+            </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="4" Width="100" HorizontalAlignment="Right">
                 <telerik:RadButton x:Name="AddOrgBtn" telerik:StyleManager.Theme="Fluent" Content="اضافة" Click="AddOrgBtn_Click"></telerik:RadButton>
             </StackPanel>

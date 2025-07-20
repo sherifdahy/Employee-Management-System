@@ -3,27 +3,35 @@ using App.Entities.Enums;
 using App.Entities.Models;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Services.State;
 using MyApp.WPF.UserControls.Admin.Employees;
 using MyApp.WPF.ViewModels;
 using System;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
-namespace MyApp.WPF.Windows
+namespace MyApp.WPF.Windows.Identity
 {
     public partial class LoginWindow : Window
     {
         public bool IsLoginSuccessful { get; private set; }
         private readonly IServiceProvider _serviceProvider;
         private readonly IAuthService _authService;
-        public LoginWindow(IServiceProvider serviceProvider, IAuthService authService)
+        private readonly IStateService _stateService;
+        public LoginWindow(IStateService stateService,IServiceProvider serviceProvider, IAuthService authService)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _authService = authService;
-
+            _stateService = stateService;
+            
         }
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            EmailTxt.Focus();
+        }
 
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -37,6 +45,7 @@ namespace MyApp.WPF.Windows
                     if (result.State)
                     {
                         IsLoginSuccessful = true;
+                        _stateService.UserId = result.Data.Id;
                         if (result.Data.UserType == UserType.Admin)
                         {
                             var mainWindow = _serviceProvider.GetRequiredService<Admin.MainWindow>();
@@ -68,5 +77,15 @@ namespace MyApp.WPF.Windows
                 vm.Password = passwordBox.Password;
             }
         }
+
+        private void Input_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                LoginBtn_Click(sender, e);
+            }
+        }
+
+        
     }
 }

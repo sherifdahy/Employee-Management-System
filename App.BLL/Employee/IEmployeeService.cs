@@ -10,7 +10,7 @@ namespace App.BLL
     public interface IEmployeeService
     {
         Task CreateAsync(ApplicationUser applicationUser);
-        Task<IEnumerable<ApplicationUser>> GetAllAsync();
+        Task<Pagination<ApplicationUser>> GetAllAsync(int currentPage, int pageSize, string value);
         void UpdateRange(IEnumerable<ApplicationUser> applicationUsers);
     }
 }

@@ -4,6 +4,7 @@ using AutoMapper;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.WPF.ViewModels;
+using MyApp.WPF.Windows.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,12 +60,30 @@ namespace MyApp.WPF.UserControls.Admin.Organizations
                 MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        private void AddSelectorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var window = _serviceProvider.GetRequiredService<AddSelectorWindow>();
+            window.ShowDialog();
+            if(window.DialogResult.GetValueOrDefault())
+            {
+                var SelectorVM = window.DataContext as SelectorViewModel;
+                if(SelectorVM != null)
+                {
+                    var orgVM = this.DataContext as OrganizationViewModel;
+                    if (orgVM != null)
+                    {
+                        orgVM.Selectors.Add(SelectorVM);
+                    }
+                }
+            }
+        }
         #region Helper
         private void ResetUserControl()
         {
             this.Content = _serviceProvider.GetRequiredService<NewOrganizationControl>();
         }
         #endregion
+
+        
     }
 }

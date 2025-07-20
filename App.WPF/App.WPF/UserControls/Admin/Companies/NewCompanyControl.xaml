@@ -23,8 +23,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -70,11 +68,20 @@
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" Background="WhiteSmoke" Margin="10" >
                 <telerik:RadButton x:Name="AddCustomerBtn" telerik:StyleManager.Theme="Fluent" Content="اضافة عميل" Width="100" HorizontalAlignment="Right" Margin="10" Click="AddCustomerBtn_Click"></telerik:RadButton>
-                <telerik:RadGridView x:Name="OwnersDataGrid" telerik:StyleManager.Theme="Windows11" ItemsSource="{Binding Owners,ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  Margin="10"></telerik:RadGridView>
+                <telerik:RadGridView x:Name="OwnersDataGrid" 
+                                     telerik:StyleManager.Theme="Windows11"
+                                     ShowGroupPanel="False"
+                                     IsReadOnly="True"
+                                     ItemsSource="{Binding Owners,ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  Margin="10"></telerik:RadGridView>
             </StackPanel>
             <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" Background="WhiteSmoke" Margin="10" >
                 <telerik:RadButton x:Name="AddEmailBtn" telerik:StyleManager.Theme="Fluent" Content="اضافة حساب" Width="100" HorizontalAlignment="Right" Margin="10" Click="AddEmailBtn_Click" ></telerik:RadButton>
-                <telerik:RadGridView x:Name="EmailsDataGrid" telerik:StyleManager.Theme="Windows11"  ItemsSource="{Binding Emails, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Margin="10">
+                <telerik:RadGridView x:Name="EmailsDataGrid" 
+                                     ShowGroupPanel="False"
+                                     IsReadOnly="True"
+                                     telerik:StyleManager.Theme="Windows11"  
+                                     ItemsSource="{Binding Emails, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
+                                     Margin="10">
                 </telerik:RadGridView>
             
             </StackPanel>

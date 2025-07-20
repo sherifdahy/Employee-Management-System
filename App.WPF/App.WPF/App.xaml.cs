@@ -1,19 +1,19 @@
 ﻿using App.BLL;
+using App.BLL.Dependencies.Implementations;
+using App.BLL.Dependencies.Interfaces;
 using App.DAL.Data;
-using AutoMapper;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyApp.WPF.ApplicationConfiguration;
-using MyApp.WPF.UserControls;
-using MyApp.WPF.UserControls.Admin;
+using MyApp.WPF.Services.State;
 using MyApp.WPF.UserControls.Admin.Companies;
 using MyApp.WPF.UserControls.Admin.Employees;
 using MyApp.WPF.UserControls.Admin.Organizations;
-using MyApp.WPF.Windows;
+using MyApp.WPF.UserControls.Shared;
 using MyApp.WPF.Windows.Admin;
-using MyApp.WPF.Windows.Employee;
+using MyApp.WPF.Windows.Identity;
 using Repository;
 using System.Windows;
 
@@ -34,6 +34,10 @@ namespace MyApp.WPF
                     services.AddTransient<ICompanyService,CompanyService>();
                     services.AddTransient<IOrganizationService,OrganizationService>();
                     services.AddTransient<IEmployeeService,EmployeeService>();
+                    services.AddSingleton<IStateService, StateService>();
+                    services.AddSingleton<IBrowserService, BrowserService>();
+                    services.AddSingleton<IWebDriverFactory, WebDriverFactory>();
+                    
                     #endregion
                     #region IUnitOfWork Registration
                     services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -47,22 +51,28 @@ namespace MyApp.WPF
                     services.AddTransient<Windows.Employee.MainWindow>();
                     services.AddTransient<NewOwnerWindow>();
                     services.AddTransient<NewEmailWindow>();
+                    services.AddTransient<AddSelectorWindow>();
                     #endregion
                     #region UserControl Registration
-                    services.AddTransient<HomeControl>();
-                    services.AddTransient<CompaniesControl>();
+                    services.AddTransient<UserControls.Admin.HomeControl>();
+                    services.AddTransient<UserControls.Admin.Companies.CompaniesControl>();
+                    services.AddTransient<UserControls.Employee.Home.HomeControl>();
+                    services.AddTransient<UserControls.Employee.Companies.CompaniesControl>();
                     services.AddTransient<NewCompanyControl>();
                     services.AddTransient<NewOrganizationControl>();
                     services.AddTransient<OrganizationsControl>();
                     services.AddTransient<NewEmployeeControl>();
                     services.AddTransient<EmployeesControl>();
                     services.AddTransient<EmployeeAccessControl>();
+                    services.AddTransient<DisplayCompanyControl>();
+                    services.AddTransient<SettingsControl>();
                     #endregion
 
                     services.AddDbContext<ApplicationDbContext>(option =>
                     {
                         option.UseLazyLoadingProxies().UseSqlServer(connectionString);
-                    });
+                        
+                    },ServiceLifetime.Transient);
 
                 })
                 .Build();

@@ -22,11 +22,14 @@ namespace MyApp.WPF.ApplicationConfiguration
             #region Owner
             CreateMap<OwnerViewModel, Owner>().ReverseMap();
             #endregion
+            #region Selector
+            CreateMap<SelectorViewModel, Selector>().ReverseMap();
+            #endregion
             #region Organization
             CreateMap<OrganizationViewModel, Organization>().ReverseMap();
             #endregion
             #region Employee
-            CreateMap<RegisterViewModel, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUserViewModel, ApplicationUser>().ReverseMap();
             #endregion
         }
     }

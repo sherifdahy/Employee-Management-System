@@ -24,72 +24,88 @@
             <!-- 🔍 مربع البحث -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
                 <telerik:RadWatermarkTextBox
-                Width="300"
-                HorizontalAlignment="Left"
-                telerik:StyleManager.Theme="Fluent"
-                x:Name="SearchBox"
-                WatermarkContent="ابحث عن شركة..."
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    telerik:StyleManager.Theme="Fluent"
+                    x:Name="SearchBox"
+                    WatermarkContent="ابحث عن شركة..."
                 
                 />
             </StackPanel>
 
             <StackPanel Grid.Row="1">
                 <telerik:RadGridView 
-                    SelectionUnit="FullRow"
-                    RowActivated="CompaniesDataGrid_RowActivated"
-                    x:Name="CompaniesDataGrid"
-                    IsReadOnly="True"
-                    AutoGenerateColumns="False"
-                    telerik:StyleManager.Theme="Windows11"
-                    ShowGroupPanel="False"
-                    IsFilteringAllowed="False"
-                    AllowDrop="False"
+                        SelectionUnit="FullRow"
+                        RowActivated="CompaniesDataGrid_RowActivated"
+                        x:Name="CompaniesDataGrid"
+                        IsReadOnly="True"
+                        AutoGenerateColumns="False"
+                        telerik:StyleManager.Theme="Windows11"
+                        ShowGroupPanel="False"
+                        IsFilteringAllowed="False"
+                        AllowDrop="False"
                     
 
-                    CanUserResizeColumns="True"
-                    Margin="0">
+                        CanUserResizeColumns="True"
+                        Margin="0">
                     <telerik:RadGridView.Columns>
                         <telerik:GridViewDataColumn 
-        DataMemberBinding="{Binding Name}" 
-        Width="3*" 
-        Header="اسم الشركة"/>
+                            DataMemberBinding="{Binding Name}" 
+                            Width="3*" 
+                            Header="اسم الشركة"/>
                         <telerik:GridViewDataColumn 
-        DataMemberBinding="{Binding TaxRegistrationNumber}" 
-        Width="2*" 
-        Header="رقم التسجيل"/>
-                        <telerik:GridViewDataColumn 
-        DataMemberBinding="{Binding Address}" 
-        Width="3*" 
-        Header="العنوان"/>
+                            DataMemberBinding="{Binding TaxRegistrationNumber}" 
+                            Width="2*" 
+                            Header="رقم التسجيل"/>
+                                            <telerik:GridViewDataColumn 
+                            DataMemberBinding="{Binding Address}" 
+                            Width="3*" 
+                            Header="العنوان"/>
 
-                        <telerik:GridViewDataColumn Width="1*">
+                        <telerik:GridViewDataColumn Width="auto">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="تعديل" 
-                        telerik:StyleManager.Theme="Office2013" 
-                        x:Name="EditBtn" 
-                        Click="EditBtn_Click" 
-                        Margin="2" 
-                        Padding="4,2"
-                        MinWidth="50"/>
+                                    <Button 
+                                        telerik:StyleManager.Theme="Crystal"
+                                        Click="EditBtn_Click" 
+                                        ToolTip="Edit"
+                                        Cursor="Hand"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Padding="5"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Image Source="/assets/icons/icons8-edit-64.png" Width="18" Height="18"/>
+                                            <TextBlock Text="تعديل" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Button>
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
 
-                        <telerik:GridViewDataColumn Width="1*">
+                        <telerik:GridViewDataColumn Width="auto">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="حذف" 
-                        x:Name="DeleteBtn" 
-                        telerik:StyleManager.Theme="Office2013" 
-                        Click="DeleteBtn_Click" 
-                        Margin="2" 
-                        Padding="4,2"
-                        MinWidth="50"
-                        Foreground="Red"/>
+                                    <Button 
+                                        telerik:StyleManager.Theme="Crystal"
+                                        Click="DeleteBtn_Click" 
+                                        ToolTip="Delete"
+                                        Cursor="Hand"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Padding="5"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Image Source="/assets/icons/icons8-delete-96.png" Width="18" Height="18"/>
+                                            <TextBlock Text="حذف" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Button>
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
+
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 

@@ -6,81 +6,153 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:model="clr-namespace:App.Entities.Models;assembly=App.Entities"
-    mc:Ignorable="d" 
+            mc:Ignorable="d" 
+            Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <model:Company></model:Company>
     </UserControl.DataContext>
-    <ScrollViewer Margin="10">
-        <Grid>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
+            <!-- Box 1: اسم الشركة -->
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
                 <TextBlock Text="اسم الشركة:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox 
-                    telerik:StyleManager.Theme="Fluent" 
-                    Text="{Binding Name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnNotifyDataErrors=True}"
-                    Style="{DynamicResource ValidationTextBoxStyle}"
-                    />
+                <TextBox 
+            telerik:StyleManager.Theme="Fluent"
+            IsReadOnly="True"
+            Style="{DynamicResource ValidationTextBoxStyle}" 
+            Text="{Binding Name}"  />
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
-                <TextBlock Text="اسم الشركة:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox 
-                    telerik:StyleManager.Theme="Fluent"
-                    Text="{Binding TaxRegistrationNumber,NotifyOnValidationError=True,ValidatesOnNotifyDataErrors=True}"
-                    Style="{DynamicResource ValidationTextBoxStyle}"
-                    />
+
+            <StackPanel Grid.Row="0" Grid.Column="1"  Margin="10">
+                <TextBlock Text="رقم التسجيل الضريبي:" Margin="0,0,0,5"/>
+                <TextBox 
+            Style="{DynamicResource ValidationTextBoxStyle}" 
+            IsReadOnly="True"
+            telerik:StyleManager.Theme="Fluent"
+            x:Name="TaxRegistrationNumber" 
+            Text="{Binding TaxRegistrationNumber}" 
+             />
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="2" Margin="10">
-                <TextBlock Text="اسم الشركة:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox 
-                    Text="{Binding TaxFileNumber,NotifyOnValidationError=True,ValidatesOnNotifyDataErrors=True}"
-                    Style="{DynamicResource ValidationTextBoxStyle}"
-                    telerik:StyleManager.Theme="Fluent" />
+
+            <StackPanel Grid.Row="0" Grid.Column="2"  Margin="10">
+                <TextBlock Text="رقم الملف الضريبي:" Margin="0,0,0,5"/>
+                <TextBox 
+            Style="{DynamicResource ValidationTextBoxStyle}" 
+            IsReadOnly="True"
+            telerik:StyleManager.Theme="Fluent"
+            Text="{Binding TaxFileNumber}" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-                <TextBlock Text="اسم الشركة:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox 
-                    Text="{Binding EntityType,NotifyOnValidationError=True,ValidatesOnNotifyDataErrors=True}"
-                    Style="{DynamicResource ValidationTextBoxStyle}"
-                    telerik:StyleManager.Theme="Fluent" />
+                <TextBlock Text="العنوان:" Margin="0,0,0,5"></TextBlock>
+                <TextBox 
+            Style="{DynamicResource ValidationTextBoxStyle}" 
+            IsReadOnly="True"
+            telerik:StyleManager.Theme="Fluent"
+            Text="{Binding Address}"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
-                <TextBlock Text="اسم الشركة:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox 
-                    Text="{Binding TaxOfficeName,NotifyOnValidationError=True,ValidatesOnNotifyDataErrors=True}"
-                    Style="{DynamicResource ValidationTextBoxStyle}"
-                    telerik:StyleManager.Theme="Fluent" />
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="2" Margin="10">
-                <TextBlock Text="اسم الشركة:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox 
-                    Text="{Binding Address,NotifyOnValidationError=True,ValidatesOnNotifyDataErrors=True}"
-                    Style="{DynamicResource ValidationTextBoxStyle}"
-                    telerik:StyleManager.Theme="Fluent" />
-            </StackPanel>
-            <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="0" >
-                <telerik:RadGridView ItemsSource="{Binding Owners}">
-                    
+            <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" Background="WhiteSmoke" Margin="10" >
+                <telerik:RadGridView x:Name="OwnersDataGrid"
+                  telerik:StyleManager.Theme="Windows11"
+                     ShowGroupPanel="False"
+                     AutoGenerateColumns="False"
+                     IsReadOnly="True"
+                     ItemsSource="{Binding Owners}"
+                     FontSize="14"
+                     RowHeight="40">
+
+                    <telerik:RadGridView.Columns>
+                        <!-- ✅ الاسم -->
+                        <telerik:GridViewDataColumn Header="الاسم"
+                                    DataMemberBinding="{Binding Name}"
+                                    Width="200"
+                                    HeaderTextAlignment="Center"
+                                    TextAlignment="Center" />
+
+                        <!-- ✅ الرقم القومي -->
+                        <telerik:GridViewDataColumn Header="الرقم القومي"
+                                    DataMemberBinding="{Binding NationalId}"
+                                    Width="200"
+                                    HeaderTextAlignment="Center"
+                                    TextAlignment="Center" />
+
+                        <!-- ✅ رقم الهاتف -->
+                        <telerik:GridViewDataColumn Header="رقم الهاتف"
+                                    DataMemberBinding="{Binding PhoneNumber}"
+                                    Width="150"
+                                    HeaderTextAlignment="Center"
+                                    TextAlignment="Center" />
+
+                        <!-- ✅ العنوان -->
+                        <telerik:GridViewDataColumn Header="العنوان"
+                                    DataMemberBinding="{Binding Address}"
+                                    Width="*"
+                                    HeaderTextAlignment="Center"
+                                    TextAlignment="Right" />
+                    </telerik:RadGridView.Columns>
+
+                    <!-- ✅ ستايل الصفوف (ألوان متبادلة) -->
+                    <telerik:RadGridView.AlternateRowBackground>
+                        <SolidColorBrush Color="#F2F8FF"/>
+                    </telerik:RadGridView.AlternateRowBackground>
                 </telerik:RadGridView>
+
             </StackPanel>
-            <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="0">
-                <telerik:RadGridView ItemsSource="{Binding Emails}" SelectionUnit="FullRow" x:Name="EmailDataGrid" RowActivated="EmailDataGrid_RowActivated">
-                    
+            <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" Background="WhiteSmoke" Margin="10" >
+                <telerik:RadGridView ItemsSource="{Binding Emails}"
+                     x:Name="OrganizationsDataGrid"
+                  telerik:StyleManager.Theme="Windows11"
+                     AutoGenerateColumns="False"
+                     RowActivated="OrganizationsDataGrid_RowActivated"
+                     ShowGroupPanel="False"
+                     IsReadOnly="True"
+                     >
+
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="المنظمة" DataMemberBinding="{Binding Key}" />
+                    </telerik:RadGridView.Columns>
+
+                    <telerik:RadGridView.ChildTableDefinitions>
+                        <telerik:GridViewTableDefinition />
+                    </telerik:RadGridView.ChildTableDefinitions>
+
+                    <telerik:RadGridView.HierarchyChildTemplate>
+                        <DataTemplate>
+                            <Border Background="#F9FCFF" Padding="80,0,0,0" BorderBrush="#D0E4FF" BorderThickness="1" Margin="4,2,4,6">
+                                <telerik:RadGridView ItemsSource="{Binding Value}"
+                                     AutoGenerateColumns="False"
+                                     telerik:StyleManager.Theme="Windows11"
+                                     x:Name="EmailsDataGrid"
+                                     RowActivated="EmailsDataGrid_RowActivated"
+                                     ShowGroupPanel="False"
+                                     IsReadOnly="True"
+                                     >
+                                    <telerik:RadGridView.Columns>
+                                        <telerik:GridViewDataColumn Header="Email Address" DataMemberBinding="{Binding EmailAddress}" />
+                                    </telerik:RadGridView.Columns>
+                                </telerik:RadGridView>
+                            </Border>
+                        </DataTemplate>
+                    </telerik:RadGridView.HierarchyChildTemplate>
                 </telerik:RadGridView>
+
             </StackPanel>
         </Grid>
-        
     </ScrollViewer>
 </UserControl>

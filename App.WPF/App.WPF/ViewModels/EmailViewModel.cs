@@ -15,6 +15,8 @@ namespace MyApp.WPF.ViewModels
         string _password;
         int _organizationId;
         #endregion
+
+        public int Id { get; set; }
         [Required]
         public string EmailAddress {
             get => _emailAddress;

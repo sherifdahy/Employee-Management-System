@@ -1,6 +1,7 @@
 ﻿using App.Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace MyApp.WPF.ViewModels
         string _address;
         #endregion
 
+        public int Id { get; set; }
         [Required(ErrorMessage = "اسم الشركة مطلوب")]
         public string Name {
             get => _name;
@@ -48,8 +50,8 @@ namespace MyApp.WPF.ViewModels
             get => _address;
             set => SetProperty(ref _address, value);
         }
-        public ICollection<OwnerViewModel> Owners { get; set; } = new HashSet<OwnerViewModel>();
-        public ICollection<EmailViewModel> Emails { get; set; } = new HashSet<EmailViewModel>();
+        public ObservableCollection<OwnerViewModel> Owners { get; set; }
+        public ObservableCollection<EmailViewModel> Emails { get; set; }
 
         public bool IsValid => ValidateAll();
     }

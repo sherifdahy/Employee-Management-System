@@ -16,11 +16,24 @@ namespace App.BLL
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task CreateAsync(Company company)
+        public async Task<OperationResult<bool, string>> CreateAsync(Company company)
         {
-            await _unitOfWork.Companies.AddAsync(company);
-            _unitOfWork.Save();
+            try
+            {
+                if (!_unitOfWork.Companies.IsExist(x => x.TaxRegistrationNumber == company.TaxRegistrationNumber))
+                {
+                    await _unitOfWork.Companies.AddAsync(company);
+                    _unitOfWork.Save();
+                    return OperationResult<bool, string>.Ok(true);
+                }
+                return OperationResult<bool, string>.Fail("رقم التسجيل الضريبي مسجل من قبل");
+            }
+            catch (Exception ex)
+            {
+                return OperationResult<bool, string>.Fail("حدث خطأ أثناء الحفظ: " + ex.Message);
+            }
         }
+
         public async Task<OperationResult<Company, string>> GetByIdAsync(int id)
         {
             var company = await _unitOfWork.Companies.GetByIdAsync(id);
@@ -75,6 +88,19 @@ namespace App.BLL
         {
             var companies = await _unitOfWork.Companies.FindAllAsync(x => string.IsNullOrEmpty(value) ? true : x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value));
             return companies;
+        }
+
+        public OperationResult<string, string> Update(Company company)
+        {
+            try
+            {
+                _unitOfWork.Companies.Update(company);
+                _unitOfWork.Save();
+                return OperationResult<string, string>.Ok("تم الحفظ بنجاح");
+            }
+            catch (Exception ex) {
+                return OperationResult<string, string>.Fail(ex.Message);
+            }
         }
     }
 }

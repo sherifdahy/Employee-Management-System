@@ -10,7 +10,8 @@ namespace App.BLL
 {
     public interface ICompanyService
     {
-        Task CreateAsync(Company company);
+        Task<OperationResult<bool, string>> CreateAsync(Company company);
+        OperationResult<string,string> Update(Company company);
         Task<Pagination<Company>> GetAllAsync(int currentPage, int displayCount = 10, int userId = 0, string? value = null);
         Task<OperationResult<string, string>> DeleteAsync(int id);
         Task<OperationResult<Company, string>> GetByIdAsync(int id);

@@ -3,6 +3,7 @@ using App.Entities.Models;
 using AutoMapper;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.ViewModels;
 using MyApp.WPF.Windows;
 using MyApp.WPF.Windows.Admin;
@@ -33,79 +34,34 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             try
             {
-                var companyVM = this.DataContext as CompanyViewModel;
+                var companyVM = this.FormControl.DataContext as CompanyViewModel;
 
-                if(companyVM.IsValid)
+                if (companyVM.IsValid)
                 {
-                    await _companyService.CreateAsync(_mapper.Map<Company>(companyVM));
-                    MessageBox.Show(
-                    "✅ تم حفظ بيانات الشركة بنجاح.",
-                    "نجاح العملية",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information,
-                    MessageBoxResult.OK);
+                    var result = await _companyService.CreateAsync(_mapper.Map<Company>(companyVM));
 
-                    // to reset form
-                    this.DataContext = new CompanyViewModel();
+                    if (result.State)
+                    {
+                        DialogService.ShowSuccess("✅ تم حفظ بيانات الشركة بنجاح.");
+                        var control = this.FormControl.Content as CompanyFromControl;
+                        control.DataContext = new CompanyViewModel();
+                    }
+                    else
+                    {
+                        DialogService.ShowWarning(result.Message);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"حدث خطأ ما",MessageBoxButton.OK,MessageBoxImage.Error);
+                DialogService.ShowError(ex.Message);
             }
         }
 
-        private void AddCustomerBtn_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var window = _serviceProvider.GetRequiredService<NewOwnerWindow>();
-                if (window.ShowDialog() == true)
-                {
-                    OwnersDataGrid.Items.AddNewItem(window.DataContext as OwnerViewModel);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        } 
 
-        private void AddEmailBtn_Click(object sender, RoutedEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                NewEmailWindow window = _serviceProvider.GetRequiredService<NewEmailWindow>();
-                if (window.ShowDialog() == true)
-                {
-                    EmailsDataGrid.Items.AddNewItem(window.DataContext as EmailViewModel);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            this.FormControl.Content = ActivatorUtilities.CreateInstance<CompanyFromControl>(_serviceProvider,this.DataContext);
         }
-        #region Helper
-        private void TaxRegistrationNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = IsTextNumeric(e.Text);
-        }
-        private bool IsTextNumeric(string text)
-        {
-            return !Regex.IsMatch(text, @"^\d+$");
-        }
-
-        private void TaxRegistrationNumber_Pasting(object sender, DataObjectPastingEventArgs e)
-        {
-            string text = (string)e.DataObject.GetData(typeof(string));
-            if (IsTextNumeric(text))
-            {
-                e.CancelCommand();
-            }
-        }
-        #endregion
-
-        
     }
 }

@@ -14,6 +14,8 @@ namespace MyApp.WPF.ViewModels
         string _phoneNumber;
         string _address;
         #endregion
+
+        public int Id {  get; set; }
         [Required]
         public string Name { 
             get => _name; 

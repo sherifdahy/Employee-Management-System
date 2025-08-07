@@ -3,6 +3,7 @@ using App.Entities.Models;
 using AutoMapper;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Mappers;
 using MyApp.WPF.UserControls.Shared;
 using MyApp.WPF.ViewModels;
 using System;
@@ -43,7 +44,7 @@ namespace MyApp.WPF.UserControls.Admin.Companies
                 var company = e.Row.DataContext as Company;
                 if (company != null)
                 {
-                    this.Content = ActivatorUtilities.CreateInstance<DisplayCompanyControl>(_serviceProvider, company);
+                    this.Content = ActivatorUtilities.CreateInstance<DisplayCompanyControl>(_serviceProvider, company.ToDisplayViewModel());
                 }
             }
             catch (Exception ex)
@@ -72,7 +73,6 @@ namespace MyApp.WPF.UserControls.Admin.Companies
                 MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -82,7 +82,7 @@ namespace MyApp.WPF.UserControls.Admin.Companies
                 if (company != null)
                 {
                     var companyVM = _mapper.Map<CompanyViewModel>(company);
-                    this.Content = ActivatorUtilities.CreateInstance<DisplayCompanyControl>(_serviceProvider, companyVM);
+                    this.Content = ActivatorUtilities.CreateInstance<EditCompaniesControl>(_serviceProvider, companyVM);
                 }
             }
             catch (Exception ex)
@@ -94,7 +94,6 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             await UsePagination();
         }
-
         private async Task UsePagination(int userId = 0,string value = null)
         {
             var pageSize = CompaniesDataPager.PageSize;
@@ -103,7 +102,6 @@ namespace MyApp.WPF.UserControls.Admin.Companies
             CompaniesDataGrid.ItemsSource = paginationResult.Items;
             CompaniesDataPager.ItemCount = paginationResult.TotalCount;
         }
-
         private async void SearchBox_LostFocus(object sender, RoutedEventArgs e)
         {
             try

@@ -37,6 +37,7 @@ namespace MyApp.WPF
                     services.AddSingleton<IStateService, StateService>();
                     services.AddSingleton<IBrowserService, BrowserService>();
                     services.AddSingleton<IWebDriverFactory, WebDriverFactory>();
+                    services.AddSingleton<IEmailService, EmailService>();
                     
                     #endregion
                     #region IUnitOfWork Registration

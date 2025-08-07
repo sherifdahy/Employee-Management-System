@@ -3,6 +3,7 @@ using Interfaces;
 using MyApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +25,11 @@ namespace MyApp.WPF.Windows.Admin
     {
         private readonly IUnitOfWork _unitOfWork;
         public EmailViewModel _email;
-        public NewEmailWindow(IUnitOfWork unitOfWork)
+        public NewEmailWindow(IUnitOfWork unitOfWork,EmailViewModel emailViewModel)
         {
             InitializeComponent();
-            _unitOfWork = unitOfWork;
+            this._unitOfWork = unitOfWork;
+            this.DataContext = emailViewModel;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)

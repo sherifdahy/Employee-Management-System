@@ -5,6 +5,12 @@
     <Compile Update="UserControls\Admin\Companies\CompaniesControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Admin\Companies\CompanyFromControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Companies\EditCompaniesControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Admin\Companies\NewCompanyControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -59,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="UserControls\Admin\Companies\CompaniesControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Companies\CompanyFromControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Companies\EditCompaniesControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\Admin\Companies\NewCompanyControl.xaml">

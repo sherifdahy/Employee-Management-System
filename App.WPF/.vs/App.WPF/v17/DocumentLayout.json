@@ -3,28 +3,20 @@
   "WorkspaceRootPath": "E:\\Saber Eid\\Desktop Application\\App.WPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\usercontrols\\admin\\companies\\companiescontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\companies\\companiescontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\mappers\\emailmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\mappers\\emailmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\usercontrols\\admin\\companies\\newcompanycontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\companies\\newcompanycontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\usercontrols\\admin\\companies\\companiescontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\companies\\companiescontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\windows\\admin\\newemailwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\windows\\admin\\newemailwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\windows\\identity\\loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\windows\\identity\\loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\windows\\identity\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\windows\\identity\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\usercontrols\\admin\\companies\\newcompanycontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\companies\\newcompanycontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\desktop application\\app.wpf\\app.wpf\\usercontrols\\admin\\companies\\companyfromcontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\companies\\companyfromcontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 238,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,73 +38,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginWindow.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Windows\\Identity\\LoginWindow.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\Windows\\Identity\\LoginWindow.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Windows\\Identity\\LoginWindow.xaml.cs",
-              "RelativeToolTip": "App.WPF\\Windows\\Identity\\LoginWindow.xaml.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwCEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T16:56:21.079Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LoginWindow.xaml",
-              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Windows\\Identity\\LoginWindow.xaml",
-              "RelativeDocumentMoniker": "App.WPF\\Windows\\Identity\\LoginWindow.xaml",
-              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Windows\\Identity\\LoginWindow.xaml",
-              "RelativeToolTip": "App.WPF\\Windows\\Identity\\LoginWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-07-19T16:56:16.154Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CompaniesControl.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml.cs",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAIwFsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T16:55:16.482Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CompaniesControl.xaml",
-              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-07-19T16:54:44.329Z",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\appsettings.json",
+              "RelativeDocumentMoniker": "App.WPF\\appsettings.json",
+              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\appsettings.json",
+              "RelativeToolTip": "App.WPF\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-05T10:03:23.594Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NewCompanyControl.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml.cs",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAhwCMAAAAQAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "EmailMapper.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Mappers\\EmailMapper.cs",
+              "RelativeDocumentMoniker": "App.WPF\\Mappers\\EmailMapper.cs",
+              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Mappers\\EmailMapper.cs",
+              "RelativeToolTip": "App.WPF\\Mappers\\EmailMapper.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAkwBcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T16:45:15.001Z"
+              "WhenOpened": "2025-08-04T15:24:53.491Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "NewCompanyControl.xaml",
-              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml",
-              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Companies\\NewCompanyControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-07-19T16:39:25.444Z"
+              "DocumentIndex": 2,
+              "Title": "NewEmailWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Windows\\Admin\\NewEmailWindow.xaml.cs",
+              "RelativeDocumentMoniker": "App.WPF\\Windows\\Admin\\NewEmailWindow.xaml.cs",
+              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\Windows\\Admin\\NewEmailWindow.xaml.cs",
+              "RelativeToolTip": "App.WPF\\Windows\\Admin\\NewEmailWindow.xaml.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAuwCUAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T14:26:26.409Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CompanyFromControl.xaml.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompanyFromControl.xaml.cs",
+              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Companies\\CompanyFromControl.xaml.cs",
+              "ToolTip": "E:\\Saber Eid\\Desktop Application\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompanyFromControl.xaml.cs",
+              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Companies\\CompanyFromControl.xaml.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAtwF4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T14:17:19.739Z",
+              "EditorCaption": ""
             }
           ]
         }

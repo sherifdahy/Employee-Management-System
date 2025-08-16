@@ -1,6 +1,7 @@
 ﻿using App.BLL;
 using App.Entities.Models;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.Services.State;
 using MyApp.WPF.UserControls;
 using MyApp.WPF.UserControls.Admin;
@@ -42,37 +43,33 @@ namespace MyApp.WPF.Windows.Admin
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            try
+            var result = await _authService.GetByIdAsync(_stateService.UserId);
+            
+            if(!result.State)
             {
-                
-                var result = await _authService.GetByIdAsync(_stateService.UserId);
-                if(result.State)
-                {
-                    NameOfUserTxt.Text = $"أهلاً، {result?.Data?.Name}  👋";
-                    RoleOfUser.Text = $"الصلاحية : {result?.Data?.UserType}";
-                }
-                else
-                {
-
-                }
+                DialogService.ShowError(result.Message);
+                return;
             }
-            catch (Exception ex)
-            {
 
-            }
+            NameOfUserTxt.Text = $"أهلاً، {result?.Data?.Name}  👋";
+            RoleOfUser.Text = $"الصلاحية : {result?.Data?.UserType}";
+
+            HomePageBtn_Click(HomePageBtn, e);
         }
        
         private void HomePageBtn_Click(object sender, RoutedEventArgs e)
         {
+
             MainSection.Content = _serviceProvider.GetRequiredService<HomeControl>();
             CurrentPageName.Text = "الصفحة الرئيسية";
-
+            SetActiveButton((Button)sender);
         }
 
         private void CompanyPageBtn_Click(object sender, RoutedEventArgs e)
         {
             MainSection.Content = _serviceProvider.GetRequiredService<CompaniesControl>();
             CurrentPageName.Text = "عرض الشركات";
+            SetActiveButton((Button)sender);
 
         }
 
@@ -80,6 +77,7 @@ namespace MyApp.WPF.Windows.Admin
         {
             MainSection.Content = _serviceProvider.GetRequiredService<NewCompanyControl>();
             CurrentPageName.Text = "شركة جديدة";
+            SetActiveButton((Button)sender);
 
         }
 
@@ -87,6 +85,7 @@ namespace MyApp.WPF.Windows.Admin
         {
             MainSection.Content = _serviceProvider.GetRequiredService<OrganizationsControl>();
             CurrentPageName.Text = "عرض المنصات";
+            SetActiveButton((Button)sender);
 
         }
 
@@ -94,6 +93,7 @@ namespace MyApp.WPF.Windows.Admin
         {
             MainSection.Content = _serviceProvider.GetRequiredService<NewOrganizationControl>();
             CurrentPageName.Text = "منصة جديدة";
+            SetActiveButton((Button)sender);
 
         }
 
@@ -101,12 +101,14 @@ namespace MyApp.WPF.Windows.Admin
         {
             MainSection.Content = _serviceProvider.GetRequiredService<EmployeesControl>();
             CurrentPageName.Text = "عرض الموظفين";
+            SetActiveButton((Button)sender);
 
         }
         private void CreateEmplyee_Click(object sender, RoutedEventArgs e)
         {
             MainSection.Content = _serviceProvider.GetRequiredService<NewEmployeeControl>();
             CurrentPageName.Text = "موظف جديد";
+            SetActiveButton((Button)sender);
 
         }
 
@@ -114,6 +116,7 @@ namespace MyApp.WPF.Windows.Admin
         {
             MainSection.Content = _serviceProvider.GetRequiredService<EmployeeAccessControl>();
             CurrentPageName.Text = "صلاحيات الموظف";
+            SetActiveButton((Button)sender);
 
         }
 
@@ -121,9 +124,34 @@ namespace MyApp.WPF.Windows.Admin
         {
             MainSection.Content = _serviceProvider.GetRequiredService<SettingsControl>();
             CurrentPageName.Text = "الاعدادات";
+            SetActiveButton((Button)sender);
 
         }
+        private void SetActiveButton(Button activeBtn)
+        {
+            ClearTagsFromChildren(SidebarContent);
+            activeBtn.Tag = "Selected";
+        }
 
+        private void ClearTagsFromChildren(Panel parent)
+        {
+            foreach (var child in parent.Children)
+            {
+                if (child is Button btn)
+                {
+                    btn.Tag = null;
+                }
+                else if (child is Panel panel) // لو جوه StackPanel أو Grid أو غيره
+                {
+                    ClearTagsFromChildren(panel);
+                }
+                else if (child is ContentControl cc && cc.Content is Panel innerPanel)
+                {
+                    // علشان نمسك الـ StackPanel اللي جوه RadExpander
+                    ClearTagsFromChildren(innerPanel);
+                }
+            }
+        }
 
     }
 }

@@ -25,7 +25,7 @@ namespace MyApp.WPF.ViewModels
             get => _url; 
             set => SetProperty(ref _url,value); 
         }
-        public ObservableCollection<SelectorViewModel> Selectors { get; set; } = new ObservableCollection<SelectorViewModel>();
+        public ICollection<SelectorViewModel> Selectors { get; set; } = new ObservableCollection<SelectorViewModel>();
         public bool IsValid => ValidateAll();
     }
 }

@@ -23,7 +23,7 @@
             <ContentControl Name="FormSection"/>
         </Border>
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <Button x:Name="EditCompanyBtn" Content="حفظ التغيرات" Margin="10" telerik:StyleManager.Theme="Fluent" Width="100" HorizontalAlignment="Right" Click="EditCompanyBtn_Click"></Button>
+            <Button x:Name="EditCompanyBtn" Content="حفظ التغيرات" Style="{DynamicResource BlueFlatButton}" Margin="10" telerik:StyleManager.Theme="Fluent" Width="200" HorizontalAlignment="Right" Click="EditCompanyBtn_Click"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -20,7 +20,7 @@ namespace App.BLL
             throw new NotImplementedException();
         }
 
-        public async Task<OperationResult<Email, string>> GetByIdAsync(int id)
+        public async Task<OperationResult<Email, string>> GetByIdAsync(Guid id)
         {
             try
             {

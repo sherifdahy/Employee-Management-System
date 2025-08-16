@@ -1,11 +1,15 @@
 ﻿using App.BLL;
+using App.BLL.DataSync;
 using App.BLL.Dependencies.Implementations;
 using App.BLL.Dependencies.Interfaces;
 using App.DAL.Data;
+using App.Entities.Helper;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using MyApp.WPF.ApplicationConfiguration;
 using MyApp.WPF.Services.State;
 using MyApp.WPF.UserControls.Admin.Companies;
@@ -15,6 +19,7 @@ using MyApp.WPF.UserControls.Shared;
 using MyApp.WPF.Windows.Admin;
 using MyApp.WPF.Windows.Identity;
 using Repository;
+using Serilog;
 using System.Windows;
 
 namespace MyApp.WPF
@@ -26,27 +31,58 @@ namespace MyApp.WPF
         public App()
         {
             _host = Host.CreateDefaultBuilder()
-                .ConfigureServices((context , services) =>
+                .ConfigureServices((context, services) =>
                 {
-                    string connectionString = context.Configuration.GetSection("ConnectionStrings")["defaultConnection"];
-                    #region Service Registration
-                    services.AddTransient<IAuthService,AuthService>();
-                    services.AddTransient<ICompanyService,CompanyService>();
-                    services.AddTransient<IOrganizationService,OrganizationService>();
-                    services.AddTransient<IEmployeeService,EmployeeService>();
+                    var connectionString = context.Configuration.GetConnectionString("defaultConnection");
+
+                    #region Databases
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                    {
+                        options.UseLazyLoadingProxies().UseSqlServer(connectionString);
+                    }, ServiceLifetime.Transient);
+
+                    #endregion
+                    #region Logger
+                    LoggerConfigurator.ConfigureLogger(connectionString);
+                    services.AddLogging(loggingBuilder =>
+                    {
+                        loggingBuilder.ClearProviders();
+                        loggingBuilder.AddSerilog(Log.Logger, dispose: true);
+                    });
+
+                    #endregion
+
+                    #region AppSettings Mapping
+                    services.Configure<EncryptionSettings>(context.Configuration.GetSection("EncryptionSettings"));
+                    #endregion
+
+                    #region Services Registration
+                    // Business Layer
+                    services.AddTransient<IAuthService, AuthService>();
+                    services.AddTransient<ICompanyService, CompanyService>();
+                    services.AddTransient<IOrganizationService, OrganizationService>();
+                    services.AddTransient<IEmployeeService, EmployeeService>();
+                    services.AddTransient<IDataSync, DataSync>();
+
+                    // Application Layer
                     services.AddSingleton<IStateService, StateService>();
                     services.AddSingleton<IBrowserService, BrowserService>();
                     services.AddSingleton<IWebDriverFactory, WebDriverFactory>();
                     services.AddSingleton<IEmailService, EmailService>();
-                    
-                    #endregion
-                    #region IUnitOfWork Registration
+                    services.AddSingleton<IEncryptionService, EncryptionService>();
+
+                    // UnitOfWork
                     services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+                    // Logger
+                    services.AddScoped<ILoggerService, LoggerService>();
                     #endregion
-                    #region AutoMapper Registration
+
+                    #region AutoMapper
                     services.AddAutoMapper(typeof(AutoMapperProfile));
                     #endregion
-                    #region Window Registration
+
+                    #region Windows
                     services.AddTransient<LoginWindow>();
                     services.AddTransient<Windows.Admin.MainWindow>();
                     services.AddTransient<Windows.Employee.MainWindow>();
@@ -54,7 +90,8 @@ namespace MyApp.WPF
                     services.AddTransient<NewEmailWindow>();
                     services.AddTransient<AddSelectorWindow>();
                     #endregion
-                    #region UserControl Registration
+
+                    #region UserControls
                     services.AddTransient<UserControls.Admin.HomeControl>();
                     services.AddTransient<UserControls.Admin.Companies.CompaniesControl>();
                     services.AddTransient<UserControls.Employee.Home.HomeControl>();
@@ -67,17 +104,13 @@ namespace MyApp.WPF
                     services.AddTransient<EmployeeAccessControl>();
                     services.AddTransient<DisplayCompanyControl>();
                     services.AddTransient<SettingsControl>();
+                    services.AddTransient<FormOrganizationControl>();
                     #endregion
-
-                    services.AddDbContext<ApplicationDbContext>(option =>
-                    {
-                        option.UseLazyLoadingProxies().UseSqlServer(connectionString);
-                        
-                    },ServiceLifetime.Transient);
 
                 })
                 .Build();
         }
+
         protected override async void OnStartup(StartupEventArgs e)
         {
             await _host.StartAsync();

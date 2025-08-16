@@ -15,7 +15,6 @@ namespace MyApp.WPF.Windows.Admin
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public OwnerViewModel _owner;
         public NewOwnerWindow(IUnitOfWork unitOfWork,IMapper mapper)
         {
             InitializeComponent();
@@ -25,9 +24,13 @@ namespace MyApp.WPF.Windows.Admin
 
         private void AddOwnerBtn_Click(object sender, RoutedEventArgs e)
         {
-            _owner = this.DataContext as OwnerViewModel;
-            this.DialogResult = true;
-            
+            if(this.DataContext is OwnerViewModel owner)
+            {
+                if(owner.ValidateAll())
+                {
+                    this.DialogResult = true;
+                }
+            }
         }
     }
 }

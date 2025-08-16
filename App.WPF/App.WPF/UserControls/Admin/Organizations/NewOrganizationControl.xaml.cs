@@ -3,6 +3,8 @@ using App.Entities.Models;
 using AutoMapper;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Mappers;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.ViewModels;
 using MyApp.WPF.Windows.Admin;
 using System;
@@ -26,64 +28,41 @@ namespace MyApp.WPF.UserControls.Admin.Organizations
 {
     public partial class NewOrganizationControl : UserControl
     {
-        private readonly IMapper _mapper;
         private readonly IServiceProvider _serviceProvider;
         private readonly IOrganizationService _organizationService;
         public NewOrganizationControl(IOrganizationService organizationService,IMapper mapper,IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _mapper = mapper;
             _serviceProvider = serviceProvider;
             _organizationService = organizationService;
         }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.FormControl.Content = ActivatorUtilities.CreateInstance<FormOrganizationControl>(_serviceProvider);
+            this.FormControl.DataContext = new OrganizationViewModel();
+        }
 
-        private async void AddOrgBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var formControl = this.FormControl.Content as FormOrganizationControl;
+            if (formControl == null)
             {
-                var organizationVM = this.DataContext as OrganizationViewModel;
-                if(organizationVM.IsValid)
-                {
-                    var organization = _mapper.Map<Organization>(organizationVM);
-                    await _organizationService.CreateAsync(organization);
-                    ResetUserControl();
-                    MessageBox.Show(
-                        "تم الإضافة بنجاح.",
-                        "نجاح العملية",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information
-                    );
-                }
+                DialogService.ShowError("خطأ داخلي");
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        private void AddSelectorBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var window = _serviceProvider.GetRequiredService<AddSelectorWindow>();
-            window.ShowDialog();
-            if(window.DialogResult.GetValueOrDefault())
-            {
-                var SelectorVM = window.DataContext as SelectorViewModel;
-                if(SelectorVM != null)
-                {
-                    var orgVM = this.DataContext as OrganizationViewModel;
-                    if (orgVM != null)
-                    {
-                        orgVM.Selectors.Add(SelectorVM);
-                    }
-                }
-            }
-        }
-        #region Helper
-        private void ResetUserControl()
-        {
-            this.Content = _serviceProvider.GetRequiredService<NewOrganizationControl>();
-        }
-        #endregion
 
-        
+            var organizationVM = formControl.DataContext as OrganizationViewModel;
+            if (!organizationVM.IsValid)
+                return;
+
+            var organization = organizationVM.ToModel();
+            await _organizationService.CreateAsync(organization);
+
+            DialogService.ShowSuccess("تم الاضافة بنجاح.");
+            
+            this.Content = ActivatorUtilities.CreateInstance<OrganizationsControl>(_serviceProvider);
+        }
+
+
     }
 }

@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Margin="10">
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -61,11 +61,11 @@
     telerik:StyleManager.Theme="Fluent"
     Text="{Binding Address, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True,ValidatesOnDataErrors=True}"/>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" Background="WhiteSmoke" Margin="10" >
-                <telerik:RadButton x:Name="AddCustomerBtn" telerik:StyleManager.Theme="Fluent" Content="اضافة عميل" Width="100" HorizontalAlignment="Right" Margin="10" Click="AddCustomerBtn_Click"></telerik:RadButton>
+            <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"  Margin="10" >
+                <telerik:RadButton x:Name="AddCustomerBtn"  Style="{StaticResource BlueFlatButton}" HorizontalAlignment="Right" Margin="0,0,0,10" Content="اضافة عميل" Click="AddCustomerBtn_Click"/>
                 <telerik:RadGridView 
                     x:Name="OwnersDataGrid"
-                    ItemsSource="{Binding Owners, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
+                    ItemsSource="{Binding Owners, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" 
                     ShowGroupPanel="False"
                     IsReadOnly="True"
                     RowHeight="40"
@@ -149,12 +149,12 @@
 
 
                     </telerik:RadGridView.Columns>
-                    
+
                 </telerik:RadGridView>
 
             </StackPanel>
-            <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" Background="WhiteSmoke" Margin="10" >
-                <telerik:RadButton x:Name="AddEmailBtn" telerik:StyleManager.Theme="Fluent" Content="اضافة حساب" Width="100" HorizontalAlignment="Right" Margin="10" Click="AddEmailBtn_Click" ></telerik:RadButton>
+            <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"  Margin="10" >
+                <telerik:RadButton x:Name="AddEmailBtn" Style="{StaticResource BlueFlatButton}" Content="اضافة حساب"  HorizontalAlignment="Right" Margin="0,0,0,10" Click="AddEmailBtn_Click" ></telerik:RadButton>
                 <telerik:RadGridView 
                     Grid.Row="1"
                     x:Name="EmailsDataGrid"

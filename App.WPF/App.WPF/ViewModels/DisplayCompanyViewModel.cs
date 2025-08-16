@@ -16,6 +16,6 @@ namespace MyApp.WPF.ViewModels
         public string TaxOfficeName { get; set; }
         public string Address { get; set; }
         public ICollection<OwnerViewModel> Owners { get; set; }
-        public IReadOnlyDictionary<string, ICollection<EmailViewModel>> Emails { get; init; } = new Dictionary<string, ICollection<EmailViewModel>>();
+        public IDictionary<string, ICollection<EmailViewModel>> Emails { get; set; } = new Dictionary<string, ICollection<EmailViewModel>>();
     }
 }

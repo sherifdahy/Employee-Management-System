@@ -19,7 +19,7 @@ namespace MyApp.WPF.ViewModels
         private string _confirmPassword;
         private UserType _userType;
         #endregion
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required(ErrorMessage = "اسم المستخدم مطلوب")]
         public string Name
         {

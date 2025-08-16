@@ -14,49 +14,63 @@ namespace App.BLL.Dependencies.Implementations
     public class BrowserService : IBrowserService
     {
         private readonly IWebDriverFactory _webDriverFactory;
-        public BrowserService(IWebDriverFactory webDriverFactory)
+        private readonly IEncryptionService _encryptionService;
+        public BrowserService(IWebDriverFactory webDriverFactory,IEncryptionService encryptionService)
         {
             _webDriverFactory = webDriverFactory;
+            _encryptionService = encryptionService;
         }
-        public OperationResult<bool, string> Open(Email email, byte browser = 1)
+        public void Open(Email email, byte browser = 1)
         {
-            var driver = _webDriverFactory.Create(browser);
-            driver.Navigate().GoToUrl(email?.Organization?.URL);
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            wait.Until(drv => drv.Url.Contains(email.Organization.URL));
-            foreach(var selector in email.Organization.Selectors)
+            if (email?.Organization == null || string.IsNullOrEmpty(email.Organization.URL))
+                throw new ArgumentException("بيانات البريد أو المنظمة غير مكتملة");
+
+            IWebDriver driver = null;
+
+            try
             {
-                switch(selector.contentType)
+                driver = _webDriverFactory.Create(browser);
+                driver.Navigate().GoToUrl(email.Organization.URL);
+
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+                bool pageLoaded = wait.Until(drv =>
+                    new Uri(drv.Url).Host == new Uri(email.Organization.URL).Host);
+
+                if (!pageLoaded)
+                    throw new TimeoutException("انتهى الوقت قبل تحميل الصفحة المطلوبة");
+
+                foreach (var selector in email.Organization.Selectors ?? Enumerable.Empty<Selector>())
                 {
-                    case ContentType.Data:
-                        switch (selector.selectorType)
-                        {
-                            case SelectorType.Id:
-                                driver.FindElement(By.Id(selector.Value)).SendKeys(email.Password);
-                                break;
-                            case SelectorType.Name:
-                                driver.FindElement(By.Name(selector.Value)).SendKeys(email.Password);
-                                break;
-                            default:
-                                throw new NotImplementedException("نوع البيانات خاطئ");
-                        }
-                        break;
-                    case ContentType.Action:
-                        switch(selector.selectorType)
-                        {
-                            case SelectorType.Id:
-                                driver.FindElement(By.Id(selector.Value)).Click();
-                                break;
-                            case SelectorType.Name:
-                                driver.FindElement(By.Name(selector.Value)).Click();
-                                break;
-                            default:
-                                throw new NotImplementedException("نوع البيانات خاطئ");
-                        }
-                        break;
+                    IWebElement element = selector.selectorType switch
+                    {
+                        SelectorType.Id => wait.Until(d => d.FindElement(By.Id(selector.Value))),
+                        SelectorType.Name => wait.Until(d => d.FindElement(By.Name(selector.Value))),
+                        _ => throw new NotImplementedException("نوع المحدد غير مدعوم")
+                    };
+
+                    switch (selector.contentType)
+                    {
+                        case ContentType.Data:
+                            element.SendKeys(email.EmailAddress);
+                            break;
+                        case ContentType.Password:
+                            element.SendKeys(_encryptionService.Decrypt(email.Password));
+                            break;
+                        case ContentType.Action:
+                            element.Click();
+                            break;
+                        default:
+                            throw new NotImplementedException("نوع البيانات خاطئ");
+                    }
                 }
             }
-            return OperationResult<bool, string>.Ok(true);
+            catch (Exception ex)
+            {
+                driver?.Quit();
+                throw;
+            }
         }
+
+
     }
 }

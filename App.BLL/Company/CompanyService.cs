@@ -1,5 +1,9 @@
-﻿using App.Entities.Models;
+﻿using App.BLL.Mappers;
+using App.Entities;
+using App.Entities.Models;
 using Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +16,11 @@ namespace App.BLL
     public class CompanyService : ICompanyService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CompanyService(IUnitOfWork unitOfWork)
+        private readonly IEncryptionService _encryptionService;
+        public CompanyService(IUnitOfWork unitOfWork,IEncryptionService encryptionService)
         {
             _unitOfWork = unitOfWork;
+            _encryptionService = encryptionService;
         }
         public async Task<OperationResult<bool, string>> CreateAsync(Company company)
         {
@@ -22,6 +28,11 @@ namespace App.BLL
             {
                 if (!_unitOfWork.Companies.IsExist(x => x.TaxRegistrationNumber == company.TaxRegistrationNumber))
                 {
+                    foreach(var email in company.Emails)
+                    {
+                        email.Password = _encryptionService.Encrypt(email.Password);
+                    }
+
                     await _unitOfWork.Companies.AddAsync(company);
                     _unitOfWork.Save();
                     return OperationResult<bool, string>.Ok(true);
@@ -34,7 +45,7 @@ namespace App.BLL
             }
         }
 
-        public async Task<OperationResult<Company, string>> GetByIdAsync(int id)
+        public async Task<OperationResult<Company, string>> GetByIdAsync(Guid id)
         {
             var company = await _unitOfWork.Companies.GetByIdAsync(id);
             if(company != null)
@@ -46,12 +57,13 @@ namespace App.BLL
                 return OperationResult<Company, string>.Fail("Not Found");
             }
         }
-        public async Task<OperationResult<string, string>> DeleteAsync(int id)
+        public async Task<OperationResult<string, string>> DeleteAsync(Guid id)
         {
             var companyResult = await GetByIdAsync(id);
             if(companyResult.State)
             {
-                _unitOfWork.Companies.Delete(companyResult?.Data);
+                companyResult.Data.IsDeleted = true;
+                _unitOfWork.Companies.Update(companyResult?.Data);
                 _unitOfWork.Save();
                 return OperationResult<string,string>.Ok(string.Empty);
             }
@@ -61,11 +73,12 @@ namespace App.BLL
             }
         }
 
-        public async Task<Pagination<Company>> GetAllAsync(int currentPage,int displayCount = 10,int userId = 0,string? value = null)
+        public async Task<Pagination<Company>> GetAllAsync(int currentPage,int displayCount = 10,Guid userId = default,string? value = null)
         {
             Expression<Func<Company, bool>> query = x =>
-                (userId == 0 || x.ApplicationUsers.Any(u => u.Id == userId)) &&
-                (string.IsNullOrEmpty(value) || x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value));
+                (userId == default || x.ApplicationUsers.Any(u => u.Id == userId)) &&
+                (string.IsNullOrEmpty(value) || x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value)) &&
+                (!x.IsDeleted);
 
             var totalCount = await _unitOfWork.Companies.CountAsync(query);
             var skip = currentPage * displayCount;
@@ -78,15 +91,18 @@ namespace App.BLL
 
         }
 
-        public async Task<IEnumerable<Company>> GetRelatedCompaniesAsync(int userId)
+        public async Task<IEnumerable<Company>> GetRelatedCompaniesAsync(Guid userId)
         {
-            var appUser = await _unitOfWork.ApplicationUsers.FindAsync(x=>x.Id == userId);
+            var appUser = await _unitOfWork.ApplicationUsers.FindAsync(x=>x.Id == userId && !x.IsDeleted);
             return appUser.Companies;
         }
 
         public async Task<IEnumerable<Company>> SearchAsync(string value)
         {
-            var companies = await _unitOfWork.Companies.FindAllAsync(x => string.IsNullOrEmpty(value) ? true : x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value));
+            Expression<Func<Company, bool>> query = x =>
+                (string.IsNullOrEmpty(value) ? true : x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value)) && !x.IsDeleted;
+
+            var companies = await _unitOfWork.Companies.FindAllAsync(query);
             return companies;
         }
 
@@ -94,6 +110,11 @@ namespace App.BLL
         {
             try
             {
+                foreach(var email in company.Emails)
+                {
+                    email.Password = _encryptionService.Encrypt(email.Password);
+                }
+                company.UpdatedAt = DateTime.UtcNow;
                 _unitOfWork.Companies.Update(company);
                 _unitOfWork.Save();
                 return OperationResult<string, string>.Ok("تم الحفظ بنجاح");
@@ -102,5 +123,20 @@ namespace App.BLL
                 return OperationResult<string, string>.Fail(ex.Message);
             }
         }
+
+        public async Task<OperationResult<IEnumerable<Company>,string>> GetAllAsync()
+        {
+            try
+            {
+                var companies = await _unitOfWork.Companies.GetAllAsync();
+                return OperationResult<IEnumerable<Company>,string>.Ok(companies);
+            }
+            catch (Exception ex)
+            {
+                return OperationResult<IEnumerable<Company>,string>.Fail(ex.Message);
+            }
+        }
+
+        
     }
 }

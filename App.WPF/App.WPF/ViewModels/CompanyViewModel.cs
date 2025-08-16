@@ -21,7 +21,7 @@ namespace MyApp.WPF.ViewModels
         string _address;
         #endregion
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required(ErrorMessage = "اسم الشركة مطلوب")]
         public string Name {
             get => _name;
@@ -50,8 +50,8 @@ namespace MyApp.WPF.ViewModels
             get => _address;
             set => SetProperty(ref _address, value);
         }
-        public ObservableCollection<OwnerViewModel> Owners { get; set; }
-        public ObservableCollection<EmailViewModel> Emails { get; set; }
+        public ICollection<OwnerViewModel> Owners { get; set; } = new ObservableCollection<OwnerViewModel>();
+        public ICollection<EmailViewModel> Emails { get; set; } = new ObservableCollection<EmailViewModel>();
 
         public bool IsValid => ValidateAll();
     }

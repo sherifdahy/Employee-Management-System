@@ -1,4 +1,5 @@
-﻿using App.Entities.Models;
+﻿using App.BLL.DTOs;
+using App.Entities.Models;
 using Azure.Core;
 using MyApp.WPF.ViewModels;
 using System;
@@ -13,6 +14,7 @@ namespace MyApp.WPF.Mappers
 {
     public static class OwnerMapper
     {
+        #region Model => ViewModel
         public static OwnerViewModel ToViewModel(this Owner owner)
         {
             if (owner == null) throw new ArgumentNullException(nameof(owner));
@@ -32,7 +34,7 @@ namespace MyApp.WPF.Mappers
             if (owners == null) throw new ArgumentNullException(nameof(owners));
             return owners.Select(o => ToViewModel(o)).ToList();
         }
-        #region New
+        
         public static Owner ToModel(this OwnerViewModel vm)
         {
             if (vm == null) throw new ArgumentNullException(nameof(vm));
@@ -47,15 +49,7 @@ namespace MyApp.WPF.Mappers
         }
         #endregion
 
-        /// <summary>
-        /// Updates the existing entity by modifying its properties directly.
-        /// Since the entity is a reference type, changes are applied in-place,
-        /// so there is no need to return a value.
-        /// </summary>
-        /// <param name="vm"></param>
-        /// <param name="owner"></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        #region Update
+        #region ViewModel => Model
 
         public static void ToModel(this OwnerViewModel vm, Owner owner)
         {
@@ -79,7 +73,7 @@ namespace MyApp.WPF.Mappers
 
         private static void RemoveDeletedEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
         {
-            var vmIds = new HashSet<int>(vms.Where(vm => vm.Id != 0).Select(vm => vm.Id));
+            var vmIds = new HashSet<Guid>(vms.Where(vm => vm.Id != Guid.Empty).Select(vm => vm.Id));
             var toRemove = owners.Where(e => !vmIds.Contains(e.Id)).ToList();
             foreach (var owner in toRemove)
                 owners.Remove(owner);
@@ -88,7 +82,7 @@ namespace MyApp.WPF.Mappers
         private static void UpdateExistingEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
         {
             var ownerDic = owners.ToDictionary(e => e.Id);
-            foreach (var vm in vms.Where(vm => vm.Id != 0))
+            foreach (var vm in vms.Where(vm => vm.Id != Guid.Empty))
             {
                 if (ownerDic.TryGetValue(vm.Id, out var owner))
                 {
@@ -99,11 +93,12 @@ namespace MyApp.WPF.Mappers
 
         private static void AddNewEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
         {
-            foreach (var vm in vms.Where(vm => vm.Id == 0))
+            foreach (var vm in vms.Where(vm => vm.Id == Guid.Empty))
             {
                 owners.Add(ToModel(vm));
             }
         }
         #endregion
+
     }
 }

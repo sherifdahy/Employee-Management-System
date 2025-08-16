@@ -1,4 +1,5 @@
-﻿using App.Entities.Models;
+﻿using App.BLL.DTOs;
+using App.Entities.Models;
 using MyApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -50,15 +51,33 @@ namespace MyApp.WPF.Mappers
             email.Password = emailViewModel.Password;
             email.OrganizationId = emailViewModel.OrganizationId;
         }
-        public static void ToModel(this ICollection<EmailViewModel> vms, ICollection<Email> emails)
+        public static void ToModel(this ICollection<EmailViewModel> vms, ICollection<Email> emails, Guid companyId)
         {
             if (vms is null) throw new ArgumentNullException(nameof(vms));
             if (emails is null) throw new ArgumentNullException(nameof(emails));
 
-            RemoveDeletedEmails(vms, emails);
-            UpdateExistingEmails(vms, emails);
-            AddNewEmails(vms, emails);
+            // 1- حذف الـ Emails اللي مش موجودة في الـ ViewModel
+            var vmIds = vms.Where(vm => vm.Id != Guid.Empty).Select(vm => vm.Id).ToHashSet();
+            var toRemove = emails.Where(e => !vmIds.Contains(e.Id)).ToList();
+            foreach (var email in toRemove)
+                emails.Remove(email);
+
+            // 2- تحديث القديم
+            var emailDict = emails.ToDictionary(e => e.Id);
+            foreach (var vm in vms.Where(vm => vm.Id != Guid.Empty))
+            {
+                if (emailDict.TryGetValue(vm.Id, out var email))
+                {
+                    vm.ToModel(email); // update
+                }
+            }
+            // 3- إضافة الجديد
+            foreach (var vm in vms.Where(vm => vm.Id == Guid.Empty))
+            {
+                emails.Add(ToModel(vm));
+            }
         }
+
         #endregion
 
         #region ViewModel => ViewModel
@@ -90,7 +109,7 @@ namespace MyApp.WPF.Mappers
         #region Helper
         private static void RemoveDeletedEmails(ICollection<EmailViewModel> vms, ICollection<Email> emails)
         {
-            var vmIds = new HashSet<int>(vms.Where(vm => vm.Id != 0).Select(vm => vm.Id));
+            var vmIds = new HashSet<Guid>(vms.Where(vm => vm.Id != Guid.Empty).Select(vm => vm.Id));
             var toRemove = emails.Where(e => !vmIds.Contains(e.Id)).ToList();
             foreach (var email in toRemove)
                 emails.Remove(email);
@@ -98,7 +117,7 @@ namespace MyApp.WPF.Mappers
         private static void UpdateExistingEmails(ICollection<EmailViewModel> vms, ICollection<Email> emails)
         {
             var emailDic = emails.ToDictionary(e => e.Id);
-            foreach (var vm in vms.Where(vm => vm.Id != 0))
+            foreach (var vm in vms.Where(vm => vm.Id != Guid.Empty))
             {
                 if (emailDic.TryGetValue(vm.Id, out var email))
                 {
@@ -108,11 +127,11 @@ namespace MyApp.WPF.Mappers
         }
         private static void AddNewEmails(ICollection<EmailViewModel> vms, ICollection<Email> emails)
         {
-            foreach (var vm in vms.Where(vm => vm.Id == 0))
+            foreach (var vm in vms.Where(vm => vm.Id == Guid.Empty))
             {
                 emails.Add(ToModel(vm));
             }
-        } 
+        }
         #endregion
 
     }

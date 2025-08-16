@@ -14,16 +14,28 @@
     <Compile Update="UserControls\Admin\Companies\NewCompanyControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Admin\Employees\EditEmployeeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Admin\Employees\EmployeeAccessControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Admin\Employees\EmployeesControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Admin\Employees\FormEmployeeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Admin\Employees\NewEmployeeControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Admin\HomeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Organizations\EditOrganizationControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\Organizations\FormOrganizationControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Admin\Organizations\NewOrganizationControl.xaml.cs">
@@ -76,16 +88,28 @@
     <Page Update="UserControls\Admin\Companies\NewCompanyControl.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UserControls\Admin\Employees\EditEmployeeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\Admin\Employees\EmployeeAccessControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\Admin\Employees\EmployeesControl.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UserControls\Admin\Employees\FormEmployeeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\Admin\Employees\NewEmployeeControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\Admin\HomeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Organizations\EditOrganizationControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\Organizations\FormOrganizationControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\Admin\Organizations\NewOrganizationControl.xaml">

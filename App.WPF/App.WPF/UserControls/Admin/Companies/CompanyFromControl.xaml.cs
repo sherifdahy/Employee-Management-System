@@ -29,13 +29,11 @@ namespace MyApp.WPF.UserControls.Admin.Companies
     {
         private readonly ICompanyService _companyService;
         private readonly IServiceProvider _serviceProvider;
-        public CompanyFromControl(ICompanyService companyService, IServiceProvider serviceProvider, CompanyViewModel companyViewModel)
+        public CompanyFromControl(ICompanyService companyService, IServiceProvider serviceProvider)
         {
             InitializeComponent();
-
             this._companyService = companyService;
             this._serviceProvider = serviceProvider;
-            this.DataContext = companyViewModel;
         }
 
 
@@ -46,7 +44,8 @@ namespace MyApp.WPF.UserControls.Admin.Companies
                 var window = _serviceProvider.GetRequiredService<NewOwnerWindow>();
                 if (window.ShowDialog() == true)
                 {
-                    OwnersDataGrid.Items.AddNewItem(window.DataContext as OwnerViewModel);
+                    var ownerVM = window.DataContext as OwnerViewModel;
+                    OwnersDataGrid.Items.AddNewItem(ownerVM);
                 }
             }
             catch (Exception ex)
@@ -59,10 +58,13 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             try
             {
-                NewEmailWindow window = _serviceProvider.GetRequiredService<NewEmailWindow>();
+                NewEmailWindow window = ActivatorUtilities.CreateInstance<NewEmailWindow>(_serviceProvider,new EmailViewModel());
                 if (window.ShowDialog() == true)
                 {
-                    EmailsDataGrid.Items.AddNewItem(window.DataContext as EmailViewModel);
+                    var companyViewModel = this.DataContext as CompanyViewModel;
+                    var emailViewModel = window.DataContext as EmailViewModel;
+
+                    companyViewModel.Emails.Add(emailViewModel);
                 }
             }
             catch (Exception ex)
@@ -95,12 +97,13 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             try
             {
-                var companyVM = this.DataContext as CompanyViewModel;
+                
+                var btn = sender as Button;
+                var emailViewModel = btn.DataContext as EmailViewModel;
                 var button = sender as Button;
-                var emailVM = button?.DataContext as EmailViewModel;
-                if (companyVM is not null && emailVM is not null) 
+                if (emailViewModel is not null) 
                 {
-                    companyVM.Emails.Remove(emailVM);
+                    EmailsDataGrid.Items.Remove(emailViewModel);
                 }
             }
             catch (Exception ex) 

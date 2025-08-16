@@ -1,0 +1,167 @@
+2025-08-14 10:48:40.974 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-08-14 10:48:41.302 +03:00 [DBG] The index {'ApplicationUsersId'} was not created on entity type 'ApplicationUserCompany (Dictionary<string, object>)' as the properties are already covered by the index {'ApplicationUsersId', 'CompaniesId'}.
+2025-08-14 10:48:41.378 +03:00 [WRN] Entity 'ApplicationUser' has a global query filter defined and is the required end of a relationship with the entity 'Account'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:42.224 +03:00 [WRN] Entity 'Company' has a global query filter defined and is the required end of a relationship with the entity 'Email'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:42.225 +03:00 [WRN] Entity 'Company' has a global query filter defined and is the required end of a relationship with the entity 'Owner'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:42.263 +03:00 [DBG] The property 'Selector.OrganizationId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:42.263 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).ApplicationUsersId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:42.263 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).CompaniesId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:42.281 +03:00 [WRN] No store type was specified for the decimal property 'Currency' on entity type 'Account'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-14 10:48:42.379 +03:00 [DBG] Entity Framework Core 8.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.0' with options: using lazy loading proxies 
+2025-08-14 10:48:42.413 +03:00 [DBG] The index {'ApplicationUsersId'} was not created on entity type 'ApplicationUserCompany (Dictionary<string, object>)' as the properties are already covered by the index {'ApplicationUsersId', 'CompaniesId'}.
+2025-08-14 10:48:42.419 +03:00 [WRN] Entity 'ApplicationUser' has a global query filter defined and is the required end of a relationship with the entity 'Account'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:42.420 +03:00 [WRN] Entity 'Company' has a global query filter defined and is the required end of a relationship with the entity 'Email'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:42.420 +03:00 [WRN] Entity 'Company' has a global query filter defined and is the required end of a relationship with the entity 'Owner'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:42.425 +03:00 [DBG] The property 'Selector.OrganizationId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:42.425 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).ApplicationUsersId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:42.425 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).CompaniesId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:42.427 +03:00 [WRN] No store type was specified for the decimal property 'Currency' on entity type 'Account'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-14 10:48:43.644 +03:00 [DBG] 'ApplicationDbContext' disposed.
+2025-08-14 10:48:56.089 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-08-14 10:48:56.401 +03:00 [DBG] The index {'ApplicationUsersId'} was not created on entity type 'ApplicationUserCompany (Dictionary<string, object>)' as the properties are already covered by the index {'ApplicationUsersId', 'CompaniesId'}.
+2025-08-14 10:48:56.470 +03:00 [WRN] Entity 'ApplicationUser' has a global query filter defined and is the required end of a relationship with the entity 'Account'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:56.471 +03:00 [WRN] Entity 'Company' has a global query filter defined and is the required end of a relationship with the entity 'Email'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:56.471 +03:00 [WRN] Entity 'Company' has a global query filter defined and is the required end of a relationship with the entity 'Owner'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-08-14 10:48:56.507 +03:00 [DBG] The property 'Selector.OrganizationId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:56.507 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).ApplicationUsersId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:56.507 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).CompaniesId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-14 10:48:56.524 +03:00 [WRN] No store type was specified for the decimal property 'Currency' on entity type 'Account'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-14 10:48:56.617 +03:00 [DBG] Entity Framework Core 8.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.0' with options: using lazy loading proxies 
+2025-08-14 10:48:56.627 +03:00 [DBG] Creating DbConnection.
+2025-08-14 10:48:56.630 +03:00 [DBG] Created DbConnection. (1ms).
+2025-08-14 10:48:56.632 +03:00 [DBG] Migrating using database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.635 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.640 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.644 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-14 10:48:56.647 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-08-14 10:48:56.648 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (6ms).
+2025-08-14 10:48:56.652 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-14 10:48:56.659 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-14 10:48:56.661 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.664 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-14 10:48:56.665 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2025-08-14 10:48:56.665 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2025-08-14 10:48:56.666 +03:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (0ms).
+2025-08-14 10:48:56.666 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.666 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.666 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-14 10:48:56.673 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-14 10:48:56.673 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.673 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-14 10:48:56.673 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.674 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.674 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-14 10:48:56.674 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:56.674 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:56.674 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-14 10:48:56.675 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-14 10:48:56.675 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.675 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-14 10:48:56.675 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2025-08-14 10:48:56.675 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2025-08-14 10:48:56.675 +03:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (0ms).
+2025-08-14 10:48:56.675 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.675 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.675 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-14 10:48:56.676 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-14 10:48:56.676 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.676 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-14 10:48:56.685 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.685 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:56.685 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-08-14 10:48:56.685 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2025-08-14 10:48:56.685 +03:00 [DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+2025-08-14 10:48:56.685 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-08-14 10:48:56.688 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-08-14 10:48:57.033 +03:00 [DBG] Closing data reader to 'MyAppDb' on server '.'.
+2025-08-14 10:48:57.034 +03:00 [DBG] A data reader for 'MyAppDb' on server '.' is being disposed after spending 1ms reading results.
+2025-08-14 10:48:57.034 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:57.034 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-14 10:48:57.040 +03:00 [INF] Applying migration '20250814074843_add_restrictDelete_on_organization'.
+2025-08-14 10:48:57.071 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:57.071 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:57.072 +03:00 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-08-14 10:48:57.076 +03:00 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-08-14 10:48:57.077 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-14 10:48:57.077 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:57.078 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:57.078 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Emails] DROP CONSTRAINT [FK_Emails_Organizations_OrganizationId];
+2025-08-14 10:48:57.081 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Emails] DROP CONSTRAINT [FK_Emails_Organizations_OrganizationId];
+2025-08-14 10:48:57.082 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-14 10:48:57.082 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:57.082 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:57.082 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Organizations]') AND [c].[name] = N'IsDeleted');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Organizations] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Organizations] DROP COLUMN [IsDeleted];
+2025-08-14 10:48:57.099 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Organizations]') AND [c].[name] = N'IsDeleted');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Organizations] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Organizations] DROP COLUMN [IsDeleted];
+2025-08-14 10:48:57.099 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-14 10:48:57.099 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:57.099 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:57.099 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Emails]') AND [c].[name] = N'IsDeleted');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Emails] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Emails] DROP COLUMN [IsDeleted];
+2025-08-14 10:48:59.256 +03:00 [INF] Executed DbCommand (2,156ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Emails]') AND [c].[name] = N'IsDeleted');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Emails] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Emails] DROP COLUMN [IsDeleted];
+2025-08-14 10:48:59.256 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-14 10:48:59.256 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:59.256 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:59.256 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Emails] ADD CONSTRAINT [FK_Emails_Organizations_OrganizationId] FOREIGN KEY ([OrganizationId]) REFERENCES [Organizations] ([Id]) ON DELETE NO ACTION;
+2025-08-14 10:48:59.264 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Emails] ADD CONSTRAINT [FK_Emails_Organizations_OrganizationId] FOREIGN KEY ([OrganizationId]) REFERENCES [Organizations] ([Id]) ON DELETE NO ACTION;
+2025-08-14 10:48:59.265 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-14 10:48:59.265 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:59.265 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-14 10:48:59.265 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20250814074843_add_restrictDelete_on_organization', N'8.0.0');
+2025-08-14 10:48:59.266 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20250814074843_add_restrictDelete_on_organization', N'8.0.0');
+2025-08-14 10:48:59.267 +03:00 [DBG] Committing transaction.
+2025-08-14 10:48:59.269 +03:00 [DBG] Committed transaction.
+2025-08-14 10:48:59.270 +03:00 [DBG] Disposing transaction.
+2025-08-14 10:48:59.270 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:59.270 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-14 10:48:59.271 +03:00 [DBG] 'ApplicationDbContext' disposed.
+2025-08-14 10:48:59.273 +03:00 [DBG] Disposing connection to database 'MyAppDb' on server '.'.
+2025-08-14 10:48:59.273 +03:00 [DBG] Disposed connection to database '' on server '' (0ms).

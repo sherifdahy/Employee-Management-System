@@ -42,16 +42,28 @@
   <Page Include="UserControls\Admin\Companies\NewCompanyControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
+  <Page Include="UserControls\Admin\Employees\EditEmployeeControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="UserControls\Admin\Employees\EmployeeAccessControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
   <Page Include="UserControls\Admin\Employees\EmployeesControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
+  <Page Include="UserControls\Admin\Employees\FormEmployeeControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="UserControls\Admin\Employees\NewEmployeeControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
   <Page Include="UserControls\Admin\HomeControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Organizations\EditOrganizationControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\Organizations\FormOrganizationControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
   <Page Include="UserControls\Admin\Organizations\NewOrganizationControl.xaml">
@@ -95,22 +107,29 @@
     <SubType>Code</SubType>
   </Compile>
   <Compile Include="ApplicationConfiguration\AutoMapperProfile.cs" />
+  <Compile Include="ApplicationConfiguration\LoggerConfigurationManager.cs" />
+  <Compile Include="Mappers\AccountMapper.cs" />
+  <Compile Include="Mappers\ApplicationUserMapper.cs" />
   <Compile Include="Mappers\CompanyMapper.cs" />
   <Compile Include="Mappers\EmailMapper.cs" />
+  <Compile Include="Mappers\OrganizationMapper.cs" />
   <Compile Include="Mappers\OwnerMapper.cs" />
+  <Compile Include="Mappers\SelectorMapper.cs" />
   <Compile Include="Services\Dialog\DialogService.cs" />
-  <Compile Include="Services\Encryption\EncryptionService.cs" />
-  <Compile Include="Services\Encryption\IEncryptionService.cs" />
   <Compile Include="Services\State\IStateService.cs" />
   <Compile Include="Services\State\StateService.cs" />
   <Compile Include="UserControls\Admin\Companies\CompaniesControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Companies\CompanyFromControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Companies\EditCompaniesControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Companies\NewCompanyControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Employees\EditEmployeeControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Employees\EmployeeAccessControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Employees\EmployeesControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Employees\FormEmployeeControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Employees\NewEmployeeControl.xaml.cs" />
   <Compile Include="UserControls\Admin\HomeControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Organizations\EditOrganizationControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\Organizations\FormOrganizationControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Organizations\NewOrganizationControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Organizations\OrganizationControl.xaml.cs" />
   <Compile Include="UserControls\Employee\Companies\CompaniesControl.xaml.cs" />

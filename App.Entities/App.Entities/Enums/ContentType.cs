@@ -9,6 +9,7 @@ namespace App.Entities.Enums
     public enum ContentType:byte
     {
         Data = 1,
-        Action = 2
+        Password=2,
+        Action = 3,
     }
 }

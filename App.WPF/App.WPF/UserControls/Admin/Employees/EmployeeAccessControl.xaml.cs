@@ -148,7 +148,7 @@ namespace MyApp.WPF.UserControls.Admin.Employees
         }
 
 
-        private async Task UsePaginationForCompanies(int userId = 0,string value = null)
+        private async Task UsePaginationForCompanies(Guid userId = default,string value = null)
         {
             var currentPage = CompaniesDataPager.PageIndex;
             var pageSize = CompaniesDataPager.PageSize;

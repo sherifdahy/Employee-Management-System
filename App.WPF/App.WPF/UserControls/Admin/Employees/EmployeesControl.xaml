@@ -10,10 +10,81 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <localVM:ApplicationUser></localVM:ApplicationUser>
-    </UserControl.DataContext>
-    <Grid>
-        <telerik:RadGridView telerik:StyleManager.Theme="Windows11" Name="EmployeesDataGrid"/>
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <telerik:RadGridView 
+    x:Name="EmployeesDataGrid"
+    Grid.Row="0"
+    AutoGenerateColumns="False"
+    IsReadOnly="True"
+    ShowGroupPanel="False"
+    telerik:StyleManager.Theme="Windows11">
+
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn Header="المعرف" DataMemberBinding="{Binding Id}" Width="*" />
+                    <telerik:GridViewDataColumn Header="الاسم" DataMemberBinding="{Binding Name}" Width="*" />
+                    <telerik:GridViewDataColumn Header="البريد الإلكتروني" DataMemberBinding="{Binding Email}" Width="*" />
+                    <telerik:GridViewDataColumn Header="نوع المستخدم" DataMemberBinding="{Binding UserType}" Width="*" />
+                    <telerik:GridViewDataColumn Header="عدد الشركات" DataMemberBinding="{Binding Companies.Count}" Width="*" />
+
+                    <!-- زر التعديل -->
+                    <telerik:GridViewDataColumn Width="Auto">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                        telerik:StyleManager.Theme="Crystal"
+                        Click="EditBtn_Click" 
+                        ToolTip="Edit"
+                        Cursor="Hand"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Padding="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Image Source="/assets/icons/icons8-edit-64.png" Width="18" Height="18"/>
+                                        <TextBlock Text="تعديل" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+
+                    <!-- زر الحذف -->
+                    <telerik:GridViewDataColumn Width="Auto">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                        telerik:StyleManager.Theme="Crystal"
+                        Click="DeleteBtn_Click" 
+                        ToolTip="Delete"
+                        Cursor="Hand"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Padding="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Image Source="/assets/icons/icons8-delete-96.png" Width="18" Height="18"/>
+                                        <TextBlock Text="حذف" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+            <telerik:RadDataPager 
+                    Grid.Row="1"
+                    x:Name="EmployeeDataPager"
+                    PageSize="25"
+                    telerik:StyleManager.Theme="Windows11">
+                </telerik:RadDataPager>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

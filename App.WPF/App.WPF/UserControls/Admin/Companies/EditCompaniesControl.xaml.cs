@@ -3,6 +3,7 @@ using App.Entities.Models;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.WPF.Mappers;
+using MyApp.WPF.UserControls.Admin.Employees;
 using MyApp.WPF.UserControls.Employee.Companies;
 using MyApp.WPF.ViewModels;
 using MyApp.WPF.Windows.Admin;
@@ -28,15 +29,19 @@ namespace MyApp.WPF.UserControls.Admin.Companies
 
             this._companyService = companyService;
             this._serviceProvider = serviceProvider;
-            this.DataContext = companyViewModel;
+            this.FormSection.DataContext = companyViewModel;
             
         }
-
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.FormSection.Content = ActivatorUtilities.CreateInstance<CompanyFromControl>(_serviceProvider);
+        }
         private async void EditCompanyBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var companyVM = this.DataContext as CompanyViewModel;
+                var formControl = this.FormSection.Content as CompanyFromControl;
+                var companyVM = formControl.DataContext as CompanyViewModel;
                 if (companyVM.IsValid)
                 {
                     var result = await _companyService.GetByIdAsync(companyVM.Id);
@@ -60,9 +65,6 @@ namespace MyApp.WPF.UserControls.Admin.Companies
             }
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.FormSection.Content = ActivatorUtilities.CreateInstance<CompanyFromControl>(_serviceProvider, this.DataContext);
-        }
+        
     }
 }

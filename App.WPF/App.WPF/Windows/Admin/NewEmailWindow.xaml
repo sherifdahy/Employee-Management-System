@@ -27,15 +27,15 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
                 <TextBlock Text="الحساب:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox telerik:StyleManager.Theme="Fluent"  Text="{Binding EmailAddress, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="الحساب" />
+                <telerik:RadWatermarkTextBox Style="{DynamicResource ValidationTextBoxStyle}"  telerik:StyleManager.Theme="Fluent"  Text="{Binding EmailAddress, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="الحساب" />
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
                 <TextBlock Text="كلمة المرور:" Margin="0,0,0,5"/>
-                <telerik:RadPasswordBox telerik:StyleManager.Theme="Fluent" Text="{Binding Password, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="كلمة المرور" />
+                <telerik:RadPasswordBox telerik:StyleManager.Theme="Fluent" Style="{DynamicResource ValidationTextBoxStyle}"  Text="{Binding Password, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" PasswordChanged="RadPasswordBox_PasswordChanged" WatermarkContent="كلمة المرور" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
                 <TextBlock Text="نوع الحساب:" Margin="0,0,0,5"/>
-                <telerik:RadComboBox telerik:StyleManager.Theme="Fluent" Name="OrgCombobox" SelectedValue="{Binding OrganizationId , Mode=TwoWay,ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                <telerik:RadComboBox telerik:StyleManager.Theme="Fluent" Style="{DynamicResource ValidationComboBoxStyle}"  Name="OrgCombobox" SelectedValue="{Binding OrganizationId , Mode=TwoWay,ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
             </StackPanel>
 
             

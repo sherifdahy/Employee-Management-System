@@ -9,6 +9,6 @@ namespace App.BLL.Dependencies.Interfaces
 {
     public interface IBrowserService
     {
-        OperationResult<bool,string> Open(Email email, byte browser = 1);
+        void Open(Email email, byte browser = 1);
     }
 }

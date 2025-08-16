@@ -12,6 +12,6 @@ namespace MyApp.WPF.Services.State
         public StateService() {
             
         }
-        public int UserId { get ; set ; }
+        public Guid UserId { get ; set ; }
     }
 }

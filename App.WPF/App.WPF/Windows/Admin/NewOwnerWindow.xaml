@@ -27,19 +27,19 @@
             
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
                 <TextBlock Text="اسم العميل:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox telerik:StyleManager.Theme="Fluent" Text="{Binding Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="اسم العميل" />
+                <telerik:RadWatermarkTextBox Style="{StaticResource ValidationTextBoxStyle}" telerik:StyleManager.Theme="Fluent" Text="{Binding Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="اسم العميل" />
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
                 <TextBlock Text="معرف العميل:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox telerik:StyleManager.Theme="Fluent" Text="{Binding NationalId, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="معرف العميل" />
+                <telerik:RadWatermarkTextBox Style="{StaticResource ValidationTextBoxStyle}" telerik:StyleManager.Theme="Fluent" Text="{Binding NationalId, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="معرف العميل" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
                 <TextBlock Text="رقم التليفون:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox telerik:StyleManager.Theme="Fluent" Text="{Binding PhoneNumber, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="رقم التليفون" />
+                <telerik:RadWatermarkTextBox Style="{StaticResource ValidationTextBoxStyle}" telerik:StyleManager.Theme="Fluent" Text="{Binding PhoneNumber, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="رقم التليفون" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
                 <TextBlock Text="العنوان:" Margin="0,0,0,5"/>
-                <telerik:RadWatermarkTextBox telerik:StyleManager.Theme="Fluent" Text="{Binding Address, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="العنوان" />
+                <telerik:RadWatermarkTextBox Style="{StaticResource ValidationTextBoxStyle}" telerik:StyleManager.Theme="Fluent" Text="{Binding Address, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" WatermarkContent="العنوان" />
             </StackPanel>
 
             <Button Name="AddOwnerBtn" Grid.Row="2" Grid.Column="1" Width="100" telerik:StyleManager.Theme="Fluent" Content="اضافة" HorizontalAlignment="Right" Click="AddOwnerBtn_Click"/>

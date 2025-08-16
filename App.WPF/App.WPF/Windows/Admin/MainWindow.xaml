@@ -1,5 +1,4 @@
 ﻿<Window
-        
         FlowDirection="RightToLeft"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,11 +14,46 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="SubButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Padding" Value="45,10,10,10"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
+
+            <Style.Triggers>
+                <!-- لما يكون الزرار مختار -->
+                <Trigger Property="Tag" Value="Selected">
+                    <Setter Property="Background" Value="#FFCCE5FF"/>
+                    <!-- لون أزرق فاتح -->
+                </Trigger>
+
+                <!-- لما أعمل Hover -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFD9F0FF"/>
+                    <!-- لون Hover -->
+                </Trigger>
+            </Style.Triggers>
         </Style>
+        <Style x:Key="MainButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="30,10,10,10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+
+            <Style.Triggers>
+                <!-- لما يكون الزرار مختار -->
+                <Trigger Property="Tag" Value="Selected">
+                    <Setter Property="Background" Value="#FFCCE5FF"/>
+                    <!-- لون أزرق فاتح -->
+                </Trigger>
+
+                <!-- لما أعمل Hover -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFD9F0FF"/>
+                    <!-- لون Hover -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
 
@@ -38,32 +72,23 @@
             <!-- Main Section -->
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#2196F3" Height="60" Padding="10">
-            <DockPanel VerticalAlignment="Center">
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#0057f6" Height="60" Padding="10">
+            <Border.Effect>
+                <DropShadowEffect Color="#0057f6" BlurRadius="10" ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 <!-- اسم الصفحة -->
-                <TextBlock 
-            x:Name="CurrentPageName"
-            FontSize="16"
-            FontWeight="Bold"
-            Foreground="White"
-            DockPanel.Dock="Right"
-            VerticalAlignment="Center"/>
-
+                <TextBlock x:Name="CurrentPageName" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Grid.Column="0"/>
                 <!-- اسم المستخدم + الصلاحية -->
-                <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-                    <TextBlock 
-                x:Name="NameOfUserTxt"
-                FontSize="16"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="شريف ضاحي 👋" />
-                    <TextBlock 
-                x:Name="RoleOfUser"
-                FontSize="12"
-                Foreground="White"
-                Text="مدير النظام" />
+                <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock x:Name="NameOfUserTxt" FontSize="16" FontWeight="Bold" Foreground="White" Text="شريف ضاحي 👋" />
+                    <TextBlock x:Name="RoleOfUser" FontSize="12" Foreground="White" Text="مدير النظام" />
                 </StackPanel>
-            </DockPanel>
+            </Grid>
         </Border>
 
 
@@ -71,10 +96,10 @@
 
 
         <!-- Sidebar -->
-        <Border Grid.Row="1" Grid.Column="0" Background="LightGray" Width="200" x:Name="SidebarBorder">
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="DarkCyan" BorderThickness="0,0,1,0" Background="White" Width="200" x:Name="SidebarBorder">
             <!-- Sidebar Content -->
             <StackPanel  x:Name="SidebarContent">
-                <Button telerik:StyleManager.Theme="Fluent" Name="HomePageBtn" 
+                <Button Style="{StaticResource MainButtonStyle}" Name="HomePageBtn" 
                     Content="الصفحة الرئيسية" Click="HomePageBtn_Click"/>
 
                 <!-- Companies Section -->
@@ -82,34 +107,34 @@
                                 IsExpanded="False" Margin="0,5">
                     <StackPanel>
                         <Button Content="عرض الكل" Click="CompanyPageBtn_Click"
-                            Margin="5,0,5,5" Style="{StaticResource SubButtonStyle}"/>
+                             Style="{StaticResource SubButtonStyle}"/>
                         <Button Content="إنشاء جديد" Click="NewCompanyBtn_Click"
-                            Margin="5,0,5,0" Style="{StaticResource SubButtonStyle}"/>
+                             Style="{StaticResource SubButtonStyle}"/>
                     </StackPanel>
                 </telerik:RadExpander>
                 <!-- Employees Section -->
                 <telerik:RadExpander Header="الموظفين" telerik:StyleManager.Theme="Fluent" IsExpanded="False" Margin="0,5">
                     <StackPanel>
                         <Button Content="عرض الكل" Click="EmployeesBtn_Click"
-                                    Margin="5,0,5,5" Style="{StaticResource SubButtonStyle}"/>
+                                    Style="{StaticResource SubButtonStyle}"/>
                         <Button Content="إنشاء جديد" Click="CreateEmplyee_Click"
-                                    Margin="5,0,5,0" Style="{StaticResource SubButtonStyle}"/>
+                                     Style="{StaticResource SubButtonStyle}"/>
                         <Button Content="صلاحيات مشاهدة الشركات" Click="UserAccessBtn_Click"
-                                Margin="5,5,5,0" Style="{StaticResource SubButtonStyle}"/>
+                                 Style="{StaticResource SubButtonStyle}"/>
                     </StackPanel>
                 </telerik:RadExpander>
                 <!-- Organizations Section -->
                 <telerik:RadExpander Header="المنظمات" telerik:StyleManager.Theme="Fluent" IsExpanded="False" Margin="0,5">
                     <StackPanel>
                         <Button Content="عرض الكل" Click="OrganizationsBtn_Click"
-                            Margin="5,0,5,5" Style="{StaticResource SubButtonStyle}"/>
+                             Style="{StaticResource SubButtonStyle}"/>
                         <Button Content="إنشاء جديد" Click="AddOrganizationBtn_Click"
-                            Margin="5,0,5,0" Style="{StaticResource SubButtonStyle}"/>
+                             Style="{StaticResource SubButtonStyle}"/>
                     </StackPanel>
                 </telerik:RadExpander>
 
-                <Button telerik:StyleManager.Theme="Fluent" Content="العهد"/>
-                <Button x:Name="SettingsBtn" telerik:StyleManager.Theme="Fluent" Content="الاعدادات" Click="SettingsBtn_Click" />
+                <Button Style="{StaticResource MainButtonStyle}" Content="العهد"/>
+                <Button x:Name="SettingsBtn" Style="{StaticResource MainButtonStyle}" Content="الاعدادات" Click="SettingsBtn_Click" />
             </StackPanel>
         </Border>
 

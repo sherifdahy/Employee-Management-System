@@ -1,9 +1,12 @@
 ﻿using App.BLL;
+using App.BLL.DataSync;
 using App.Entities.Models;
 using AutoMapper;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using MyApp.WPF.Mappers;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.UserControls.Shared;
 using MyApp.WPF.ViewModels;
 using System;
@@ -20,10 +23,12 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         private readonly IMapper _mapper;
         private readonly ICompanyService _companyService;
         private readonly IServiceProvider _serviceProvider;
-        public CompaniesControl(ICompanyService companyService, IMapper mapper, IServiceProvider serviceProvider)
+        private readonly IDataSync _dataSync;
+        public CompaniesControl(IDataSync dataSync,ICompanyService companyService, IMapper mapper, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _companyService = companyService;
+            _dataSync = dataSync;
             _mapper = mapper;
             _serviceProvider = serviceProvider;
             Loaded += UserControl_Loaded;
@@ -94,7 +99,7 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             await UsePagination();
         }
-        private async Task UsePagination(int userId = 0,string value = null)
+        private async Task UsePagination(Guid userId = default,string value = null)
         {
             var pageSize = CompaniesDataPager.PageSize;
             var currentPage = CompaniesDataPager.PageIndex;
@@ -130,6 +135,54 @@ namespace MyApp.WPF.UserControls.Admin.Companies
             {
                 MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private async void ExportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var saveDialog = new SaveFileDialog()
+            {
+                Title = "اختر مكان حفظ الملف",
+                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+                FileName = $"{DateTime.UtcNow:yyyy-MM-dd_HH-mm-ss} - Export File"
+            };
+
+            if(saveDialog.ShowDialog() != true)
+                return;
+
+            string filePath = saveDialog.FileName;
+            var result = await _dataSync.ExportToFileAsync(filePath);
+
+            if (!result.State)
+            {
+                DialogService.ShowError(result.Message);
+                return;
+            }
+
+            DialogService.ShowSuccess("تم حفظ البيانات في المجلد بنجاح.");
+        }
+
+        private async void ImportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog()
+            {
+                Title = "اختر مكان الملف",
+                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+            };
+
+            if(fileDialog.ShowDialog() != true)
+                return;
+            
+            string filePath = fileDialog.FileName;
+            var result = await _dataSync.ImportFromFileAsync(filePath);
+
+            if(!result.State)
+            {
+                DialogService.ShowError(result.Message);
+                return;
+            }
+
+            DialogService.ShowSuccess($"Importing file {filePath}");
+
         }
     }
 }

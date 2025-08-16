@@ -9,11 +9,6 @@
              mc:Ignorable="d" 
              
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <localVM:Company/>
-    </UserControl.DataContext>
-
-
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="10">
             <Grid.RowDefinitions>
@@ -22,16 +17,42 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <!-- 🔍 مربع البحث -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Grid Grid.Row="0" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- SearchBox -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Spacer -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Buttons -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Search box on the right -->
                 <telerik:RadWatermarkTextBox
+                    Grid.Column="0"
                     Width="300"
                     HorizontalAlignment="Left"
                     telerik:StyleManager.Theme="Fluent"
                     x:Name="SearchBox"
                     WatermarkContent="ابحث عن شركة..."
-                
-                />
-            </StackPanel>
+                    Margin="0,0,10,0" />
+
+                <!-- Buttons on the left -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <Button 
+                        Content="تصدير البيانات"
+                        x:Name="ExportBtn"
+                        Click="ExportBtn_Click"
+                        Style="{DynamicResource BlueFlatButton}"
+                        Margin="0,0,10,0"/>
+                    <Button 
+                        Content="استيراد البيانات"
+                        x:Name="ImportBtn"
+                        Click="ImportBtn_Click"
+                        Style="{DynamicResource BlueFlatButton}"/>
+                </StackPanel>
+            </Grid>
+
 
             <StackPanel Grid.Row="1">
                 <telerik:RadGridView 
@@ -57,7 +78,7 @@
                             DataMemberBinding="{Binding TaxRegistrationNumber}" 
                             Width="2*" 
                             Header="رقم التسجيل"/>
-                                            <telerik:GridViewDataColumn 
+                        <telerik:GridViewDataColumn 
                             DataMemberBinding="{Binding Address}" 
                             Width="3*" 
                             Header="العنوان"/>
@@ -108,7 +129,7 @@
 
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
-                
+
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <telerik:RadDataPager telerik:StyleManager.Theme="Windows11"

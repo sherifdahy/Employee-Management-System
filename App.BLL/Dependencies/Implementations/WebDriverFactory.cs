@@ -21,41 +21,49 @@ namespace App.BLL.Dependencies.Implementations
 
         public IWebDriver Create(byte browser)
         {
-            switch (browser)
+            try
             {
-                case 1: // Chrome
-                    var chromeOptions = new ChromeOptions();
+                switch (browser)
+                {
+                    case 1: // Chrome
+                        var chromeOptions = new ChromeOptions();
 
-                    chromeOptions.AddArgument("--disable-gpu");
-                    chromeOptions.AddArgument("--start-maximized");
-                    var chromeService = ChromeDriverService.CreateDefaultService();
-                    chromeService.HideCommandPromptWindow = true;
+                        chromeOptions.AddArgument("--disable-gpu");
+                        chromeOptions.AddArgument("--start-maximized");
+                        var chromeService = ChromeDriverService.CreateDefaultService();
+                        chromeService.HideCommandPromptWindow = true;
 
-                    return new ChromeDriver(chromeService, chromeOptions);
+                        return new ChromeDriver(chromeService, chromeOptions);
 
-                case 2: // Firefox
-                    var firefoxOptions = new FirefoxOptions();
+                    case 2: // Firefox
+                        var firefoxOptions = new FirefoxOptions();
 
-                    firefoxOptions.AddArgument("--start-maximized");
+                        firefoxOptions.AddArgument("--start-maximized");
 
-                    var firefoxService = FirefoxDriverService.CreateDefaultService();
-                    firefoxService.HideCommandPromptWindow = true;
+                        var firefoxService = FirefoxDriverService.CreateDefaultService();
+                        firefoxService.HideCommandPromptWindow = true;
 
-                    return new FirefoxDriver(firefoxService, firefoxOptions);
+                        return new FirefoxDriver(firefoxService, firefoxOptions);
 
-                case 3: // Edge
-                    var edgeOptions = new EdgeOptions();
+                    case 3: // Edge
+                        var edgeOptions = new EdgeOptions();
 
-                    edgeOptions.AddArgument("--disable-gpu");
-                    edgeOptions.AddArgument("--start-maximized");
+                        edgeOptions.AddArgument("--disable-gpu");
+                        edgeOptions.AddArgument("--start-maximized");
 
-                    var edgeService = EdgeDriverService.CreateDefaultService();
-                    edgeService.HideCommandPromptWindow = true;
+                        var edgeService = EdgeDriverService.CreateDefaultService();
+                        edgeService.HideCommandPromptWindow = true;
 
-                    return new EdgeDriver(edgeService, edgeOptions);
+                        return new EdgeDriver(edgeService, edgeOptions);
 
-                default:
-                    throw new NotSupportedException($"Browser with code {browser} is not supported.");
+                    default:
+                        throw new NotSupportedException($"Browser with code {browser} is not supported.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 

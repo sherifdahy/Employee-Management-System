@@ -10,11 +10,7 @@
     FlowDirection="RightToLeft"
     Loaded="UserControl_Loaded"
     d:DesignHeight="1080" d:DesignWidth="1920">
-
-    <UserControl.DataContext>
-        <localVM:CompanyViewModel />
-    </UserControl.DataContext>
-
+    
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
@@ -25,7 +21,7 @@
                 <ContentControl x:Name="FormControl"></ContentControl>
             </Border>
             <StackPanel Grid.Row="6" Grid.Column="2">
-                <Button x:Name="CreateCompanyBtn" Content="انشاء" Margin="10" telerik:StyleManager.Theme="Fluent" Width="200" HorizontalAlignment="Right" Click="CreateCompanyBtn_Click"></Button>
+                <Button x:Name="CreateCompanyBtn" Content="انشاء" Margin="10" Style="{StaticResource BlueFlatButton}" Width="200" HorizontalAlignment="Right" Click="CreateCompanyBtn_Click"></Button>
             </StackPanel>
         </Grid>
     </ScrollViewer>

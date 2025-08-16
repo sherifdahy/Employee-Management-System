@@ -1,9 +1,12 @@
 ﻿using App.BLL;
+using App.Entities;
 using App.Entities.Enums;
 using App.Entities.Models;
 using AutoMapper;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Mappers;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,54 +27,43 @@ namespace MyApp.WPF.UserControls.Admin.Employees
 {
     public partial class NewEmployeeControl : UserControl
     {
-        private readonly IMapper _mapper;
         private readonly IEmployeeService _employeeService;
         private readonly IServiceProvider _serviceProvider;
-        public NewEmployeeControl(IEmployeeService employeeService,IMapper mapper,IServiceProvider serviceProvider)
+        public NewEmployeeControl(IServiceProvider serviceProvider,IEmployeeService employeeService)
         {
             InitializeComponent();
-            _employeeService = employeeService;
-            _mapper = mapper;
             _serviceProvider = serviceProvider;
+            _employeeService = employeeService;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var roles = Enum.GetValues(typeof(UserType));
-                RoleComboBox.ItemsSource = roles;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            BodyContent.Content = ActivatorUtilities.CreateInstance<FormEmployeeControl>(_serviceProvider,new ApplicationUserViewModel());
         }
-
         private async void AddEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var formControl = this.BodyContent.Content as FormEmployeeControl;
+            if (formControl is null)
             {
-                var registerVM = this.DataContext as ApplicationUserViewModel;
-                if (registerVM.IsValid)
-                {
-                    var appUser = _mapper.Map<ApplicationUser>(registerVM);
-                    await _employeeService.CreateAsync(appUser);
-                    this.Content = _serviceProvider.GetRequiredService<NewEmployeeControl>();
-                    MessageBox.Show(
-                        "✅ تم حفظ بيانات الموظف بنجاح.",
-                        "نجاح العملية",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information,
-                        MessageBoxResult.OK,
-                        MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
-                }
+                DialogService.ShowError(ErrorCatalog.Server.Unexpected.Message);
             }
-            catch (Exception ex)
+
+
+            var registerVM = formControl.DataContext as ApplicationUserViewModel;
+            if (registerVM is null)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ErrorCatalog.Server.Unexpected.Message);
             }
+
+            if (registerVM.IsValid)
+            {
+                var appUser = registerVM.ToModel();
+                await _employeeService.CreateAsync(appUser);
+                this.Content = _serviceProvider.GetRequiredService<NewEmployeeControl>();
+                DialogService.ShowSuccess("✅ تم حفظ بيانات الموظف بنجاح.");
+            }
+
         }
-        
+
     }
 }

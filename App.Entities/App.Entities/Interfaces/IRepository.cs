@@ -8,8 +8,8 @@ namespace Interfaces
 	public interface IRepository<T> where T : class
 	{
 
-		T GetById(int id);
-		Task<T> GetByIdAsync(int id);
+		T GetById(Guid id);
+		Task<T> GetByIdAsync(Guid id);
 		IEnumerable<T> GetAll();
 		Task<IEnumerable<T>> GetAllAsync();
 		public List<string> GetDistinct(Expression<Func<T, string>> col);

@@ -28,8 +28,12 @@ namespace MyApp.WPF.UserControls.Admin.Companies
             _mapper = mapper;
             _serviceProvider = serviceProvider;
             _companyService = companyService;
+            this.FormControl.DataContext = new CompanyViewModel();
         }
-
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.FormControl.Content = ActivatorUtilities.CreateInstance<CompanyFromControl>(_serviceProvider);
+        }
         private async void CreateCompanyBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -59,9 +63,6 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         }
 
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.FormControl.Content = ActivatorUtilities.CreateInstance<CompanyFromControl>(_serviceProvider,this.DataContext);
-        }
+        
     }
 }

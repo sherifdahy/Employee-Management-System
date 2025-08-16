@@ -1,6 +1,11 @@
 ﻿using App.BLL;
+using App.Entities;
+using App.Entities.Models;
 using AutoMapper;
 using Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Mappers;
+using MyApp.WPF.Services.Dialog;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -16,30 +21,64 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Telerik.Windows.Controls;
 
 namespace MyApp.WPF.UserControls.Admin.Organizations
 {
     public partial class OrganizationsControl : UserControl
     {
         private readonly IOrganizationService _organizationService;
-        public OrganizationsControl(IOrganizationService organizationService)
+        private readonly IServiceProvider _serviceProvider;
+        public OrganizationsControl(IOrganizationService organizationService,IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _organizationService = organizationService;
+            _serviceProvider = serviceProvider;
         }
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
+            var result = await _organizationService.GetAllAsync();
+            if(result is null)
             {
-                var orgs = await _organizationService.GetAllAsync();
-                OrganizationDataGrid.Items.AddRange(orgs);
+                DialogService.ShowError(result.Message);
+                return;
             }
-            catch (Exception ex)
+
+            OrganizationDataGrid.ItemsSource = result.Data;
+        }
+
+        private async void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button btn || btn.DataContext is not Organization org)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ErrorCatalog.Server.Unexpected.Message);
+                return;
             }
+
+            var result = await _organizationService.DeleteAsync(org.Id);
+
+            if (result.State)
+            {
+                UserControl_Loaded(sender, e);
+            }
+            else
+            {
+                DialogService.ShowError(result.Message);
+            }
+        }
+
+
+        private void EditBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            var org = btn.DataContext as Organization;
+            if (org is null)
+            {
+                DialogService.ShowError(ErrorCatalog.Server.Unexpected.Message);
+                return;
+            }
+
+            this.Content = ActivatorUtilities.CreateInstance<EditOrganizationControl>(_serviceProvider,org.ToViewModel());
         }
     }
 }

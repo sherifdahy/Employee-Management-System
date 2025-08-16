@@ -14,7 +14,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 
 namespace MyApp.WPF.Windows.Admin
 {
@@ -24,7 +26,6 @@ namespace MyApp.WPF.Windows.Admin
     public partial class NewEmailWindow : Window
     {
         private readonly IUnitOfWork _unitOfWork;
-        public EmailViewModel _email;
         public NewEmailWindow(IUnitOfWork unitOfWork,EmailViewModel emailViewModel)
         {
             InitializeComponent();
@@ -41,8 +42,24 @@ namespace MyApp.WPF.Windows.Admin
 
         private void AddEmailBtn_Click(object sender, RoutedEventArgs e)
         {
-            _email = this.DataContext as EmailViewModel;
-            this.DialogResult = true;
+            if (this.DataContext is EmailViewModel emailViewModel)
+            {
+                if (emailViewModel.ValidateAll())
+                {
+                    this.DialogResult = true;
+                }
+            }
+        }
+
+        private void RadPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (sender is RadPasswordBox passwordBox)
+            {
+                if (this.DataContext is EmailViewModel emailViewModel)
+                {
+                    emailViewModel.Password = passwordBox.Password;
+                }
+            }
         }
     }
 }

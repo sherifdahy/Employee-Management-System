@@ -9,12 +9,12 @@ namespace App.Entities.Models
 {
     public class Owner : BaseEntity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; }
         public string? Name { get; set; }
-        public string? NationalId { get; set; }
+        public string NationalId { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Address { get; set; }
-        public Guid CompanyId { get; set; }
+        public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
     }
 }

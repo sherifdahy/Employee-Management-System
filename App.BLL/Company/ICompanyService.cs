@@ -11,13 +11,13 @@ namespace App.BLL
     public interface ICompanyService
     {
         Task<OperationResult<bool, string>> CreateAsync(Company company);
-        OperationResult<string,string> Update(Company company);
-        Task<Pagination<Company>> GetAllAsync(int currentPage, int displayCount = 10, Guid userId = default, string? value = null);
+        Task<OperationResult<string, string>> UpdateAsync(Company company);
+        Task<Pagination<Company>> GetAllAsync(int currentPage, int displayCount = 10, int userId = 0, string? value = null);
         Task<OperationResult<IEnumerable<Company>, string>> GetAllAsync();
-        Task<OperationResult<string, string>> DeleteAsync(Guid id);
-        Task<OperationResult<Company, string>> GetByIdAsync(Guid id);
+        Task<OperationResult<string, string>> DeleteAsync(int id);
+        Task<OperationResult<Company, string>> GetByIdAsync(int id);
         Task<IEnumerable<Company>> SearchAsync(string value);
-        Task<IEnumerable<Company>> GetRelatedCompaniesAsync(Guid userId);
+        Task<IEnumerable<Company>> GetRelatedCompaniesAsync(int userId);
         
     }
 }

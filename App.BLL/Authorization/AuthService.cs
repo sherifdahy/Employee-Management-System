@@ -1,6 +1,7 @@
 ﻿using App.Entities;
 using App.Entities.Models;
 using Interfaces;
+using System.Threading.Tasks;
 
 namespace App.BLL
 {
@@ -47,7 +48,7 @@ namespace App.BLL
         }
 
 
-        public async Task<OperationResult<ApplicationUser,string>> GetByIdAsync(Guid id)
+        public async Task<OperationResult<ApplicationUser,string>> GetByIdAsync(int id)
         {
             var user = await _unitOfWork.ApplicationUsers.GetByIdAsync(id);
             if (user != null)
@@ -60,13 +61,13 @@ namespace App.BLL
             }
         }
 
-        public void Update(ApplicationUser applicationUser)
+        public async Task UpdateAsync(ApplicationUser applicationUser)
         {
             try
             {
                 applicationUser.Password = _encryptionService.Encrypt(applicationUser.Password);
                 _unitOfWork.ApplicationUsers.Update(applicationUser);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
             }
             catch (Exception ex)
             {

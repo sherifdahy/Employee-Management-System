@@ -108,14 +108,14 @@ namespace MyApp.WPF.UserControls.Admin.Employees
             }
         }
 
-        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        private async void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 var employees = EmployeesDataGrid.ItemsSource as List<ApplicationUser>;
                 if (employees != null)
                 {
-                    _employeeService.UpdateRange(employees);
+                    await _employeeService.UpdateRangeAsync(employees);
                     MessageBox.Show("تم الحفظ بنجاح", "تمت العمليه ", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
@@ -148,7 +148,7 @@ namespace MyApp.WPF.UserControls.Admin.Employees
         }
 
 
-        private async Task UsePaginationForCompanies(Guid userId = default,string value = null)
+        private async Task UsePaginationForCompanies(int userId = default,string value = null)
         {
             var currentPage = CompaniesDataPager.PageIndex;
             var pageSize = CompaniesDataPager.PageSize;

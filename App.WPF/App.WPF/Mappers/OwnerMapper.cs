@@ -73,7 +73,7 @@ namespace MyApp.WPF.Mappers
 
         private static void RemoveDeletedEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
         {
-            var vmIds = new HashSet<Guid>(vms.Where(vm => vm.Id != Guid.Empty).Select(vm => vm.Id));
+            var vmIds = new HashSet<int>(vms.Where(vm => vm.Id != 0).Select(vm => vm.Id));
             var toRemove = owners.Where(e => !vmIds.Contains(e.Id)).ToList();
             foreach (var owner in toRemove)
                 owners.Remove(owner);
@@ -82,7 +82,7 @@ namespace MyApp.WPF.Mappers
         private static void UpdateExistingEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
         {
             var ownerDic = owners.ToDictionary(e => e.Id);
-            foreach (var vm in vms.Where(vm => vm.Id != Guid.Empty))
+            foreach (var vm in vms.Where(vm => vm.Id != 0))
             {
                 if (ownerDic.TryGetValue(vm.Id, out var owner))
                 {
@@ -93,7 +93,7 @@ namespace MyApp.WPF.Mappers
 
         private static void AddNewEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
         {
-            foreach (var vm in vms.Where(vm => vm.Id == Guid.Empty))
+            foreach (var vm in vms.Where(vm => vm.Id == 0))
             {
                 owners.Add(ToModel(vm));
             }

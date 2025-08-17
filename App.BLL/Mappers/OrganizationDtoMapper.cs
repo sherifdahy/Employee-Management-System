@@ -18,8 +18,8 @@ namespace App.BLL.Mappers
             return new OrganizationDTO()
             {
                 Id = organization.Id,
-                CreatedAt = organization.CreatedAt,
-                UpdatedAt = organization.UpdatedAt,
+                //CreatedAt = organization.CreatedAt,
+                //UpdatedAt = organization.UpdatedAt,
                 URL = organization.URL,
                 Name = organization.Name,
                 Selectors = organization.Selectors.ToDTO().ToList(),

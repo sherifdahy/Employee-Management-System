@@ -23,8 +23,8 @@ namespace App.BLL.Mappers
                 Name = applicationUser.Name,
                 Password = applicationUser.Password,
                 UserType = applicationUser.UserType,
-                CreatedAt = applicationUser.CreatedAt,
-                UpdatedAt = applicationUser.UpdatedAt,
+                //CreatedAt = applicationUser.CreatedAt,
+                //UpdatedAt = applicationUser.UpdatedAt,
                 Account = applicationUser.Account.ToDTO()
             };
         }
@@ -46,8 +46,8 @@ namespace App.BLL.Mappers
             return new ApplicationUser()
             {
                 Id = applicationUserDTO.Id,
-                CreatedAt = applicationUserDTO.CreatedAt,
-                UpdatedAt = applicationUserDTO.UpdatedAt,
+                //CreatedAt = applicationUserDTO.CreatedAt,
+                //UpdatedAt = applicationUserDTO.UpdatedAt,
                 Name = applicationUserDTO.Name,
                 Email = applicationUserDTO.Email,
                 Password = applicationUserDTO.Password,

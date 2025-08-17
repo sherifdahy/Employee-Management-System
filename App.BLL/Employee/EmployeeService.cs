@@ -25,7 +25,7 @@ namespace App.BLL
             {
                 applicationUser.Password = _encryptionService.Encrypt(applicationUser.Password);
                 await _unitOfWork.ApplicationUsers.AddAsync(applicationUser);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
             }
             catch (Exception ex) 
             {
@@ -33,7 +33,7 @@ namespace App.BLL
             }
         }
 
-        public async Task<OperationResult<bool, string>> DeleteAsync(Guid id)
+        public async Task<OperationResult<bool, string>> DeleteAsync(int id)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace App.BLL
 
                 result.Data.IsDeleted = true;
                 _unitOfWork.ApplicationUsers.Update(result.Data);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
 
                 return OperationResult<bool, string>.Ok(true);
             }
@@ -68,13 +68,13 @@ namespace App.BLL
                 Items = applicationUsers
             };
         }
-        public void UpdateRange(IEnumerable<ApplicationUser> applicationUsers)
+        public async Task UpdateRangeAsync(IEnumerable<ApplicationUser> applicationUsers)
         {
             _unitOfWork.ApplicationUsers.UpdateRange(applicationUsers);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public async Task<OperationResult<ApplicationUser, string>> GetByIdAsync(Guid id)
+        public async Task<OperationResult<ApplicationUser, string>> GetByIdAsync(int id)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace App.BLL
             }
         }
 
-        public OperationResult<bool, string> Update(ApplicationUser applicationUser)
+        public async Task<OperationResult<bool, string>> UpdateAsync(ApplicationUser applicationUser)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace App.BLL
                 applicationUser.UpdatedAt = DateTime.UtcNow;
                 applicationUser.Password = _encryptionService.Encrypt(applicationUser.Password);
                 _unitOfWork.ApplicationUsers.Update(applicationUser);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
 
                 return OperationResult<bool, string>.Ok(true);
             }

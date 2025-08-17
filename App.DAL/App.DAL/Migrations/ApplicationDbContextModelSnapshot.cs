@@ -18,17 +18,14 @@ namespace App.DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.0")
-                .HasAnnotation("Proxies:ChangeTracking", false)
-                .HasAnnotation("Proxies:CheckEquality", false)
-                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("App.Entities.Models.Account", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Currency")
                         .HasColumnType("decimal(18,2)");
@@ -40,9 +37,11 @@ namespace App.DAL.Migrations
 
             modelBuilder.Entity("App.Entities.Models.ApplicationUser", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -75,22 +74,24 @@ namespace App.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("89b2f491-f973-47b9-a5fd-fb56a5f314d4"),
-                            CreatedAt = new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6688),
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5026),
                             Email = "admin",
                             IsDeleted = false,
                             Name = "Sherif Dahy",
                             Password = "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=",
-                            UpdatedAt = new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6691),
+                            UpdatedAt = new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5029),
                             UserType = 2
                         });
                 });
 
             modelBuilder.Entity("App.Entities.Models.Company", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -126,12 +127,14 @@ namespace App.DAL.Migrations
 
             modelBuilder.Entity("App.Entities.Models.Email", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -139,8 +142,8 @@ namespace App.DAL.Migrations
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -159,9 +162,11 @@ namespace App.DAL.Migrations
 
             modelBuilder.Entity("App.Entities.Models.Organization", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -182,15 +187,17 @@ namespace App.DAL.Migrations
 
             modelBuilder.Entity("App.Entities.Models.Owner", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -216,12 +223,14 @@ namespace App.DAL.Migrations
 
             modelBuilder.Entity("App.Entities.Models.Selector", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("OrganizationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -242,11 +251,11 @@ namespace App.DAL.Migrations
 
             modelBuilder.Entity("ApplicationUserCompany", b =>
                 {
-                    b.Property<Guid>("ApplicationUsersId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ApplicationUsersId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CompaniesId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CompaniesId")
+                        .HasColumnType("int");
 
                     b.HasKey("ApplicationUsersId", "CompaniesId");
 

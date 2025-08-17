@@ -70,7 +70,7 @@ namespace MyApp.WPF.UserControls.Shared
                         var result = await _authService.GetByIdAsync(_stateService.UserId);
                         if (result.State)
                         {
-                            _authService.Update(_mapper.Map(vm, result.Data));
+                            await _authService.UpdateAsync(_mapper.Map(vm, result.Data));
                             MessageBox.Show("تم الحفظ بنجاح", "عملية ناجة", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else

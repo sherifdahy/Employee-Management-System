@@ -11,8 +11,8 @@ namespace App.BLL
     {
         Task<OperationResult<IEnumerable<Organization>, string>> GetAllAsync();
         Task<OperationResult<bool, string>> CreateAsync(Organization organization);
-        Task<OperationResult<bool, string>> DeleteAsync(Guid id);
-        Task<OperationResult<Organization,string>> GetByIdAsync(Guid id);
-        OperationResult<Organization, string> Update(Organization organization);
+        Task<OperationResult<bool, string>> DeleteAsync(int id);
+        Task<OperationResult<Organization,string>> GetByIdAsync(int id);
+        Task<OperationResult<Organization, string>> UpdateAsync(Organization organization);
     }
 }

@@ -99,7 +99,7 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             await UsePagination();
         }
-        private async Task UsePagination(Guid userId = default,string value = null)
+        private async Task UsePagination(int userId = default,string value = null)
         {
             var pageSize = CompaniesDataPager.PageSize;
             var currentPage = CompaniesDataPager.PageIndex;

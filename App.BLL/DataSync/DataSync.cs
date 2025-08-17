@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,7 +85,6 @@ namespace App.BLL.DataSync
                 //await UpdateApplicationUsers(obj.ApplicationUsers);
                 await UpdateCompanies(obj.Companies);
 
-                _unitOfWork.Save();
 
                 return OperationResult<object, string>.Ok(filePath);
             }
@@ -104,7 +104,7 @@ namespace App.BLL.DataSync
                 {
                     _unitOfWork.Organizations.Add(organizationDTO.ToModel());
                 }
-                else if (organizationDTO.UpdatedAt > organization.UpdatedAt)
+                else // if (organizationDTO.UpdatedAt > organization.UpdatedAt)
                 {
                     organizationDTO.ToModel(organization);
                     _unitOfWork.Organizations.Update(organization);
@@ -122,7 +122,7 @@ namespace App.BLL.DataSync
                 {
                     _unitOfWork.ApplicationUsers.Add(applicationUserDTO.ToModel());
                 }
-                else if (applicationUserDTO.UpdatedAt > applicationUser.UpdatedAt)
+                else // if (applicationUserDTO.UpdatedAt > applicationUser.UpdatedAt)
                 {
                     applicationUserDTO.ToModel(applicationUser);
                     _unitOfWork.ApplicationUsers.Update(applicationUser);
@@ -132,39 +132,29 @@ namespace App.BLL.DataSync
 
         private async Task UpdateCompanies(List<CompanyDTO> companiesDTO)
         {
+            var data = await _unitOfWork.Companies.GetAllAsync();
+            
+            if (data is null)
+                return;
 
-            var companies = applicationDbContext.Companies
-                .Include(c => c.Owners).ToList();
+            var companies = data.ToDictionary(x => x.TaxRegistrationNumber);
 
-
-            var companiesDIC = companies.ToDictionary(x => x.Id);
-
-            foreach (var companyDTO in companiesDTO)
+            foreach(var companyDTO in companiesDTO)
             {
-                if (!companiesDIC.TryGetValue(companyDTO.Id, out var company))
+                if(!companies.TryGetValue(companyDTO.TaxRegistrationNumber,out Company foundedCompany))
                 {
-                    _unitOfWork.Companies.Add(companyDTO.ToModel());
+                    // new 
+                    var newCompany = new Company();
+                    companyDTO.ToModel(newCompany);
+                    _unitOfWork.Companies.Add(newCompany);
                 }
-                else //if (companyDTO.UpdatedAt > company.UpdatedAt)
+                else
                 {
-                    companyDTO.ToModel(company);
+                    companyDTO.ToModel(foundedCompany);
                 }
+
             }
-
-
-            //var companies = (await _unitOfWork.Companies.GetAllAsync()).ToDictionary(x => x.Id);
-
-            //foreach (var companyDTO in companiesDTO)
-            //{
-            //    if (!companies.TryGetValue(companyDTO.Id, out var company))
-            //    {
-            //        _unitOfWork.Companies.Add(companyDTO.ToModel());
-            //    }
-            //    else if (companyDTO.UpdatedAt > company.UpdatedAt)
-            //    {
-            //        companyDTO.ToModel(company,_unitOfWork);
-            //    }
-            //}
+            await _unitOfWork.SaveAsync();
         }
     }
 

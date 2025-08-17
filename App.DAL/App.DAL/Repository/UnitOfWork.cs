@@ -2,6 +2,7 @@
 using App.Entities.Models;
 using DAL;
 using Interfaces;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -28,13 +29,9 @@ namespace Repository
 		{
 			_context.Dispose();
 		}
-		public void ClearChangeTracker()
+		public async Task<int> SaveAsync()
 		{
-			_context.ChangeTracker.Clear();
-		}
-		public int Save()
-		{
-            return _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
 	}
 

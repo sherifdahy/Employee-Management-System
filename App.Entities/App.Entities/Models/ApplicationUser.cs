@@ -11,7 +11,7 @@ namespace App.Entities.Models
 {
     public class ApplicationUser : BaseEntity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

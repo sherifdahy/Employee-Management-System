@@ -60,7 +60,7 @@ namespace MyApp.WPF.UserControls.Admin.Employees
             }
 
             vm.ToModel(result.Data);
-            _employeeService.Update(result.Data);
+            await _employeeService.UpdateAsync(result.Data);
 
             this.Content = ActivatorUtilities.CreateInstance<EmployeesControl>(_serviceProvider);
         }

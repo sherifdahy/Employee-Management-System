@@ -40,11 +40,9 @@ namespace App.BLL.Mappers
 
             return new Email()
             {
-                Id = emailDTO.Id,
                 EmailAddress = emailDTO.EmailAddress,
                 Password = emailDTO.Password,
                 OrganizationId = emailDTO.OrganizationId,
-                CompanyId = emailDTO.CompanyId
             };
         }
         public static List<Email> ToModel(this List<EmailDTO> emailDTOs)
@@ -52,6 +50,43 @@ namespace App.BLL.Mappers
             if (emailDTOs == null) return null;
 
             return emailDTOs.Select(x => ToModel(x)).ToList();
+        }
+
+
+        public static void ToModel(this EmailDTO emailDTO,Email email)
+        {
+            email.EmailAddress = emailDTO.EmailAddress;
+            email.Password = emailDTO.Password;
+            email.OrganizationId = emailDTO.OrganizationId;
+        }
+
+
+
+        public static void ToModel(this ICollection<EmailDTO> emailDTOs, ICollection<Email> emails)
+        {
+
+            var emailsDictionary = emails.ToDictionary(x => x.EmailAddress);
+            foreach (var emailDTO in emailDTOs)
+            {
+                if (!emailsDictionary.TryGetValue(emailDTO.EmailAddress, out Email email))
+                {
+                    // new
+                    emails.Add(emailDTO.ToModel());
+                }
+                else
+                {
+                    // exist
+                    emailDTO.ToModel(email);
+                }
+            }
+            foreach (var email in emails.ToList())
+            {
+                // remove not exist
+                if (!emailDTOs.Any(emailDTO => emailDTO.EmailAddress == email.EmailAddress))
+                {
+                    emails.Remove(email);
+                }
+            }
         }
         #endregion
     }

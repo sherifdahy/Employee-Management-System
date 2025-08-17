@@ -10,9 +10,9 @@ namespace Interfaces
         public IRepository<Owner> Owners { get; }
         public IRepository<Email> Emails { get;}
         public IRepository<Organization> Organizations { get; }
-        int Save();
-		public void Dispose();
+        Task<int> SaveAsync();
 
-        public void ClearChangeTracker();
+        public void Dispose();
+
 	}
 }

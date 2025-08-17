@@ -9,7 +9,7 @@ namespace App.Entities.Models
 {
     public class Selector
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; }
         public string Value { get; set; }
         public SelectorType selectorType { get; set; }
         public ContentType contentType { get; set; }

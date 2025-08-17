@@ -48,7 +48,7 @@ namespace MyApp.WPF.UserControls.Admin.Companies
                     if (result != null) 
                     {
                         companyVM.ToModel(result.Data);
-                        _companyService.Update(result.Data);
+                        await _companyService.UpdateAsync(result.Data);
                         // to reset form
                         MessageBox.Show("✅ تم حفظ بيانات بنجاح.","نجاح العملية",MessageBoxButton.OK,MessageBoxImage.Information,MessageBoxResult.OK);
                         this.Content = ActivatorUtilities.CreateInstance<CompaniesControl>(_serviceProvider);

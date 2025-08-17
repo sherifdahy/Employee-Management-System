@@ -8,9 +8,9 @@ namespace App.BLL.DTOs
 {
     public class OrganizationDTO : BaseDTO
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string URL { get; set; }
-        public List<SelectorDTO> Selectors { get; set; } = new();
+        public  List<SelectorDTO> Selectors { get; set; } = new();
     }
 }

@@ -3,51 +3,22 @@
   "WorkspaceRootPath": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5B4A4F79-8B16-5E27-63A5-6FF812BA1EE1}|..\\App.DAL\\App.DAL\\App.DAL.csproj|e:\\saber eid\\employee-management-system\\app.dal\\app.dal\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\datasync\\datasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\employee\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\mappers\\organizationmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\mappers\\organizationmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{033C5012-F62B-90FB-3EBC-FF584B891E1B}|..\\App.Entities\\App.Entities\\App.Entities.csproj|e:\\saber eid\\employee-management-system\\app.entities\\app.entities\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\authorization\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\company\\companyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\viewmodels\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\viewmodels\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\datasync\\datasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\mappers\\companydtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\mappers\\ownerdtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\mappers\\selectordtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\mappers\\organizationdtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\mappers\\emaildtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\mappers\\applicationuserdtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\mappers\\accountdtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{5B4A4F79-8B16-5E27-63A5-6FF812BA1EE1}|..\\App.DAL\\App.DAL\\App.DAL.csproj|e:\\saber eid\\employee-management-system\\app.dal\\app.dal\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,190 +41,67 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Repository.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\Repository\\Repository.cs",
-              "RelativeDocumentMoniker": "..\\App.DAL\\App.DAL\\Repository\\Repository.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\Repository\\Repository.cs",
-              "RelativeToolTip": "..\\App.DAL\\App.DAL\\Repository\\Repository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T09:18:01.658Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IUnitOfWork.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.Entities\\App.Entities\\Interfaces\\IUnitOfWork.cs",
-              "RelativeDocumentMoniker": "..\\App.Entities\\App.Entities\\Interfaces\\IUnitOfWork.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.Entities\\App.Entities\\Interfaces\\IUnitOfWork.cs",
-              "RelativeToolTip": "..\\App.Entities\\App.Entities\\Interfaces\\IUnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T09:17:37.064Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EmployeeService.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Employee\\EmployeeService.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Employee\\EmployeeService.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Employee\\EmployeeService.cs",
-              "RelativeToolTip": "..\\App.BLL\\Employee\\EmployeeService.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAwFEAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T09:17:35.643Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Authorization\\AuthService.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Authorization\\AuthService.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Authorization\\AuthService.cs",
-              "RelativeToolTip": "..\\App.BLL\\Authorization\\AuthService.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAYwDMAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T09:17:33.254Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CompanyService.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Company\\CompanyService.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Company\\CompanyService.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Company\\CompanyService.cs",
-              "RelativeToolTip": "..\\App.BLL\\Company\\CompanyService.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAYwDEAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T09:17:32.53Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SelectorDtoMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\SelectorDtoMapper.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Mappers\\SelectorDtoMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\SelectorDtoMapper.cs",
-              "RelativeToolTip": "..\\App.BLL\\Mappers\\SelectorDtoMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:55:26.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "OrganizationDtoMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\OrganizationDtoMapper.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Mappers\\OrganizationDtoMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\OrganizationDtoMapper.cs",
-              "RelativeToolTip": "..\\App.BLL\\Mappers\\OrganizationDtoMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:55:21.678Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "EmailDtoMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\EmailDtoMapper.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Mappers\\EmailDtoMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\EmailDtoMapper.cs",
-              "RelativeToolTip": "..\\App.BLL\\Mappers\\EmailDtoMapper.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:55:18.349Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ApplicationUserDtoMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\ApplicationUserDtoMapper.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Mappers\\ApplicationUserDtoMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\ApplicationUserDtoMapper.cs",
-              "RelativeToolTip": "..\\App.BLL\\Mappers\\ApplicationUserDtoMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:55:13.526Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AccountDtoMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\AccountDtoMapper.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Mappers\\AccountDtoMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\AccountDtoMapper.cs",
-              "RelativeToolTip": "..\\App.BLL\\Mappers\\AccountDtoMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:55:12.597Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "DataSync.cs",
               "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\DataSync\\DataSync.cs",
               "RelativeDocumentMoniker": "..\\App.BLL\\DataSync\\DataSync.cs",
               "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\DataSync\\DataSync.cs",
               "RelativeToolTip": "..\\App.BLL\\DataSync\\DataSync.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAkwF4AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAswJgAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:39:15.073Z",
+              "WhenOpened": "2025-08-17T14:53:04.927Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "OwnerDtoMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\OwnerDtoMapper.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Mappers\\OwnerDtoMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\OwnerDtoMapper.cs",
-              "RelativeToolTip": "..\\App.BLL\\Mappers\\OwnerDtoMapper.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAowHsAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "OrganizationMapper.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\OrganizationMapper.cs",
+              "RelativeDocumentMoniker": "App.WPF\\Mappers\\OrganizationMapper.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\OrganizationMapper.cs",
+              "RelativeToolTip": "App.WPF\\Mappers\\OrganizationMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:29:59.281Z",
+              "WhenOpened": "2025-08-17T14:52:53.662Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CompanyDtoMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\CompanyDtoMapper.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\Mappers\\CompanyDtoMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\Mappers\\CompanyDtoMapper.cs",
-              "RelativeToolTip": "..\\App.BLL\\Mappers\\CompanyDtoMapper.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAowF0AAAAIAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "BaseViewModel.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\ViewModels\\BaseViewModel.cs",
+              "RelativeDocumentMoniker": "App.WPF\\ViewModels\\BaseViewModel.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\ViewModels\\BaseViewModel.cs",
+              "RelativeToolTip": "App.WPF\\ViewModels\\BaseViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:24:55.852Z"
+              "WhenOpened": "2025-08-17T14:52:48.134Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\App.xaml.cs",
               "RelativeDocumentMoniker": "App.WPF\\App.xaml.cs",
               "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\App.xaml.cs",
               "RelativeToolTip": "App.WPF\\App.xaml.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACgAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T08:22:49.115Z",
+              "WhenOpened": "2025-08-17T14:52:44.526Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\appsettings.json",
-              "RelativeDocumentMoniker": "App.WPF\\appsettings.json",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\appsettings.json",
-              "RelativeToolTip": "App.WPF\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-17T08:22:42.538Z"
+              "DocumentIndex": 4,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "..\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "..\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T14:52:37.694Z",
+              "EditorCaption": ""
             }
           ]
         }

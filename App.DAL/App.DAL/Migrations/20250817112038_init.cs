@@ -15,7 +15,8 @@ namespace App.DAL.Migrations
                 name: "ApplicationUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -33,7 +34,8 @@ namespace App.DAL.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaxRegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaxFileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -53,7 +55,8 @@ namespace App.DAL.Migrations
                 name: "Organizations",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     URL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -68,7 +71,7 @@ namespace App.DAL.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Currency = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -86,8 +89,8 @@ namespace App.DAL.Migrations
                 name: "ApplicationUserCompany",
                 columns: table => new
                 {
-                    ApplicationUsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CompaniesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ApplicationUsersId = table.Column<int>(type: "int", nullable: false),
+                    CompaniesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,12 +113,13 @@ namespace App.DAL.Migrations
                 name: "Owners",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -134,11 +138,12 @@ namespace App.DAL.Migrations
                 name: "Emails",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrganizationId = table.Column<int>(type: "int", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -163,11 +168,12 @@ namespace App.DAL.Migrations
                 name: "Selectors",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     selectorType = table.Column<byte>(type: "tinyint", nullable: false),
                     contentType = table.Column<byte>(type: "tinyint", nullable: false),
-                    OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    OrganizationId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -182,7 +188,7 @@ namespace App.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
                 columns: new[] { "Id", "CreatedAt", "Email", "IsDeleted", "Name", "Password", "UpdatedAt", "UserType" },
-                values: new object[] { new Guid("89b2f491-f973-47b9-a5fd-fb56a5f314d4"), new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6688), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6691), 2 });
+                values: new object[] { 1, new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5026), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5029), 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUserCompany_CompaniesId",

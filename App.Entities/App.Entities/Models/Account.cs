@@ -13,7 +13,7 @@ namespace App.Entities.Models
     {
         [Key]
         [ForeignKey(nameof(User))]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; }
         public decimal Currency { get; set; }
         public virtual ApplicationUser User { get; set; }
     }

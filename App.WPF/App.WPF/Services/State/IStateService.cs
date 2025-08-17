@@ -10,6 +10,6 @@ namespace MyApp.WPF.Services.State
 {
     public interface IStateService
     {
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

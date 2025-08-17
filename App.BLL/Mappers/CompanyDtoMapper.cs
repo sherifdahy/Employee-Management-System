@@ -1,11 +1,13 @@
 ﻿using App.BLL.DTOs;
 using App.Entities.Models;
 using Interfaces;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace App.BLL.Mappers
 {
@@ -19,8 +21,8 @@ namespace App.BLL.Mappers
             {
                 Id = company.Id,
                 IsDeleted = company.IsDeleted,
-                CreatedAt = company.CreatedAt,
-                UpdatedAt = company.UpdatedAt,
+                //CreatedAt = company.CreatedAt,
+                //UpdatedAt = company.UpdatedAt,
                 Address = company.Address,
                 EntityType = company.EntityType,
                 Name = company.Name,
@@ -41,33 +43,33 @@ namespace App.BLL.Mappers
         #endregion
 
 
+        /*
+
+         #region Model => DTO
+                public static void ToDTO(this Company company,CompanyDTO companyDTO)
+                {
+                    if (company is null || companyDTO is null) return;
+
+                    companyDTO.Id = company.Id;
+                    companyDTO.IsDeleted = company.IsDeleted;
+                    companyDTO.Address = company.Address;
+                    companyDTO.EntityType = company.EntityType;
+                    companyDTO.Name = company.Name;
+                    companyDTO.TaxFileNumber = company.TaxFileNumber;
+                    companyDTO.TaxOfficeName = company.TaxOfficeName;
+                    companyDTO.TaxRegistrationNumber = company.TaxRegistrationNumber;
+
+                    companyDTO.Emails = company.Emails.ToDTO().ToList();
+                    companyDTO.Owners = company.Owners.ToDTO().ToList();
+                }
+                #endregion
+         */
+
 
         #region DTO => Model
-        public static Company ToModel(this CompanyDTO companyDTO)
-        {
-            if (companyDTO is null) return null;
-            return new Company()
-            {
-                Id = companyDTO.Id,
-                IsDeleted = companyDTO.IsDeleted,
-                CreatedAt= companyDTO.CreatedAt,
-                UpdatedAt= companyDTO.UpdatedAt,
-                Address= companyDTO.Address,
-                Name = companyDTO.Name,
-                EntityType= companyDTO.EntityType,
-                TaxFileNumber= companyDTO.TaxFileNumber,
-                TaxOfficeName= companyDTO.TaxOfficeName,
-                TaxRegistrationNumber= companyDTO.TaxRegistrationNumber,
-                Owners = companyDTO.Owners.ToModel(),
-                Emails = companyDTO.Emails.ToModel(),
-            };
-        }
-
         public static void ToModel(this CompanyDTO companyDTO,Company company)
         {
             company.Name = companyDTO.Name;
-            company.CreatedAt = companyDTO.CreatedAt;
-            company.UpdatedAt = companyDTO.UpdatedAt;
             company.Address = companyDTO.Address;
             company.EntityType = companyDTO.EntityType;
             company.IsDeleted = companyDTO.IsDeleted;
@@ -75,22 +77,9 @@ namespace App.BLL.Mappers
             company.TaxFileNumber = companyDTO.TaxFileNumber;
             company.TaxOfficeName = companyDTO.TaxOfficeName;
             company.TaxRegistrationNumber = companyDTO.TaxRegistrationNumber;
+
             companyDTO.Owners.ToModel(company.Owners);
-            company.Emails = companyDTO.Emails.ToModel();
-
-
-            //company.Name = companyDTO.Name;
-            //company.CreatedAt = companyDTO.CreatedAt;
-            //company.UpdatedAt = companyDTO.UpdatedAt;
-            //company.Address = companyDTO.Address;
-            //company.EntityType = companyDTO.EntityType;
-            //company.IsDeleted = companyDTO.IsDeleted;
-            //company.EntityType = companyDTO.EntityType;
-            //company.TaxFileNumber = companyDTO.TaxFileNumber;
-            //company.TaxOfficeName = companyDTO.TaxOfficeName;
-            //company.TaxRegistrationNumber = companyDTO.TaxRegistrationNumber;
-            //companyDTO.Owners.ToModel(company.Owners,unitOfWork);
-            //company.Emails = companyDTO.Emails.ToModel();
+            companyDTO.Emails.ToModel(company.Emails);
         }
         #endregion
     }

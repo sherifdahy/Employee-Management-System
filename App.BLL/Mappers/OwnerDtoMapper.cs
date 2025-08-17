@@ -43,12 +43,10 @@ namespace App.BLL.Mappers
 
             return new Owner()
             {
-                Id = ownerDTO.Id,
                 Name = ownerDTO.Name,
                 Address = ownerDTO.Address,
                 PhoneNumber = ownerDTO.PhoneNumber,
                 NationalId = ownerDTO.NationalId,
-                CompanyId = ownerDTO.CompanyId,
             };
         }
         public static List<Owner> ToModel(this List<OwnerDTO> ownerDTOs)
@@ -63,67 +61,61 @@ namespace App.BLL.Mappers
             owner.Name = ownerDTO.Name;
             owner.Address = owner.Address;
             owner.PhoneNumber = owner.PhoneNumber;
-            owner.CompanyId = owner.CompanyId;
             owner.NationalId = ownerDTO.NationalId;
         }
 
         public static void ToModel(this ICollection<OwnerDTO> ownersDTO,ICollection<Owner> owners)
         {
 
-            var ModelDictionary = owners.ToDictionary(x => x.Id);
-            var DtoDictionary = ownersDTO.ToDictionary(x => x.Id);
+            var ownersDictionary = owners.ToDictionary(x => x.NationalId);
             foreach (var ownerDTO in ownersDTO)
             {
-                if (!ModelDictionary.TryGetValue(ownerDTO.Id, out Owner owner))
+                if (!ownersDictionary.TryGetValue(ownerDTO.NationalId, out Owner owner))
                 {
                     // new
-                    var ownerTemp = ownerDTO.ToModel();
-                    owners.Add(ownerTemp);
+                    owners.Add(ownerDTO.ToModel());
                 }
                 else
                 {
-                    // exist => update
+                    // exist
                     ownerDTO.ToModel(owner);
                 }
             }
-            foreach (var owner in owners)
+            foreach (var owner in owners.ToList())
             {
                 // remove not exist
-                if (!DtoDictionary.TryGetValue(owner.Id, out OwnerDTO ownerTemp))
+                if (!ownersDTO.Any(ownerDTO => ownerDTO.NationalId == owner.NationalId))
                 {
                     owners.Remove(owner);
                 }
             }
-
-
-            //var ModelDictionary = owners.ToDictionary(x => x.Id);
-            //var DtoDictionary = ownersDTO.ToDictionary(x => x.Id);
-            //foreach(var ownerDTO in ownersDTO)
-            //{
-            //    if (!ModelDictionary.TryGetValue(ownerDTO.Id,out Owner owner))
-            //    {
-            //        // new
-            //        var ownerTemp = ownerDTO.ToModel();
-            //        unitOfWork.Owners.Add(ownerTemp);
-            //    }
-            //    else
-            //    {
-            //        // exist => update
-            //        ownerDTO.ToModel(owner);
-            //        unitOfWork.Owners.Update(owner);
-            //    }
-            //}
-            //foreach(var owner in owners)
-            //{
-            //    // remove not exist
-            //    if(!DtoDictionary.TryGetValue(owner.Id,out OwnerDTO ownerTemp))
-            //    {
-            //        unitOfWork.Owners.Delete(owner);
-            //    }
-            //}
         }
 
-
+        //var ModelDictionary = owners.ToDictionary(x => x.Id);
+        //var DtoDictionary = ownersDTO.ToDictionary(x => x.Id);
+        //foreach(var ownerDTO in ownersDTO)
+        //{
+        //    if (!ModelDictionary.TryGetValue(ownerDTO.Id,out Owner owner))
+        //    {
+        //        // new
+        //        var ownerTemp = ownerDTO.ToModel();
+        //        unitOfWork.Owners.Add(ownerTemp);
+        //    }
+        //    else
+        //    {
+        //        // exist => update
+        //        ownerDTO.ToModel(owner);
+        //        unitOfWork.Owners.Update(owner);
+        //    }
+        //}
+        //foreach(var owner in owners)
+        //{
+        //    // remove not exist
+        //    if(!DtoDictionary.TryGetValue(owner.Id,out OwnerDTO ownerTemp))
+        //    {
+        //        unitOfWork.Owners.Delete(owner);
+        //    }
+        //}
         #endregion
 
     }

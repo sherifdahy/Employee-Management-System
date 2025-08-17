@@ -13,10 +13,10 @@ namespace MyApp.WPF.ViewModels
         #region Private Property
         string _emailAddress;
         string _password;
-        Guid _organizationId;
+        int _organizationId;
         #endregion
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string EmailAddress {
             get => _emailAddress;
@@ -28,7 +28,7 @@ namespace MyApp.WPF.ViewModels
             set => SetProperty(ref _password,value); 
         }
         [Required]
-        public Guid OrganizationId { 
+        public int OrganizationId { 
             get => _organizationId; 
             set => SetProperty(ref _organizationId,value); 
         }

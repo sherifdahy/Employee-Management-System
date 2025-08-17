@@ -2,6 +2,7 @@
 using App.Entities.Models;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace App.BLL
 {
@@ -19,7 +20,7 @@ namespace App.BLL
             try
             {
                 await _unitOfWork.Organizations.AddAsync(organization);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
 
                 return OperationResult<bool, string>.Ok(true);
             }
@@ -30,7 +31,7 @@ namespace App.BLL
             }
         }
 
-        public async Task<OperationResult<bool, string>> DeleteAsync(Guid id)
+        public async Task<OperationResult<bool, string>> DeleteAsync(int id)
         {
             try
             {
@@ -43,7 +44,7 @@ namespace App.BLL
                     return OperationResult<bool, string>.Fail(ErrorCatalog.Database.ForeignKeyViolation.Message);
 
                 _unitOfWork.Organizations.Delete(result.Data);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 return OperationResult<bool,string>.Ok(true);
             }
             catch (Exception ex)
@@ -67,7 +68,7 @@ namespace App.BLL
             }
         }
 
-        public async Task<OperationResult<Organization, string>> GetByIdAsync(Guid id)
+        public async Task<OperationResult<Organization, string>> GetByIdAsync(int id)
         {
             try
             {
@@ -84,13 +85,13 @@ namespace App.BLL
             }
         }
 
-        public OperationResult<Organization, string> Update(Organization organization)
+        public async Task<OperationResult<Organization, string>> UpdateAsync(Organization organization)
         {
             try
             {
                 organization.UpdatedAt = DateTime.UtcNow;
                 _unitOfWork.Organizations.Update(organization);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
 
                 return OperationResult<Organization, string>.Ok(organization);
             }

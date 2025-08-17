@@ -27,18 +27,39 @@ namespace App.DAL.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            
+
+
+            #region Delete Behavior
             modelBuilder.Entity<Organization>() // user can't delete organization if it contain emails
-                .HasMany(X=>X.Emails)
-                .WithOne(e=>e.Organization)
-                .HasForeignKey(e=>e.OrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
-                
+                    .HasMany(X => X.Emails)
+                    .WithOne(e => e.Organization)
+                    .HasForeignKey(e => e.OrganizationId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Company>()
+                .HasMany(x => x.Owners)
+                .WithOne(c => c.Company)
+                .HasForeignKey(e => e.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict); 
+            #endregion
+
+            #region Unique
+            modelBuilder.Entity<Company>()
+                .HasIndex(x => x.TaxRegistrationNumber)
+                .IsUnique();
+
+            modelBuilder.Entity<Owner>()
+                .HasIndex(x => new { x.NationalId, x.CompanyId })
+                .IsUnique();
+
+            modelBuilder.Entity<Email>()
+                .HasIndex(x=> new {x.EmailAddress,x.CompanyId})
+                .IsUnique();
+            #endregion
 
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser()
             {
-                Id = Guid.NewGuid(),
+                Id = 1,
                 Name = "Sherif Dahy",
                 Email = "admin",
                 Password = "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=",

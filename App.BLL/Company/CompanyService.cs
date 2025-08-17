@@ -34,7 +34,7 @@ namespace App.BLL
                     }
 
                     await _unitOfWork.Companies.AddAsync(company);
-                    _unitOfWork.Save();
+                    await _unitOfWork.SaveAsync();
                     return OperationResult<bool, string>.Ok(true);
                 }
                 return OperationResult<bool, string>.Fail("رقم التسجيل الضريبي مسجل من قبل");
@@ -45,7 +45,7 @@ namespace App.BLL
             }
         }
 
-        public async Task<OperationResult<Company, string>> GetByIdAsync(Guid id)
+        public async Task<OperationResult<Company, string>> GetByIdAsync(int id)
         {
             var company = await _unitOfWork.Companies.GetByIdAsync(id);
             if(company != null)
@@ -57,14 +57,14 @@ namespace App.BLL
                 return OperationResult<Company, string>.Fail("Not Found");
             }
         }
-        public async Task<OperationResult<string, string>> DeleteAsync(Guid id)
+        public async Task<OperationResult<string, string>> DeleteAsync(int id)
         {
             var companyResult = await GetByIdAsync(id);
             if(companyResult.State)
             {
                 companyResult.Data.IsDeleted = true;
                 _unitOfWork.Companies.Update(companyResult?.Data);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 return OperationResult<string,string>.Ok(string.Empty);
             }
             else
@@ -73,7 +73,7 @@ namespace App.BLL
             }
         }
 
-        public async Task<Pagination<Company>> GetAllAsync(int currentPage,int displayCount = 10,Guid userId = default,string? value = null)
+        public async Task<Pagination<Company>> GetAllAsync(int currentPage,int displayCount = 10,int userId = 0,string? value = null)
         {
             Expression<Func<Company, bool>> query = x =>
                 (userId == default || x.ApplicationUsers.Any(u => u.Id == userId)) &&
@@ -82,7 +82,7 @@ namespace App.BLL
 
             var totalCount = await _unitOfWork.Companies.CountAsync(query);
             var skip = currentPage * displayCount;
-            var companies = await _unitOfWork.Companies.FindAllAsync(query,displayCount,skip);
+            var companies = await _unitOfWork.Companies.FindAllAsync(query, skip, displayCount);
             return new Pagination<Company>()
             {
                 TotalCount = totalCount,
@@ -91,7 +91,7 @@ namespace App.BLL
 
         }
 
-        public async Task<IEnumerable<Company>> GetRelatedCompaniesAsync(Guid userId)
+        public async Task<IEnumerable<Company>> GetRelatedCompaniesAsync(int userId)
         {
             var appUser = await _unitOfWork.ApplicationUsers.FindAsync(x=>x.Id == userId && !x.IsDeleted);
             return appUser.Companies;
@@ -106,7 +106,7 @@ namespace App.BLL
             return companies;
         }
 
-        public OperationResult<string, string> Update(Company company)
+        public async Task<OperationResult<string, string>> UpdateAsync(Company company)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace App.BLL
                 }
                 company.UpdatedAt = DateTime.UtcNow;
                 _unitOfWork.Companies.Update(company);
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 return OperationResult<string, string>.Ok("تم الحفظ بنجاح");
             }
             catch (Exception ex) {

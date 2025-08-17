@@ -69,9 +69,7 @@ namespace App.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Currency = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Currency = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -169,9 +167,7 @@ namespace App.DAL.Migrations
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     selectorType = table.Column<byte>(type: "tinyint", nullable: false),
                     contentType = table.Column<byte>(type: "tinyint", nullable: false),
-                    OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -186,7 +182,7 @@ namespace App.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
                 columns: new[] { "Id", "CreatedAt", "Email", "IsDeleted", "Name", "Password", "UpdatedAt", "UserType" },
-                values: new object[] { new Guid("5d158b89-2e6d-4d57-953e-d11e881ee6c8"), new DateTime(2025, 8, 15, 14, 13, 29, 10, DateTimeKind.Utc).AddTicks(7519), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 15, 14, 13, 29, 10, DateTimeKind.Utc).AddTicks(7521), 2 });
+                values: new object[] { new Guid("89b2f491-f973-47b9-a5fd-fb56a5f314d4"), new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6688), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6691), 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUserCompany_CompaniesId",

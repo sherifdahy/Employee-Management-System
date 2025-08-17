@@ -1,5 +1,6 @@
 ﻿using App.BLL.DTOs;
 using App.Entities.Models;
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,8 +75,22 @@ namespace App.BLL.Mappers
             company.TaxFileNumber = companyDTO.TaxFileNumber;
             company.TaxOfficeName = companyDTO.TaxOfficeName;
             company.TaxRegistrationNumber = companyDTO.TaxRegistrationNumber;
-            company.Owners = companyDTO.Owners.ToModel();
+            companyDTO.Owners.ToModel(company.Owners);
             company.Emails = companyDTO.Emails.ToModel();
+
+
+            //company.Name = companyDTO.Name;
+            //company.CreatedAt = companyDTO.CreatedAt;
+            //company.UpdatedAt = companyDTO.UpdatedAt;
+            //company.Address = companyDTO.Address;
+            //company.EntityType = companyDTO.EntityType;
+            //company.IsDeleted = companyDTO.IsDeleted;
+            //company.EntityType = companyDTO.EntityType;
+            //company.TaxFileNumber = companyDTO.TaxFileNumber;
+            //company.TaxOfficeName = companyDTO.TaxOfficeName;
+            //company.TaxRegistrationNumber = companyDTO.TaxRegistrationNumber;
+            //companyDTO.Owners.ToModel(company.Owners,unitOfWork);
+            //company.Emails = companyDTO.Emails.ToModel();
         }
         #endregion
     }

@@ -38,7 +38,7 @@ namespace MyApp.WPF
                     #region Databases
                     services.AddDbContext<ApplicationDbContext>(options =>
                     {
-                        options.UseLazyLoadingProxies().UseSqlServer(connectionString);
+                        options.UseSqlServer(connectionString);
                     }, ServiceLifetime.Transient);
 
                     #endregion

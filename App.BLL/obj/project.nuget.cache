@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "07X1w2P4u7k=",
+  "dgSpecHash": "vSVTmMrNx8w=",
   "success": true,
-  "projectFilePath": "E:\\Saber Eid\\Desktop Application\\App.BLL\\App.BLL.csproj",
+  "projectFilePath": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\App.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shrif\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\shrif\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

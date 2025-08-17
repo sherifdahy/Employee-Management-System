@@ -75,13 +75,13 @@ namespace App.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("39fa7df8-74b1-4444-a067-20fe8d6fd2a7"),
-                            CreatedAt = new DateTime(2025, 8, 16, 11, 55, 39, 5, DateTimeKind.Utc).AddTicks(2908),
+                            Id = new Guid("89b2f491-f973-47b9-a5fd-fb56a5f314d4"),
+                            CreatedAt = new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6688),
                             Email = "admin",
                             IsDeleted = false,
                             Name = "Sherif Dahy",
                             Password = "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=",
-                            UpdatedAt = new DateTime(2025, 8, 16, 11, 55, 39, 5, DateTimeKind.Utc).AddTicks(2910),
+                            UpdatedAt = new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6691),
                             UserType = 2
                         });
                 });

@@ -1,5 +1,6 @@
 ﻿using App.BLL.DTOs;
 using App.Entities.Models;
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,73 @@ namespace App.BLL.Mappers
 
             return ownerDTOs.Select(x => ToModel(x)).ToList();
         }
+
+        public static void ToModel(this OwnerDTO ownerDTO,Owner owner)
+        {
+            owner.Name = ownerDTO.Name;
+            owner.Address = owner.Address;
+            owner.PhoneNumber = owner.PhoneNumber;
+            owner.CompanyId = owner.CompanyId;
+            owner.NationalId = ownerDTO.NationalId;
+        }
+
+        public static void ToModel(this ICollection<OwnerDTO> ownersDTO,ICollection<Owner> owners)
+        {
+
+            var ModelDictionary = owners.ToDictionary(x => x.Id);
+            var DtoDictionary = ownersDTO.ToDictionary(x => x.Id);
+            foreach (var ownerDTO in ownersDTO)
+            {
+                if (!ModelDictionary.TryGetValue(ownerDTO.Id, out Owner owner))
+                {
+                    // new
+                    var ownerTemp = ownerDTO.ToModel();
+                    owners.Add(ownerTemp);
+                }
+                else
+                {
+                    // exist => update
+                    ownerDTO.ToModel(owner);
+                }
+            }
+            foreach (var owner in owners)
+            {
+                // remove not exist
+                if (!DtoDictionary.TryGetValue(owner.Id, out OwnerDTO ownerTemp))
+                {
+                    owners.Remove(owner);
+                }
+            }
+
+
+            //var ModelDictionary = owners.ToDictionary(x => x.Id);
+            //var DtoDictionary = ownersDTO.ToDictionary(x => x.Id);
+            //foreach(var ownerDTO in ownersDTO)
+            //{
+            //    if (!ModelDictionary.TryGetValue(ownerDTO.Id,out Owner owner))
+            //    {
+            //        // new
+            //        var ownerTemp = ownerDTO.ToModel();
+            //        unitOfWork.Owners.Add(ownerTemp);
+            //    }
+            //    else
+            //    {
+            //        // exist => update
+            //        ownerDTO.ToModel(owner);
+            //        unitOfWork.Owners.Update(owner);
+            //    }
+            //}
+            //foreach(var owner in owners)
+            //{
+            //    // remove not exist
+            //    if(!DtoDictionary.TryGetValue(owner.Id,out OwnerDTO ownerTemp))
+            //    {
+            //        unitOfWork.Owners.Delete(owner);
+            //    }
+            //}
+        }
+
+
         #endregion
 
     }

@@ -1,8 +1,10 @@
 ﻿using App.BLL.DTOs;
 using App.BLL.Mappers;
+using App.DAL.Data;
 using App.Entities;
 using App.Entities.Models;
 using Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,9 +17,11 @@ namespace App.BLL.DataSync
     public class DataSync : IDataSync
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DataSync(IUnitOfWork unitOfWork)
-        {
+        private readonly ApplicationDbContext applicationDbContext;
+        public DataSync(IUnitOfWork unitOfWork, ApplicationDbContext applicationDbContext)
+        {   
             _unitOfWork = unitOfWork;
+            this.applicationDbContext = applicationDbContext;
         }
 
         private async Task<OperationResult<object, string>> GetAllAsync()
@@ -76,8 +80,8 @@ namespace App.BLL.DataSync
                 if (obj == null)
                     throw new Exception(ErrorCatalog.FilesRules.FileIsEmpty.Message);
 
-                await UpdateOrganizations(obj.Organizations);
-                await UpdateApplicationUsers(obj.ApplicationUsers);
+                //await UpdateOrganizations(obj.Organizations);
+                //await UpdateApplicationUsers(obj.ApplicationUsers);
                 await UpdateCompanies(obj.Companies);
 
                 _unitOfWork.Save();
@@ -96,7 +100,6 @@ namespace App.BLL.DataSync
 
             foreach (var organizationDTO in organizationsDTO)
             {
-                if (organizationDTO.Id == Guid.Empty) continue; // validation
                 if (!organizations.TryGetValue(organizationDTO.Id, out var organization))
                 {
                     _unitOfWork.Organizations.Add(organizationDTO.ToModel());
@@ -115,7 +118,6 @@ namespace App.BLL.DataSync
 
             foreach (var applicationUserDTO in applicationUsersDTO)
             {
-                if (applicationUserDTO.Id == Guid.Empty) continue; // validation
                 if (!applicationUsers.TryGetValue(applicationUserDTO.Id, out var applicationUser))
                 {
                     _unitOfWork.ApplicationUsers.Add(applicationUserDTO.ToModel());
@@ -130,21 +132,39 @@ namespace App.BLL.DataSync
 
         private async Task UpdateCompanies(List<CompanyDTO> companiesDTO)
         {
-            var companies = (await _unitOfWork.Companies.GetAllAsync()).ToDictionary(x => x.Id);
+
+            var companies = applicationDbContext.Companies
+                .Include(c => c.Owners).ToList();
+
+
+            var companiesDIC = companies.ToDictionary(x => x.Id);
 
             foreach (var companyDTO in companiesDTO)
             {
-                if (companyDTO.Id == Guid.Empty) continue; // validation
-                if (!companies.TryGetValue(companyDTO.Id, out var company))
+                if (!companiesDIC.TryGetValue(companyDTO.Id, out var company))
                 {
                     _unitOfWork.Companies.Add(companyDTO.ToModel());
                 }
-                else if (companyDTO.UpdatedAt > company.UpdatedAt)
+                else //if (companyDTO.UpdatedAt > company.UpdatedAt)
                 {
                     companyDTO.ToModel(company);
-                    _unitOfWork.Companies.Update(company);
                 }
             }
+
+
+            //var companies = (await _unitOfWork.Companies.GetAllAsync()).ToDictionary(x => x.Id);
+
+            //foreach (var companyDTO in companiesDTO)
+            //{
+            //    if (!companies.TryGetValue(companyDTO.Id, out var company))
+            //    {
+            //        _unitOfWork.Companies.Add(companyDTO.ToModel());
+            //    }
+            //    else if (companyDTO.UpdatedAt > company.UpdatedAt)
+            //    {
+            //        companyDTO.ToModel(company,_unitOfWork);
+            //    }
+            //}
         }
     }
 

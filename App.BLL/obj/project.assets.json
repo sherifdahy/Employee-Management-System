@@ -3302,18 +3302,18 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Saber Eid\\Desktop Application\\App.BLL\\App.BLL.csproj",
+      "projectUniqueName": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\App.BLL.csproj",
       "projectName": "App.BLL",
-      "projectPath": "E:\\Saber Eid\\Desktop Application\\App.BLL\\App.BLL.csproj",
+      "projectPath": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\App.BLL.csproj",
       "packagesPath": "C:\\Users\\shrif\\.nuget\\packages\\",
-      "outputPath": "E:\\Saber Eid\\Desktop Application\\App.BLL\\obj\\",
+      "outputPath": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Progress\\ToolboxNuGetPackages"
       ],
       "configFilePaths": [
-        "E:\\Saber Eid\\Desktop Application\\App.WPF\\NuGet.Config",
+        "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\NuGet.Config",
         "C:\\Users\\shrif\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
@@ -3331,8 +3331,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\Saber Eid\\Desktop Application\\App.DAL\\App.DAL\\App.DAL.csproj": {
-              "projectPath": "E:\\Saber Eid\\Desktop Application\\App.DAL\\App.DAL\\App.DAL.csproj"
+            "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\App.DAL.csproj": {
+              "projectPath": "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\App.DAL.csproj"
             }
           }
         }

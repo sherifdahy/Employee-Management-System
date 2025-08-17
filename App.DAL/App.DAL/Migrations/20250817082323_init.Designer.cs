@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250815141329_init")]
+    [Migration("20250817082323_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -33,14 +33,8 @@ namespace App.DAL.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<decimal>("Currency")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -84,13 +78,13 @@ namespace App.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5d158b89-2e6d-4d57-953e-d11e881ee6c8"),
-                            CreatedAt = new DateTime(2025, 8, 15, 14, 13, 29, 10, DateTimeKind.Utc).AddTicks(7519),
+                            Id = new Guid("89b2f491-f973-47b9-a5fd-fb56a5f314d4"),
+                            CreatedAt = new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6688),
                             Email = "admin",
                             IsDeleted = false,
                             Name = "Sherif Dahy",
                             Password = "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=",
-                            UpdatedAt = new DateTime(2025, 8, 15, 14, 13, 29, 10, DateTimeKind.Utc).AddTicks(7521),
+                            UpdatedAt = new DateTime(2025, 8, 17, 8, 23, 23, 425, DateTimeKind.Utc).AddTicks(6691),
                             UserType = 2
                         });
                 });
@@ -229,14 +223,8 @@ namespace App.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<Guid?>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Value")
                         .IsRequired()

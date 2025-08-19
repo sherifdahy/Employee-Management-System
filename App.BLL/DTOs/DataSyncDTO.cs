@@ -8,8 +8,8 @@ namespace App.BLL.DTOs
 {
     public class DataSyncDTO
     {
-        public List<ApplicationUserDTO> ApplicationUsers { get; set; } = new();
-        public List<CompanyDTO> Companies { get; set; } = new ();
-        public List<OrganizationDTO> Organizations { get; set; } = new ();
+        public IEnumerable<ApplicationUserDTO> ApplicationUsers { get; set; } = new List<ApplicationUserDTO>();
+        public IEnumerable<CompanyDTO> Companies { get; set; } = new List<CompanyDTO>();
+        public IEnumerable<OrganizationDTO> Organizations { get; set; } = new List<OrganizationDTO>();
     }
 }

@@ -15,88 +15,93 @@ namespace MyApp.WPF.Mappers
     public static class OwnerMapper
     {
         #region Model => ViewModel
-        public static OwnerViewModel ToViewModel(this Owner owner)
+        public static OwnerViewModel ToViewModel(this Owner owner,OwnerViewModel ownerViewModel)
         {
-            if (owner == null) throw new ArgumentNullException(nameof(owner));
-            return new OwnerViewModel
-            {
-                Id = owner.Id,
-                Address = owner.Address,
-                Name = owner.Name,
-                NationalId = owner.NationalId,
-                PhoneNumber = owner.PhoneNumber,
-            };
+            if (owner is null || ownerViewModel is null) return null;
 
+            ownerViewModel.Id = owner.Id;
+            ownerViewModel.Address = owner.Address;
+            ownerViewModel.Name = owner.Name;
+            ownerViewModel.NationalId = owner.NationalId;
+            ownerViewModel.PhoneNumber = owner.PhoneNumber;
+
+            return ownerViewModel;
         }
 
-        public static ICollection<OwnerViewModel> ToViewModel(this ICollection<Owner> owners)
+        public static ICollection<OwnerViewModel> ToViewModel(this ICollection<Owner> owners, ICollection<OwnerViewModel> vms)
         {
-            if (owners == null) throw new ArgumentNullException(nameof(owners));
-            return owners.Select(o => ToViewModel(o)).ToList();
-        }
-        
-        public static Owner ToModel(this OwnerViewModel vm)
-        {
-            if (vm == null) throw new ArgumentNullException(nameof(vm));
+            if (owners is null || vms is null) return null;
 
-            return new Owner()
+            var vmsDictionary = vms.ToDictionary(x => x.NationalId);
+            foreach (var owner in owners)
             {
-                Name = vm.Name,
-                NationalId = vm.NationalId,
-                PhoneNumber = vm.PhoneNumber,
-                Address = vm.Address,
-            };
+                if (!vmsDictionary.TryGetValue(owner.NationalId, out OwnerViewModel vm))
+                {
+                    // new
+                    vms.Add(owner.ToViewModel(new OwnerViewModel()));
+                }
+                else
+                {
+                    // exist -> update
+                    owner.ToViewModel(vm);
+                }
+            }
+
+            foreach (var vm in vms.ToList())
+            {
+                // remove not exist
+                if (!owners.Any(o => o.NationalId == vm.NationalId))
+                {
+                    vms.Remove(vm);
+                }
+            }
+
+            return vms;
         }
         #endregion
 
         #region ViewModel => Model
 
-        public static void ToModel(this OwnerViewModel vm, Owner owner)
+        public static Owner ToModel(this OwnerViewModel vm, Owner owner)
         {
-            if (vm == null) throw new ArgumentNullException(nameof(vm));
-            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (vm is null || owner is null) return null;
 
             owner.Name = vm.Name;
             owner.NationalId = vm.NationalId;
             owner.PhoneNumber = vm.PhoneNumber;
             owner.Address = vm.Address;
-        }
-        public static void ToModel(this ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
-        {
-            if (vms is null) throw new ArgumentNullException(nameof(vms));
-            if (owners is null) throw new ArgumentNullException(nameof(owners));
 
-            RemoveDeletedEmails(vms, owners);
-            UpdateExistingEmails(vms, owners);
-            AddNewEmails(vms, owners);
+            return owner;
         }
-
-        private static void RemoveDeletedEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
+        public static ICollection<Owner> ToModel(this ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
         {
-            var vmIds = new HashSet<int>(vms.Where(vm => vm.Id != 0).Select(vm => vm.Id));
-            var toRemove = owners.Where(e => !vmIds.Contains(e.Id)).ToList();
-            foreach (var owner in toRemove)
-                owners.Remove(owner);
-        }
+            if(vms is null || owners is null) return null;
 
-        private static void UpdateExistingEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
-        {
-            var ownerDic = owners.ToDictionary(e => e.Id);
-            foreach (var vm in vms.Where(vm => vm.Id != 0))
+            var ownersDictionary = owners.ToDictionary(x => x.NationalId);
+            foreach(var vm in vms)
             {
-                if (ownerDic.TryGetValue(vm.Id, out var owner))
+                if(!ownersDictionary.TryGetValue(vm.NationalId, out Owner owner))
                 {
+                    // new
+                    owners.Add(vm.ToModel(new Owner()));
+                }
+                else
+                {
+                    // exist
                     vm.ToModel(owner);
                 }
             }
-        }
 
-        private static void AddNewEmails(ICollection<OwnerViewModel> vms, ICollection<Owner> owners)
-        {
-            foreach (var vm in vms.Where(vm => vm.Id == 0))
+            foreach (var model in owners.ToList())
             {
-                owners.Add(ToModel(vm));
+                // remove not exist
+                if (!vms.Any(vm => vm.NationalId == model.NationalId))
+                {
+                    owners.Remove(model);
+                }
             }
+
+            return owners;
         }
         #endregion
 

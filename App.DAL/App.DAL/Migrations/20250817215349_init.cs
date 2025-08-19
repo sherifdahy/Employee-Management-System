@@ -37,7 +37,7 @@ namespace App.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaxRegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaxRegistrationNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TaxFileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EntityType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaxOfficeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -57,6 +57,7 @@ namespace App.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     URL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -65,6 +66,21 @@ namespace App.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Organizations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TransactionItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransactionItem", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,13 +126,43 @@ namespace App.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DailyTransactions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    State = table.Column<byte>(type: "tinyint", nullable: false),
+                    FileUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyTransactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DailyTransactions_ApplicationUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "ApplicationUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DailyTransactions_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Owners",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NationalId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
@@ -131,7 +177,7 @@ namespace App.DAL.Migrations
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,7 +186,7 @@ namespace App.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrganizationId = table.Column<int>(type: "int", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
@@ -170,6 +216,7 @@ namespace App.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     selectorType = table.Column<byte>(type: "tinyint", nullable: false),
                     contentType = table.Column<byte>(type: "tinyint", nullable: false),
@@ -185,10 +232,34 @@ namespace App.DAL.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DailyTransactionTransactionItem",
+                columns: table => new
+                {
+                    DailyTransactionsId = table.Column<int>(type: "int", nullable: false),
+                    TransactionItemsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyTransactionTransactionItem", x => new { x.DailyTransactionsId, x.TransactionItemsId });
+                    table.ForeignKey(
+                        name: "FK_DailyTransactionTransactionItem_DailyTransactions_DailyTransactionsId",
+                        column: x => x.DailyTransactionsId,
+                        principalTable: "DailyTransactions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DailyTransactionTransactionItem_TransactionItem_TransactionItemsId",
+                        column: x => x.TransactionItemsId,
+                        principalTable: "TransactionItem",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
                 columns: new[] { "Id", "CreatedAt", "Email", "IsDeleted", "Name", "Password", "UpdatedAt", "UserType" },
-                values: new object[] { 1, new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5026), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5029), 2 });
+                values: new object[] { 1, new DateTime(2025, 8, 17, 21, 53, 49, 10, DateTimeKind.Utc).AddTicks(9813), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 17, 21, 53, 49, 10, DateTimeKind.Utc).AddTicks(9815), 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUserCompany_CompaniesId",
@@ -196,9 +267,36 @@ namespace App.DAL.Migrations
                 column: "CompaniesId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Companies_TaxRegistrationNumber",
+                table: "Companies",
+                column: "TaxRegistrationNumber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DailyTransactions_ApplicationUserId",
+                table: "DailyTransactions",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DailyTransactions_CompanyId",
+                table: "DailyTransactions",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DailyTransactionTransactionItem_TransactionItemsId",
+                table: "DailyTransactionTransactionItem",
+                column: "TransactionItemsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Emails_CompanyId",
                 table: "Emails",
                 column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Emails_EmailAddress_CompanyId",
+                table: "Emails",
+                columns: new[] { "EmailAddress", "CompanyId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Emails_OrganizationId",
@@ -209,6 +307,18 @@ namespace App.DAL.Migrations
                 name: "IX_Owners_CompanyId",
                 table: "Owners",
                 column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Owners_NationalId_CompanyId",
+                table: "Owners",
+                columns: new[] { "NationalId", "CompanyId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Selectors_Guid",
+                table: "Selectors",
+                column: "Guid",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Selectors_OrganizationId",
@@ -226,6 +336,9 @@ namespace App.DAL.Migrations
                 name: "ApplicationUserCompany");
 
             migrationBuilder.DropTable(
+                name: "DailyTransactionTransactionItem");
+
+            migrationBuilder.DropTable(
                 name: "Emails");
 
             migrationBuilder.DropTable(
@@ -235,13 +348,19 @@ namespace App.DAL.Migrations
                 name: "Selectors");
 
             migrationBuilder.DropTable(
+                name: "DailyTransactions");
+
+            migrationBuilder.DropTable(
+                name: "TransactionItem");
+
+            migrationBuilder.DropTable(
+                name: "Organizations");
+
+            migrationBuilder.DropTable(
                 name: "ApplicationUsers");
 
             migrationBuilder.DropTable(
                 name: "Companies");
-
-            migrationBuilder.DropTable(
-                name: "Organizations");
         }
     }
 }

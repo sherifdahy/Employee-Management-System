@@ -1,8 +1,10 @@
 ﻿using App.BLL;
+using App.BLL.Manager;
 using App.Entities.Models;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.WPF.Mappers;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.UserControls.Admin.Employees;
 using MyApp.WPF.UserControls.Employee.Companies;
 using MyApp.WPF.ViewModels;
@@ -21,13 +23,13 @@ namespace MyApp.WPF.UserControls.Admin.Companies
     /// </summary>
     public partial class EditCompaniesControl : UserControl
     {
-        private readonly ICompanyService _companyService;
+        private readonly IBLayerManager _manager;
         private readonly IServiceProvider _serviceProvider;
-        public EditCompaniesControl(ICompanyService companyService,IServiceProvider serviceProvider,CompanyViewModel companyViewModel)
+        public EditCompaniesControl(IBLayerManager manager,IServiceProvider serviceProvider,CompanyViewModel companyViewModel)
         {
             InitializeComponent();
 
-            this._companyService = companyService;
+            _manager = manager;
             this._serviceProvider = serviceProvider;
             this.FormSection.DataContext = companyViewModel;
             
@@ -40,31 +42,38 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             try
             {
-                var formControl = this.FormSection.Content as CompanyFromControl;
-                var companyVM = formControl.DataContext as CompanyViewModel;
-                if (companyVM.IsValid)
+                if (this.FormSection.Content is not CompanyFromControl { DataContext : CompanyViewModel companyVM})
+                    return;
+
+                if (!companyVM.IsValid)
+                    return;
+
+                var result = await _manager.CompanyService.GetByIdAsync(companyVM.Id);
+                
+                if(!result.State)
                 {
-                    var result = await _companyService.GetByIdAsync(companyVM.Id);
-                    if (result != null) 
-                    {
-                        companyVM.ToModel(result.Data);
-                        await _companyService.UpdateAsync(result.Data);
-                        // to reset form
-                        MessageBox.Show("✅ تم حفظ بيانات بنجاح.","نجاح العملية",MessageBoxButton.OK,MessageBoxImage.Information,MessageBoxResult.OK);
-                        this.Content = ActivatorUtilities.CreateInstance<CompaniesControl>(_serviceProvider);
-                    }
-                    else
-                    {
-                        throw new Exception(result.Message);
-                    }
+                    DialogService.ShowError(result.Message);
+                    return;
                 }
+                
+                companyVM.ToModel(result.Data);
+                
+                var updateResult = await _manager.CompanyService.UpdateAsync(result.Data);
+                
+                if(!updateResult.State)
+                {
+                    DialogService.ShowError(updateResult.Message);
+                    return;
+                }
+
+                DialogService.ShowSuccess("تم حفظ بيانات بنجاح.", "نجاح العملية");
+                
+                this.Content = ActivatorUtilities.CreateInstance<CompaniesControl>(_serviceProvider);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ex.Message);
             }
         }
-
-        
     }
 }

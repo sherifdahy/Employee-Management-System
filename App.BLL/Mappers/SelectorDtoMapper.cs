@@ -11,51 +11,92 @@ namespace App.BLL.Mappers
     public static class SelectorDtoMapper
     {
         #region Model => DTO
-        public static SelectorDTO ToDTO(this Selector selector)
+        public static SelectorDTO ToDTO(this Selector selector, SelectorDTO selectorDTO)
         {
-            if (selector == null) return null;
+            if (selector == null || selectorDTO is null) return null;
 
-            return new SelectorDTO()
-            {
-                Id = selector.Id,
-                Value = selector.Value,
-                ContentType = selector.contentType,
-                SelectorType = selector.selectorType,
-            };
+            selectorDTO.Guid = selector.Guid;
+            selectorDTO.Value = selector.Value;
+            selectorDTO.ContentType = selector.contentType;
+            selectorDTO.SelectorType = selector.selectorType;
+
+            return selectorDTO;
         }
-        public static IEnumerable<SelectorDTO> ToDTO(this IEnumerable<Selector> selectors)
-        {
-            if (selectors == null) throw new ArgumentNullException(nameof(selectors));
 
-            return selectors.Select(x => ToDTO(x));
+        public static ICollection<SelectorDTO> ToDTO(this ICollection<Selector> selectors, ICollection<SelectorDTO> selectorDTOs)
+        {
+            if (selectors == null || selectorDTOs == null) return null;
+
+            var dtoDictionary = selectorDTOs.ToDictionary(x => x.Value);
+
+            foreach (var selector in selectors)
+            {
+                if (!dtoDictionary.TryGetValue(selector.Value, out var dto))
+                {
+                    // new
+                    selectorDTOs.Add(selector.ToDTO(new SelectorDTO()));
+                }
+                else
+                {
+                    // exist
+                    selector.ToDTO(dto);
+                }
+            }
+
+            // remove not exist
+            foreach (var dto in selectorDTOs.ToList())
+            {
+                if (!selectors.Any(selector => selector.Value == dto.Value))
+                {
+                    selectorDTOs.Remove(dto);
+                }
+            }
+
+            return selectorDTOs;
         }
         #endregion
 
-
         #region DTO => Model
-        public static Selector ToModel(this SelectorDTO selectorDTO)
+        public static Selector ToModel(this SelectorDTO selectorDTO, Selector selector)
         {
-            if (selectorDTO == null) return null;
-            return new Selector()
-            {
-                Id = selectorDTO.Id,
-                Value = selectorDTO.Value,
-                contentType = selectorDTO.ContentType,
-                selectorType = selectorDTO.SelectorType,
-            };
-        }
-        
-        public static void ToModel (this SelectorDTO selectorDTO,Selector selector)
-        {
+            if (selectorDTO is null || selector is null) return null;
+
+            selector.Guid = selectorDTO.Guid;
             selector.Value = selectorDTO.Value;
-            selector.contentType = selector.contentType;
+            selector.contentType = selectorDTO.ContentType;
             selector.selectorType = selectorDTO.SelectorType;
+
+            return selector;
         }
 
-        public static List<Selector> ToModel(this List<SelectorDTO> selectorsDTO)
+        public static void ToModel(this ICollection<SelectorDTO> selectorDTOs, ICollection<Selector> selectors)
         {
-            return selectorsDTO.Select(x => ToModel(x)).ToList();
+            var selectorsDictionary = selectors.ToDictionary(x => x.Value);
+
+            foreach (var selectorDTO in selectorDTOs)
+            {
+                if (!selectorsDictionary.TryGetValue(selectorDTO.Value, out var selector))
+                {
+                    // new
+                    selectors.Add(selectorDTO.ToModel(new Selector()));
+                }
+                else
+                {
+                    // exist
+                    selectorDTO.ToModel(selector);
+                }
+            }
+
+            foreach (var selector in selectors.ToList())
+            {
+                // remove not exist
+                if (!selectorDTOs.Any(dto => dto.Value == selector.Value))
+                {
+                    selectors.Remove(selector);
+                }
+            }
         }
         #endregion
     }
+
 }

@@ -8,7 +8,7 @@ namespace App.BLL.DataSync
 {
     public interface IDataSync
     {
-        Task<OperationResult<object, string>> ExportToFileAsync(string filePath);
-        Task<OperationResult<object, string>> ImportFromFileAsync(string filePath);
+        Task<OperationResult<object>> ExportToFileAsync(string filePath);
+        Task<OperationResult<object>> ImportFromFileAsync(string filePath);
     }
 }

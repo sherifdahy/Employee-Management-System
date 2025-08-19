@@ -1,4 +1,5 @@
 ﻿using App.BLL;
+using App.BLL.Manager;
 using App.Entities;
 using App.Entities.Enums;
 using App.Entities.Models;
@@ -27,13 +28,13 @@ namespace MyApp.WPF.UserControls.Admin.Employees
 {
     public partial class NewEmployeeControl : UserControl
     {
-        private readonly IEmployeeService _employeeService;
+        private readonly IBLayerManager _manager;
         private readonly IServiceProvider _serviceProvider;
-        public NewEmployeeControl(IServiceProvider serviceProvider,IEmployeeService employeeService)
+        public NewEmployeeControl(IBLayerManager manager,IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
-            _employeeService = employeeService;
+            _manager = manager;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -42,25 +43,32 @@ namespace MyApp.WPF.UserControls.Admin.Employees
         }
         private async void AddEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            var formControl = this.BodyContent.Content as FormEmployeeControl;
-            if (formControl is null)
+            try
             {
-                DialogService.ShowError(ErrorCatalog.Server.Unexpected.Message);
-            }
+                if (BodyContent.Content is not FormEmployeeControl { DataContext: ApplicationUserViewModel applicationUserViewModel })
+                    return;
 
+                if (!applicationUserViewModel.IsValid)
+                {
+                    DialogService.ShowWarning(ErrorCatalog.Validation.RequiredFieldMissing.Message);
+                    return;
+                }    
 
-            var registerVM = formControl.DataContext as ApplicationUserViewModel;
-            if (registerVM is null)
-            {
-                DialogService.ShowError(ErrorCatalog.Server.Unexpected.Message);
-            }
+                var appUser = applicationUserViewModel.ToModel(new());
 
-            if (registerVM.IsValid)
-            {
-                var appUser = registerVM.ToModel();
-                await _employeeService.CreateAsync(appUser);
+                var result = await _manager.EmployeeService.CreateAsync(appUser);
+                if(!result.State)
+                {
+                    DialogService.ShowError(result.Message);
+                    return;
+                }    
+
                 this.Content = _serviceProvider.GetRequiredService<NewEmployeeControl>();
-                DialogService.ShowSuccess("✅ تم حفظ بيانات الموظف بنجاح.");
+                DialogService.ShowSuccess(" تم حفظ بيانات الموظف بنجاح.");
+            }
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
             }
 
         }

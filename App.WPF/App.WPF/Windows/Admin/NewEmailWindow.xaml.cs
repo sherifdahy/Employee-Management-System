@@ -1,5 +1,7 @@
-﻿using App.Entities.Models;
+﻿using App.BLL.Manager;
+using App.Entities.Models;
 using Interfaces;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,19 +27,49 @@ namespace MyApp.WPF.Windows.Admin
     /// </summary>
     public partial class NewEmailWindow : Window
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public NewEmailWindow(IUnitOfWork unitOfWork,EmailViewModel emailViewModel)
+        private readonly IBLayerManager _manager;
+        public NewEmailWindow(IBLayerManager manager,EmailViewModel emailViewModel)
         {
             InitializeComponent();
-            this._unitOfWork = unitOfWork;
+            _manager = manager;
             this.DataContext = emailViewModel;
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            OrgCombobox.ItemsSource = await _unitOfWork.Organizations.GetAllAsync();
-            OrgCombobox.DisplayMemberPath = nameof(Organization.Name);
-            OrgCombobox.SelectedValuePath = nameof(Organization.Id);
+            LoadOrganizations();
+        }
+
+        private async void LoadOrganizations()
+        {
+            try
+            {
+                var organizationsResult = await _manager.OrganizationService.GetAllAsync();
+
+                if(!organizationsResult.State)
+                {
+                    DialogService.ShowError(organizationsResult.Message);
+                    return;
+                }
+
+                if(organizationsResult.Data is null || organizationsResult.Data.Count() == 0)
+                {
+                    DialogService.ShowWarning("لا يوجد منظمات لعرضها");
+                    return;
+                }
+
+                OrgCombobox.ItemsSource = organizationsResult.Data;
+
+                OrgCombobox.DisplayMemberPath = nameof(Organization.Name);
+                OrgCombobox.SelectedValuePath = nameof(Organization.Id);
+
+                OrgCombobox.SelectedIndex = 0;
+                
+            }
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
+            }
         }
 
         private void AddEmailBtn_Click(object sender, RoutedEventArgs e)

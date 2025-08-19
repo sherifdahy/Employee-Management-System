@@ -64,6 +64,12 @@ namespace MyApp.WPF.UserControls.Admin.Companies
                     var companyViewModel = this.DataContext as CompanyViewModel;
                     var emailViewModel = window.DataContext as EmailViewModel;
 
+                    if(companyViewModel.Emails.Any(x=>x.EmailAddress == emailViewModel.EmailAddress && x.OrganizationId == emailViewModel.OrganizationId))
+                    {
+                        DialogService.ShowError($"{emailViewModel.EmailAddress} هذا الحساب مسجل بالفعل لنفس المنظومة");
+                        return;
+                    }                        
+
                     companyViewModel.Emails.Add(emailViewModel);
                 }
             }
@@ -158,5 +164,7 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
 
         }
+
+        
     }
 }

@@ -11,29 +11,21 @@ namespace App.BLL.Mappers
     public static class AccountDtoMapper
     {
         #region Model => DTO
-        public static AccountDTO ToDTO(this Account account)
+        public static void ToDTO(this Account account,AccountDTO accountDTO)
         {
-            if (account == null) return null;
+            if (account == null || account is null) return;
 
-            return new AccountDTO()
-            {
-                Id = account.Id,
-                Currency = account.Currency,
-            };
+            accountDTO.Currency = account.Currency;
         }
         #endregion
 
 
         #region DTO => Model
-        public static Account ToModel(this AccountDTO accountDTO)
+        public static void ToModel(this AccountDTO accountDTO,Account account)
         {
-            if (accountDTO == null) return null;
+            if (accountDTO == null || account is null) return;
 
-            return new Account()
-            {
-                Id = accountDTO.Id,
-                Currency = accountDTO.Currency,
-            };
+            account.Currency = accountDTO.Currency;
         }
 
         #endregion

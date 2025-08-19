@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace App.BLL.DTOs
 {
-    public class ApplicationUserDTO : BaseDTO
+    public class ApplicationUserDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

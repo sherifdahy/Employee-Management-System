@@ -9,8 +9,8 @@ namespace App.BLL
 {
     public interface IAuthService
     {
-        Task<OperationResult<ApplicationUser, string>> LoginAsync(string username, string password);
-        Task<OperationResult<ApplicationUser, string>> GetByIdAsync(int id);
+        Task<OperationResult<ApplicationUser>> LoginAsync(string username, string password);
+        Task<OperationResult<ApplicationUser>> GetByIdAsync(int id);
         Task UpdateAsync(ApplicationUser applicationUser);
     }
 }

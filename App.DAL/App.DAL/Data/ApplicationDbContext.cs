@@ -22,12 +22,11 @@ namespace App.DAL.Data
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public virtual DbSet<Selector> Selectors { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
-
+        public virtual DbSet<DailyTransaction> DailyTransactions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
 
             #region Delete Behavior
             modelBuilder.Entity<Organization>() // user can't delete organization if it contain emails
@@ -53,8 +52,17 @@ namespace App.DAL.Data
                 .IsUnique();
 
             modelBuilder.Entity<Email>()
-                .HasIndex(x=> new {x.EmailAddress,x.CompanyId})
+                .HasIndex(x=> new {x.EmailAddress,x.CompanyId,x.OrganizationId})
                 .IsUnique();
+
+            modelBuilder.Entity<Selector>()
+                .HasIndex(x => new { x.Guid })
+                .IsUnique();
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasIndex(x=> new { x.Email })
+                .IsUnique();
+
             #endregion
 
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser()

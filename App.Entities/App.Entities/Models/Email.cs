@@ -11,7 +11,7 @@ namespace App.Entities.Models
     {
         public int Id { get; set; }
         public string EmailAddress { get; set; }
-        public string? Password { get; set; }
+        public string Password { get; set; }
         public int OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }
         public int CompanyId { get; set; }

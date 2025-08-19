@@ -1,83 +1,100 @@
-﻿using App.BLL.DTOs;
-using App.Entities.Models;
+﻿using App.Entities.Models;
 using MyApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyApp.WPF.Mappers
 {
     public static class EmailMapper
     {
         #region Model => ViewModel
-        public static EmailViewModel ToViewModel(this Email email)
+        public static EmailViewModel ToViewModel(this Email email, EmailViewModel vm)
         {
-            if (email == null) throw new ArgumentNullException(nameof(email));
-            return new EmailViewModel()
-            {
-                Id = email.Id,
-                EmailAddress = email.EmailAddress,
-                OrganizationId = email.OrganizationId,
-                Password = email.Password,
-            };
+            if (email is null || vm is null) return null;
+
+            vm.Id = email.Id;
+            vm.EmailAddress = email.EmailAddress;
+            vm.OrganizationId = email.OrganizationId;
+            vm.Password = email.Password;
+
+            return vm;
         }
-        public static ICollection<EmailViewModel> ToViewModel(this ICollection<Email> emailViewModels)
+
+        public static ICollection<EmailViewModel> ToViewModel(this ICollection<Email> emails, ICollection<EmailViewModel> vms)
         {
-            if (emailViewModels == null) throw new ArgumentNullException(nameof(emailViewModels));
-            return emailViewModels.Select(x => ToViewModel(x)).ToList();
-        } 
+            if (emails is null || vms is null) return null;
+
+            var vmsDictionary = vms.ToDictionary(x => (x.EmailAddress,x.OrganizationId));
+            foreach (var email in emails)
+            {
+                if (!vmsDictionary.TryGetValue((email.EmailAddress,email.OrganizationId), out var vm))
+                {
+                    // new
+                    vms.Add(email.ToViewModel(new EmailViewModel()));
+                }
+                else
+                {
+                    // exist -> update
+                    email.ToViewModel(vm);
+                }
+            }
+
+            foreach (var vm in vms.ToList())
+            {
+                // remove not exist
+                if (!emails.Any(e => (e.EmailAddress,e.OrganizationId) == (vm.EmailAddress,vm.OrganizationId)))
+                {
+                    vms.Remove(vm);
+                }
+            }
+
+            return vms;
+        }
         #endregion
 
         #region ViewModel => Model
-        public static Email ToModel(this EmailViewModel emailViewModel)
+        public static Email ToModel(this EmailViewModel vm, Email email)
         {
-            if (emailViewModel == null) throw new ArgumentNullException(nameof(emailViewModel));
+            if (vm is null || email is null) return null;
 
-            return new Email()
-            {
-                EmailAddress = emailViewModel.EmailAddress,
-                Password = emailViewModel.Password,
-                OrganizationId = emailViewModel.OrganizationId,
-            };
+            email.EmailAddress = vm.EmailAddress;
+            email.Password = vm.Password;
+            email.OrganizationId = vm.OrganizationId;
+
+            return email;
         }
-        public static void ToModel(this EmailViewModel emailViewModel, Email email)
+
+        public static ICollection<Email> ToModel(this ICollection<EmailViewModel> vms, ICollection<Email> emails)
         {
-            if (emailViewModel == null) throw new ArgumentNullException(nameof(emailViewModel));
-            if (email == null) throw new ArgumentNullException(nameof(email));
+            if (vms is null || emails is null) return null;
 
-            email.EmailAddress = emailViewModel.EmailAddress;
-            email.Password = emailViewModel.Password;
-            email.OrganizationId = emailViewModel.OrganizationId;
-        }
-        public static void ToModel(this ICollection<EmailViewModel> vms, ICollection<Email> emails, int companyId)
-        {
-            if (vms is null) throw new ArgumentNullException(nameof(vms));
-            if (emails is null) throw new ArgumentNullException(nameof(emails));
-
-            // 1- حذف الـ Emails اللي مش موجودة في الـ ViewModel
-            var vmIds = vms.Where(vm => vm.Id != 0).Select(vm => vm.Id).ToHashSet();
-            var toRemove = emails.Where(e => !vmIds.Contains(e.Id)).ToList();
-            foreach (var email in toRemove)
-                emails.Remove(email);
-
-            // 2- تحديث القديم
-            var emailDict = emails.ToDictionary(e => e.Id);
-            foreach (var vm in vms.Where(vm => vm.Id != 0))
+            var emailsDictionary = emails.ToDictionary(x => (x.EmailAddress,x.OrganizationId));
+            foreach (var vm in vms)
             {
-                if (emailDict.TryGetValue(vm.Id, out var email))
+                if (!emailsDictionary.TryGetValue((vm.EmailAddress,vm.OrganizationId), out var email))
                 {
-                    vm.ToModel(email); // update
+                    // new
+                    emails.Add(vm.ToModel(new Email()));
+                }
+                else
+                {
+                    // exist -> update
+                    vm.ToModel(email);
                 }
             }
-            // 3- إضافة الجديد
-            foreach (var vm in vms.Where(vm => vm.Id == 0))
-            {
-                emails.Add(ToModel(vm));
-            }
-        }
 
+            foreach (var model in emails.ToList())
+            {
+                // remove not exist
+                if (!vms.Any(vm => (vm.EmailAddress,vm.OrganizationId) == (model.EmailAddress,model.OrganizationId)))
+                {
+                    emails.Remove(model);
+                }
+            }
+
+            return emails;
+        }
         #endregion
 
         #region ViewModel => ViewModel
@@ -105,34 +122,5 @@ namespace MyApp.WPF.Mappers
             };
         }
         #endregion
-
-        #region Helper
-        private static void RemoveDeletedEmails(ICollection<EmailViewModel> vms, ICollection<Email> emails)
-        {
-            var vmIds = new HashSet<int>(vms.Where(vm => vm.Id != 0).Select(vm => vm.Id));
-            var toRemove = emails.Where(e => !vmIds.Contains(e.Id)).ToList();
-            foreach (var email in toRemove)
-                emails.Remove(email);
-        }
-        private static void UpdateExistingEmails(ICollection<EmailViewModel> vms, ICollection<Email> emails)
-        {
-            var emailDic = emails.ToDictionary(e => e.Id);
-            foreach (var vm in vms.Where(vm => vm.Id != 0))
-            {
-                if (emailDic.TryGetValue(vm.Id, out var email))
-                {
-                    vm.ToModel(email);
-                }
-            }
-        }
-        private static void AddNewEmails(ICollection<EmailViewModel> vms, ICollection<Email> emails)
-        {
-            foreach (var vm in vms.Where(vm => vm.Id ==0))
-            {
-                emails.Add(ToModel(vm));
-            }
-        }
-        #endregion
-
     }
 }

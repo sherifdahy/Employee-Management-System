@@ -11,6 +11,7 @@ namespace MyApp.WPF.ViewModels
     {
         #region Private Property
         string _name;
+        string _nationalId;
         string _phoneNumber;
         string _address;
         #endregion
@@ -21,7 +22,11 @@ namespace MyApp.WPF.ViewModels
             get => _name; 
             set => SetProperty(ref _name,value); 
         }
-        public string NationalId { get; set; }
+        [Required]
+        public string NationalId {
+            get => _nationalId;
+            set => SetProperty(ref _nationalId, value);
+        }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
     }

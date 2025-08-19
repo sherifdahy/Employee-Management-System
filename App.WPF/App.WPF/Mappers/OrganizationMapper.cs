@@ -12,31 +12,32 @@ namespace MyApp.WPF.Mappers
     public static class OrganizationMapper
     {
         #region ViewModel => Model
-        public static Organization ToModel(this OrganizationViewModel vm)
+        public static Organization ToModel(this OrganizationViewModel vm,Organization organization)
         {
-            if (vm == null) throw new ArgumentNullException(nameof(vm));
+            if (vm == null) return null;
 
-            return new Organization()
-            {
-                Name = vm.Name,
-                URL = vm.URL,
-                Selectors = vm.Selectors.ToModel().ToList(),
-            };
+            organization.Name = vm.Name;
+            organization.URL = vm.URL;
+
+            vm.Selectors.ToModel(organization.Selectors);
+            
+            return organization;
         }
         #endregion
 
         #region Model => ViewModel
 
-        public static OrganizationViewModel ToViewModel(this Organization organization)
+        public static OrganizationViewModel ToViewModel(this Organization organization,OrganizationViewModel organizationViewModel)
         {
-            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            if (organization == null) return null;
 
-            return new OrganizationViewModel()
-            {
-                Name = organization.Name,
-                URL = organization.URL,
-                Selectors = organization.Selectors.ToViewModel().ToList(),
-            };
+            organizationViewModel.Guid = organization.Guid;
+            organizationViewModel.Name = organization.Name;
+            organizationViewModel.URL = organization.URL;
+
+            organization.Selectors.ToViewModel(organizationViewModel.Selectors);
+            
+            return organizationViewModel;
         }
         #endregion
 

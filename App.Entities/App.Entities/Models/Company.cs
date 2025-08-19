@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Entities.Models
 {
@@ -11,7 +12,8 @@ namespace App.Entities.Models
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public string? TaxRegistrationNumber { get; set; }
+        [StringLength(9)]
+        public string TaxRegistrationNumber { get; set; }
         public string? TaxFileNumber { get; set; }
         public string? EntityType { get; set; }
         public string? TaxOfficeName { get; set; }
@@ -20,6 +22,7 @@ namespace App.Entities.Models
         public virtual ICollection<Owner> Owners { get; set; } = new HashSet<Owner>();
         public virtual ICollection<Email> Emails { get; set; } = new HashSet<Email>();
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; } = new HashSet<ApplicationUser>();
+        public virtual ICollection<DailyTransaction> DailyTransactions { get; set; } = new HashSet<DailyTransaction>();
 
     }
 }

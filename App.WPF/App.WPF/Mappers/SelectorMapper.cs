@@ -13,47 +13,94 @@ namespace MyApp.WPF.Mappers
     public static class SelectorMapper
     {
         #region ViewModel => Model
-        public static Selector ToModel(this SelectorViewModel selectorViewModel)
+        public static Selector ToModel(this SelectorViewModel selectorViewModel,Selector selector)
         {
-            if (selectorViewModel == null) throw new ArgumentNullException(nameof(selectorViewModel));
+            if (selectorViewModel == null) return null;
 
-            return new Selector()
-            {
-                Value = selectorViewModel.Value,
-                selectorType = selectorViewModel.SelectorType,
-                contentType = selectorViewModel.ContentType,
-            };
+            selector.Guid = selectorViewModel.Guid;
+            selector.Value = selectorViewModel.Value;
+            selector.selectorType = selectorViewModel.SelectorType;
+            selector.contentType = selectorViewModel.ContentType;
+
+            return selector;
         }
 
-        public static IEnumerable<Selector> ToModel(this IEnumerable<SelectorViewModel> selectorViewModels)
+        public static ICollection<Selector> ToModel(this IEnumerable<SelectorViewModel> selectorViewModels,ICollection<Selector> selectors)
         {
-            if (selectorViewModels == null) throw new ArgumentNullException(nameof(selectorViewModels));
+            if (selectorViewModels == null || selectors is null) return null;
 
-            return selectorViewModels.Select(x => ToModel(x));
+            var selectorsDictionary = selectors.ToDictionary(x => x.Guid);
+            
+            foreach (var selectorViewModel in selectorViewModels)
+            {
+                if(!selectorsDictionary.TryGetValue(selectorViewModel.Guid,out Selector selector))
+                {
+                    // new
+                    selectors.Add(selectorViewModel.ToModel(new Selector()));
+                }
+                else
+                {
+                    // exist
+                    selectorViewModel.ToModel(selector);
+                }
+            }
+
+            foreach(var selector in selectors)
+            {
+                if(!selectorViewModels.Any(X=>X.Guid == selector.Guid))
+                {
+                    selectors.Remove(selector);
+                }
+            }
+
+
+            return selectors;
         }
 
         #endregion
 
         #region Model => ViewModel
-        public static SelectorViewModel ToViewModel(this Selector selector)
+        public static SelectorViewModel ToViewModel(this Selector selector,SelectorViewModel selectorViewModel)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            if (selector == null || selectorViewModel is null) return null;
 
-            return new SelectorViewModel()
+            selectorViewModel.Value = selector.Value;
+            selectorViewModel.ContentType = selector.contentType;
+            selectorViewModel.SelectorType = selector.selectorType;
+
+            return selectorViewModel;
+        }
+
+        public static ICollection<SelectorViewModel> ToViewModel(this IEnumerable<Selector> selectors,ICollection<SelectorViewModel> selectorViewModels)
+        {
+            if(selectors is null || selectorViewModels is null) return null;
+
+            var selectorsVmsDictionary = selectorViewModels.ToDictionary(x => x.Guid);
+
+            foreach (var selector in selectors)
             {
-                Value = selector.Value,
-                ContentType = selector.contentType,
-                SelectorType = selector.selectorType
-            };
+                if (!selectorsVmsDictionary.TryGetValue(selector.Guid, out SelectorViewModel selectorVM))
+                {
+                    // new
+                    selectorViewModels.Add(selector.ToViewModel(new SelectorViewModel()));
+                }
+                else
+                {
+                    // exist
+                    selector.ToViewModel(selectorVM);
+                }
+            }
+
+            foreach (var selectorVM in selectorViewModels)
+            {
+                if (!selectors.Any(X => X.Guid == selectorVM.Guid))
+                {
+                    selectorViewModels.Remove(selectorVM);
+                }
+            }
+
+            return selectorViewModels;
         }
-
-        public static IEnumerable<SelectorViewModel> ToViewModel(this IEnumerable<Selector> selectors)
-        {
-            if (selectors == null) throw new ArgumentNullException(nameof(selectors));
-
-            return selectors.Select(x=> ToViewModel(x));
-        }
-
         #endregion
 
     }

@@ -12,68 +12,73 @@ namespace App.BLL.Mappers
     public static class OwnerDtoMapper
     {
         #region Model => DTO
-        public static OwnerDTO ToDTO(this Owner owner)
+        public static OwnerDTO ToDTO(this Owner owner, OwnerDTO ownerDTO)
         {
-            if (owner == null) return null;
+            if (owner == null || ownerDTO is null) return null;
 
-            return new OwnerDTO()
-            {
-                Id = owner.Id,
-                Name = owner.Name,
-                Address = owner.Address,
-                PhoneNumber = owner.PhoneNumber,
-                NationalId = owner.NationalId,
-                CompanyId = owner.CompanyId,
-            };
+            ownerDTO.Name = owner.Name;
+            ownerDTO.Address = owner.Address;
+            ownerDTO.PhoneNumber = owner.PhoneNumber;
+            ownerDTO.NationalId = owner.NationalId;
+
+            return ownerDTO;
         }
 
-        public static IEnumerable<OwnerDTO> ToDTO(this IEnumerable<Owner> owners)
+        public static ICollection<OwnerDTO> ToDTO(this ICollection<Owner> owners, ICollection<OwnerDTO> ownerDTOs)
         {
-            if (owners == null) throw new ArgumentNullException(nameof(owners));
+            if (owners == null || ownerDTOs == null) return null;
 
-            return owners.Select(x => ToDTO(x));
+            var dtoDictionary = ownerDTOs.ToDictionary(x => x.NationalId);
+
+            foreach (var owner in owners)
+            {
+                if (!dtoDictionary.TryGetValue(owner.NationalId, out var dto))
+                {
+                    // new
+                    ownerDTOs.Add(owner.ToDTO(new OwnerDTO()));
+                }
+                else
+                {
+                    // exist
+                    owner.ToDTO(dto);
+                }
+            }
+
+            // remove not exist
+            foreach (var dto in ownerDTOs.ToList())
+            {
+                if (!owners.Any(owner => owner.NationalId == dto.NationalId))
+                {
+                    ownerDTOs.Remove(dto);
+                }
+            }
+
+            return ownerDTOs;
         }
         #endregion
 
-
         #region DTO => Model
-        public static Owner ToModel(this OwnerDTO ownerDTO)
+        public static Owner ToModel(this OwnerDTO ownerDTO, Owner owner)
         {
-            if (ownerDTO == null) return null;
+            if (ownerDTO is null || owner is null) return null;
 
-            return new Owner()
-            {
-                Name = ownerDTO.Name,
-                Address = ownerDTO.Address,
-                PhoneNumber = ownerDTO.PhoneNumber,
-                NationalId = ownerDTO.NationalId,
-            };
-        }
-        public static List<Owner> ToModel(this List<OwnerDTO> ownerDTOs)
-        {
-            if (ownerDTOs == null) return null;
-
-            return ownerDTOs.Select(x => ToModel(x)).ToList();
-        }
-
-        public static void ToModel(this OwnerDTO ownerDTO,Owner owner)
-        {
             owner.Name = ownerDTO.Name;
-            owner.Address = owner.Address;
-            owner.PhoneNumber = owner.PhoneNumber;
+            owner.Address = ownerDTO.Address;
+            owner.PhoneNumber = ownerDTO.PhoneNumber;
             owner.NationalId = ownerDTO.NationalId;
+
+            return owner;
         }
 
-        public static void ToModel(this ICollection<OwnerDTO> ownersDTO,ICollection<Owner> owners)
+        public static void ToModel(this ICollection<OwnerDTO> ownersDTO, ICollection<Owner> owners)
         {
-
             var ownersDictionary = owners.ToDictionary(x => x.NationalId);
             foreach (var ownerDTO in ownersDTO)
             {
-                if (!ownersDictionary.TryGetValue(ownerDTO.NationalId, out Owner owner))
+                if (!ownersDictionary.TryGetValue(ownerDTO.NationalId, out var owner))
                 {
                     // new
-                    owners.Add(ownerDTO.ToModel());
+                    owners.Add(ownerDTO.ToModel(new Owner()));
                 }
                 else
                 {
@@ -81,6 +86,7 @@ namespace App.BLL.Mappers
                     ownerDTO.ToModel(owner);
                 }
             }
+
             foreach (var owner in owners.ToList())
             {
                 // remove not exist
@@ -90,33 +96,7 @@ namespace App.BLL.Mappers
                 }
             }
         }
-
-        //var ModelDictionary = owners.ToDictionary(x => x.Id);
-        //var DtoDictionary = ownersDTO.ToDictionary(x => x.Id);
-        //foreach(var ownerDTO in ownersDTO)
-        //{
-        //    if (!ModelDictionary.TryGetValue(ownerDTO.Id,out Owner owner))
-        //    {
-        //        // new
-        //        var ownerTemp = ownerDTO.ToModel();
-        //        unitOfWork.Owners.Add(ownerTemp);
-        //    }
-        //    else
-        //    {
-        //        // exist => update
-        //        ownerDTO.ToModel(owner);
-        //        unitOfWork.Owners.Update(owner);
-        //    }
-        //}
-        //foreach(var owner in owners)
-        //{
-        //    // remove not exist
-        //    if(!DtoDictionary.TryGetValue(owner.Id,out OwnerDTO ownerTemp))
-        //    {
-        //        unitOfWork.Owners.Delete(owner);
-        //    }
-        //}
         #endregion
-
     }
+
 }

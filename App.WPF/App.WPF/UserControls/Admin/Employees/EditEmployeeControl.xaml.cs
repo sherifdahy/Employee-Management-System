@@ -1,4 +1,5 @@
 ﻿using App.BLL;
+using App.BLL.Manager;
 using App.Entities;
 using App.Entities.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,13 +30,13 @@ namespace MyApp.WPF.UserControls.Admin.Employees
     public partial class EditEmployeeControl : UserControl
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IEmployeeService _employeeService;
-        public EditEmployeeControl(IServiceProvider serviceProvider,IEmployeeService employeeService,ApplicationUserViewModel applicationUserViewModel)
+        private readonly IBLayerManager _manager;
+        public EditEmployeeControl(IServiceProvider serviceProvider,IBLayerManager manager,ApplicationUserViewModel applicationUserViewModel)
         {
             InitializeComponent();
             this.DataContext = applicationUserViewModel;
             _serviceProvider = serviceProvider;
-            _employeeService = employeeService;
+            _manager = manager;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -45,24 +46,39 @@ namespace MyApp.WPF.UserControls.Admin.Employees
 
         private async void EditEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            var vm = this.DataContext as ApplicationUserViewModel;
-            if(vm is null)
+            try
             {
-                DialogService.ShowError(ErrorCatalog.Server.Unexpected.Message);
-                return;
+                if (DataContext is not ApplicationUserViewModel applicationUserViewModel)
+                    return;
+
+                if(!applicationUserViewModel.IsValid)
+                {
+                    DialogService.ShowWarning(ErrorCatalog.Validation.RequiredFieldMissing.Message);
+                    return;
+                }
+
+                var result = await _manager.EmployeeService.GetByIdAsync(applicationUserViewModel.Id);
+                if (!result.State)
+                {
+                    DialogService.ShowError(result.Message);
+                    return;
+                }
+
+                applicationUserViewModel.ToModel(result.Data);
+                var updateResult = await _manager.EmployeeService.UpdateAsync(result.Data);
+
+                if(!updateResult.State)
+                {
+                    DialogService.ShowError(updateResult.Message);
+                    return;
+                }
+
+                this.Content = ActivatorUtilities.CreateInstance<EmployeesControl>(_serviceProvider);
             }
-
-            var result = await _employeeService.GetByIdAsync(vm.Id);
-            if(!result.State)
-            { 
-                DialogService.ShowError(result.Message);
-                return;
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
             }
-
-            vm.ToModel(result.Data);
-            await _employeeService.UpdateAsync(result.Data);
-
-            this.Content = ActivatorUtilities.CreateInstance<EmployeesControl>(_serviceProvider);
         }
 
     }

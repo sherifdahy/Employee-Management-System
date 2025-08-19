@@ -10,14 +10,14 @@ namespace App.BLL
 {
     public interface ICompanyService
     {
-        Task<OperationResult<bool, string>> CreateAsync(Company company);
-        Task<OperationResult<string, string>> UpdateAsync(Company company);
-        Task<Pagination<Company>> GetAllAsync(int currentPage, int displayCount = 10, int userId = 0, string? value = null);
-        Task<OperationResult<IEnumerable<Company>, string>> GetAllAsync();
-        Task<OperationResult<string, string>> DeleteAsync(int id);
-        Task<OperationResult<Company, string>> GetByIdAsync(int id);
-        Task<IEnumerable<Company>> SearchAsync(string value);
-        Task<IEnumerable<Company>> GetRelatedCompaniesAsync(int userId);
+        Task<OperationResult<bool>> CreateAsync(Company company);
+        Task<OperationResult<string>> UpdateAsync(Company company);
+        Task<OperationResult<Pagination<Company>>> GetAllAsync(int currentPage, int displayCount = 10, int userId = 0, string? value = null);
+        Task<OperationResult<IEnumerable<Company>>> GetAllAsync();
+        Task<OperationResult<string>> DeleteAsync(int id);
+        Task<OperationResult<Company>> GetByIdAsync(int id);
+        Task<OperationResult<IEnumerable<Company>>> SearchAsync(string value);
+        Task<OperationResult<IEnumerable<Company>>> GetRelatedCompaniesAsync(int userId);
         
     }
 }

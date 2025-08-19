@@ -15,6 +15,9 @@ namespace MyApp.WPF.ViewModels
         SelectorType _selectorType;
         ContentType _contentType;
         #endregion
+
+        public Guid Guid { get; set; }
+
         [Required]
         public string Value
         {

@@ -17,7 +17,8 @@ namespace App.Entities.Models
         public string Password { get; set; }
         public bool IsDeleted { get; set; }
         public UserType UserType { get; set; }
-        public virtual ICollection<Company> Companies { get; set; } = new HashSet<Company>();
         public virtual Account Account { get; set; }
+        public virtual ICollection<Company> Companies { get; set; } = new HashSet<Company>();
+        public virtual ICollection<DailyTransaction> DailyTransactions { get; set; } = new HashSet<DailyTransaction>();
     }
 }

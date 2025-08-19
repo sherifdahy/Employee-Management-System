@@ -9,10 +9,10 @@ namespace App.BLL
 {
     public interface IOrganizationService
     {
-        Task<OperationResult<IEnumerable<Organization>, string>> GetAllAsync();
-        Task<OperationResult<bool, string>> CreateAsync(Organization organization);
-        Task<OperationResult<bool, string>> DeleteAsync(int id);
-        Task<OperationResult<Organization,string>> GetByIdAsync(int id);
-        Task<OperationResult<Organization, string>> UpdateAsync(Organization organization);
+        Task<OperationResult<IEnumerable<Organization>>> GetAllAsync();
+        Task<OperationResult<bool>> CreateAsync(Organization organization);
+        Task<OperationResult<bool>> DeleteAsync(int id);
+        Task<OperationResult<Organization>> GetByIdAsync(int id);
+        Task<OperationResult<Organization>> UpdateAsync(Organization organization);
     }
 }

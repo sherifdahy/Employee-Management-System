@@ -1,14 +1,10 @@
-﻿using App.BLL;
-using App.BLL.DataSync;
+﻿using App.BLL.Manager;
 using App.Entities.Models;
-using AutoMapper;
-using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using MyApp.WPF.Mappers;
 using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.UserControls.Shared;
-using MyApp.WPF.ViewModels;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,21 +16,18 @@ namespace MyApp.WPF.UserControls.Admin.Companies
 {
     public partial class CompaniesControl : UserControl
     {
-        private readonly IMapper _mapper;
-        private readonly ICompanyService _companyService;
+        private readonly IBLayerManager _manager;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IDataSync _dataSync;
-        public CompaniesControl(IDataSync dataSync,ICompanyService companyService, IMapper mapper, IServiceProvider serviceProvider)
+        
+        public CompaniesControl(IBLayerManager manager,IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _companyService = companyService;
-            _dataSync = dataSync;
-            _mapper = mapper;
+
+            _manager = manager;
             _serviceProvider = serviceProvider;
+
             Loaded += UserControl_Loaded;
             CompaniesDataPager.PageIndexChanged += CompaniesDataPager_PageIndexChanged;
-            SearchBox.LostFocus += SearchBox_LostFocus;
-            SearchBox.KeyUp += SearchBox_KeyUp;
             
         }
 
@@ -42,57 +35,68 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             await UsePagination();
         }
-        private void CompaniesDataGrid_RowActivated(object sender, Telerik.Windows.Controls.GridView.RowEventArgs e)
+        private async void CompaniesDataGrid_RowActivated(object sender, Telerik.Windows.Controls.GridView.RowEventArgs e)
         {
             try
             {
-                var company = e.Row.DataContext as Company;
-                if (company != null)
-                {
-                    this.Content = ActivatorUtilities.CreateInstance<DisplayCompanyControl>(_serviceProvider, company.ToDisplayViewModel());
-                }
+                if (e.Row.DataContext is not Company tempCompany)
+                    return;
+
+                var result = await _manager.CompanyService.GetByIdAsync(tempCompany.Id);
+
+                if (!result.State)
+                    return;
+
+                this.Content = ActivatorUtilities.CreateInstance<DisplayCompanyControl>(_serviceProvider, result.Data.ToDisplayViewModel());
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ex.Message);
             }
         }
         private async void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var result = MessageBox.Show("سيتم مسح الشركة للأبد.", "تأكيد عمليه المسح", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
-                if (result == MessageBoxResult.Yes)
+                var confirm = DialogService.Confirm("سيتم مسح الشركة للأبد.", "تأكيد عمليه المسح");
+                if (!confirm)
+                    return;
+
+                if (sender is not Button { DataContext: Company company })
+                    return;
+
+                var deleteResult = await _manager.CompanyService.DeleteAsync(company.Id);
+                if (!deleteResult.State)
                 {
-                    var button = sender as Button;
-                    var company = button?.DataContext as Company;
-                    if (company != null)
-                    {
-                        await _companyService.DeleteAsync(company.Id);
-                        UserControl_Loaded(this, new RoutedEventArgs());
-                    }
+                    DialogService.ShowError(deleteResult.Message);
+                    return;
                 }
+
+                UserControl_Loaded(this, new RoutedEventArgs());
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ex.Message);
             }
         }
-        private void EditBtn_Click(object sender, RoutedEventArgs e)
+
+        private async void EditBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var button = sender as Button;
-                var company = button.DataContext as Company;
-                if (company != null)
-                {
-                    var companyVM = _mapper.Map<CompanyViewModel>(company);
-                    this.Content = ActivatorUtilities.CreateInstance<EditCompaniesControl>(_serviceProvider, companyVM);
-                }
+                if (sender is not Button { DataContext: Company company })
+                    return;
+
+                var result = await _manager.CompanyService.GetByIdAsync(company.Id);
+
+                if (!result.State)
+                    return;
+
+                this.Content = ActivatorUtilities.CreateInstance<EditCompaniesControl>(_serviceProvider, result.Data.ToViewModel(new()));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ex.Message);
             }
         }
         private async void CompaniesDataPager_PageIndexChanged(object sender, Telerik.Windows.Controls.PageIndexChangedEventArgs e)
@@ -101,87 +105,100 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         }
         private async Task UsePagination(int userId = default,string value = null)
         {
-            var pageSize = CompaniesDataPager.PageSize;
-            var currentPage = CompaniesDataPager.PageIndex;
-            var paginationResult = await _companyService.GetAllAsync(currentPage, pageSize,userId, value);
-            CompaniesDataGrid.ItemsSource = paginationResult.Items;
-            CompaniesDataPager.ItemCount = paginationResult.TotalCount;
-        }
-        private async void SearchBox_LostFocus(object sender, RoutedEventArgs e)
-        {
             try
             {
-                var text = sender as Telerik.Windows.Controls.RadWatermarkTextBox;
-                if (text == null) return;
-                await UsePagination(value: text.Text);
+                CompaniesDataGrid.IsBusy = true;
+
+                var pageSize = CompaniesDataPager.PageSize;
+                var currentPage = CompaniesDataPager.PageIndex;
+
+                var result = await _manager.CompanyService.GetAllAsync(currentPage, pageSize, userId, value);
+
+                if (!result.State)
+                {
+                    DialogService.ShowError(result.Message);
+                    return;
+                }
+
+                CompaniesDataGrid.ItemsSource = result.Data.Items;
+                CompaniesDataPager.ItemCount = result.Data.TotalCount;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ex.Message);
+            }
+            finally
+            {
+                CompaniesDataGrid.IsBusy = false;
             }
         }
         private async void SearchBox_KeyUp(object sender, KeyEventArgs e)
         {
-            try
-            {
-                var text = sender as Telerik.Windows.Controls.RadWatermarkTextBox;
-                if (text == null) return;
+            if (sender is not Telerik.Windows.Controls.RadWatermarkTextBox radWatermarkTextBox)
+                return;
 
-                if (e.RoutedEvent == KeyUpEvent && e.Key != Key.Enter) return;
-
-                await UsePagination(value: text.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            await UsePagination(value: radWatermarkTextBox.Text);
         }
 
         private async void ExportBtn_Click(object sender, RoutedEventArgs e)
         {
-            var saveDialog = new SaveFileDialog()
+            try
             {
-                Title = "اختر مكان حفظ الملف",
-                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
-                FileName = $"{DateTime.UtcNow:yyyy-MM-dd_HH-mm-ss} - Export File"
-            };
+                var saveDialog = new SaveFileDialog()
+                {
+                    Title = "اختر مكان حفظ الملف",
+                    Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+                    FileName = $"{DateTime.UtcNow:yyyy-MM-dd_HH-mm-ss} - Export File"
+                };
 
-            if(saveDialog.ShowDialog() != true)
-                return;
+                if (saveDialog.ShowDialog() != true)
+                    return;
 
-            string filePath = saveDialog.FileName;
-            var result = await _dataSync.ExportToFileAsync(filePath);
+                string filePath = saveDialog.FileName;
+                var result = await _manager.DataSync.ExportToFileAsync(filePath);
 
-            if (!result.State)
-            {
-                DialogService.ShowError(result.Message);
-                return;
+                if (!result.State)
+                {
+                    DialogService.ShowError(result.Message);
+                    return;
+                }
+
+                DialogService.ShowSuccess("تم حفظ البيانات في المجلد بنجاح.");
             }
-
-            DialogService.ShowSuccess("تم حفظ البيانات في المجلد بنجاح.");
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
+            }
         }
 
         private async void ImportBtn_Click(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new OpenFileDialog()
+            try
             {
-                Title = "اختر مكان الملف",
-                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
-            };
+                var fileDialog = new OpenFileDialog()
+                {
+                    Title = "اختر مكان الملف",
+                    Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+                };
 
-            if(fileDialog.ShowDialog() != true)
-                return;
-            
-            string filePath = fileDialog.FileName;
-            var result = await _dataSync.ImportFromFileAsync(filePath);
+                if (fileDialog.ShowDialog() != true)
+                    return;
 
-            if(!result.State)
-            {
-                DialogService.ShowError(result.Message);
-                return;
+                string filePath = fileDialog.FileName;
+                var result = await _manager.DataSync.ImportFromFileAsync(filePath);
+
+                if (!result.State)
+                {
+                    DialogService.ShowError(result.Message);
+                    return;
+                }
+
+                DialogService.ShowSuccess($"Importing file {filePath}");
             }
-
-            DialogService.ShowSuccess($"Importing file {filePath}");
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
+            }
 
         }
     }

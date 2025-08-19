@@ -1,110 +1,77 @@
 ﻿using App.BLL;
+using App.BLL.Manager;
 using App.Entities.Models;
 using Interfaces;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.ViewModels;
 using Repository;
+using SharpDX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 
 namespace MyApp.WPF.UserControls.Admin.Employees
 {
     public partial class EmployeeAccessControl : UserControl
     {
-        private readonly IEmployeeService _employeeService;
-        private readonly ICompanyService _companyService;
-        public EmployeeAccessControl(IEmployeeService employeeService, ICompanyService companyService)
+        private readonly IBLayerManager _manager;
+        public EmployeeAccessControl(IBLayerManager manager)
         {
             InitializeComponent();
-            _employeeService = employeeService;
-            _companyService = companyService;
+            _manager = manager;
             Loaded += UserControl_Loaded;
             CompaniesDataPager.PageIndexChanged += CompaniesDataPager_PageIndexChanged;
         }
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                await UsePaginationForCompanies();
-                await UsePaginationForEmployees();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            await UsePagination(CompaniesDataGrid);
+            await UsePagination(EmployeesDataGrid);
         }
 
         private async void CompanySearchTxt_KeyUp(object sender, KeyEventArgs e)
         {
-            try
-            {
-                var textbox = sender as RadWatermarkTextBox;
-                if (textbox != null) {
-                    await UsePaginationForCompanies(value:textbox.Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            if (sender is not RadWatermarkTextBox { Text: string value })
+                return;
+
+            await UsePagination(CompaniesDataGrid);
         }
 
         private void CompaniesDataGrid_RowActivated(object sender, Telerik.Windows.Controls.GridView.RowEventArgs e)
         {
-            try
+            if (e.Row.Item is not Company company)
+                return;
+
+            if (EmployeesDataGrid.SelectedItem is not ApplicationUser employee)
             {
-                var company = e.Row.Item as Company;
-                var employee = EmployeesDataGrid.SelectedItem as ApplicationUser;
-                if (employee != null)
-                {
-                    bool result = employee.Companies.Any(x=>x.Id == company.Id);
-                    if (!result)
-                    {
-                        employee.Companies.Add(company);
-                        CompaniesAccessDataGrid.Items.Clear();
-                        CompaniesAccessDataGrid.Items.AddRange(employee.Companies);
-                        return;
-                    }
-                    MessageBox.Show("هذه الشركة مضافة بالفعل للموظف.", "فشل العملية", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-                MessageBox.Show("من فضلك اختر موظفًا قبل تنفيذ هذه العملية.", "فشل العملية", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DialogService.ShowWarning("من فضلك اختر موظفًا قبل تنفيذ هذه العملية.");
                 return;
             }
-            catch (Exception ex)
+
+            if (employee.Companies.Any(x => x.Id == company.Id))
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowWarning("هذه الشركة مضافة بالفعل للموظف.");
+                return;
             }
+
+            employee.Companies.Add(company);
+            CompaniesAccessDataGrid.ItemsSource = null;
+            CompaniesAccessDataGrid.ItemsSource = employee.Companies;
         }
 
-       
-        private void EmployeesDataGrid_SelectionChanged(object sender, SelectionChangeEventArgs e)
+
+        private async void EmployeesDataGrid_SelectionChanged(object sender, SelectionChangeEventArgs e)
         {
-            try
+            var employee = EmployeesDataGrid.SelectedItem as ApplicationUser;
+            if (employee != null)
             {
-                var employee = EmployeesDataGrid.SelectedItem as ApplicationUser;
-                if (employee != null)
-                {
-                    CompaniesAccessDataGrid.Items.Clear();
-                    CompaniesAccessDataGrid.Items.AddRange(employee.Companies);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
+                await UsePagination(CompaniesAccessDataGrid);
             }
         }
 
@@ -115,65 +82,140 @@ namespace MyApp.WPF.UserControls.Admin.Employees
                 var employees = EmployeesDataGrid.ItemsSource as List<ApplicationUser>;
                 if (employees != null)
                 {
-                    await _employeeService.UpdateRangeAsync(employees);
-                    MessageBox.Show("تم الحفظ بنجاح", "تمت العمليه ", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    await _manager.EmployeeService.UpdateRangeAsync(employees);
+                    DialogService.ShowSuccess("تم الحفظ بنجاح", "تمت العملية");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogService.ShowError(ex.Message, "حدث خطأ ما.");
             }
         }
 
-        private void CompaniesAccessSeachTxt_KeyUp(object sender, KeyEventArgs e)
+        private async void CompaniesAccessSeachTxt_KeyUp(object sender, KeyEventArgs e)
         {
-            try
+            var employee = EmployeesDataGrid.SelectedItem as ApplicationUser;
+            if ( employee != null)
             {
-                var textBox = sender as RadWatermarkTextBox;
-                var employee = EmployeesDataGrid.SelectedItem as ApplicationUser;
-                if (textBox != null)
-                {
-                    if (employee != null)
-                    {
-                        //CompaniesAccessDataGrid.Items.Clear();
-                        //var filteredCompanies = employee.Companies.Where(x => string.IsNullOrEmpty(textBox.Text) ? true : x.Name.Contains(textBox.Text) || x.TaxRegistrationNumber.Contains(textBox.Text));
-                        //CompaniesAccessDataGrid.Items.AddRange(filteredCompanies);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
+                await UsePagination(CompaniesAccessDataGrid);
             }
         }
 
-
-        private async Task UsePaginationForCompanies(int userId = default,string value = null)
-        {
-            var currentPage = CompaniesDataPager.PageIndex;
-            var pageSize = CompaniesDataPager.PageSize;
-            var paginationResult = await _companyService.GetAllAsync(currentPage, pageSize, userId, value);
-            CompaniesDataGrid.ItemsSource = paginationResult.Items;
-            CompaniesDataPager.ItemCount = paginationResult.TotalCount;
-        }
-
-        private async Task UsePaginationForEmployees(int userId = 0, string value = null)
-        {
-            var currentPage = EmployeesDataPager.PageIndex;
-            var pageSize = EmployeesDataPager.PageSize;
-            var paginationResult = await _employeeService.GetAllAsync(currentPage, pageSize, value);
-            EmployeesDataGrid.ItemsSource = paginationResult.Items;
-            EmployeesDataPager.ItemCount = paginationResult.TotalCount;
-        }
         private async void CompaniesDataPager_PageIndexChanged(object sender, PageIndexChangedEventArgs e)
         {
-            var textbox = CompanySearchTxt;
-            await UsePaginationForCompanies(value:textbox.Text);
+            await UsePagination(CompaniesDataGrid);
         }
 
         private async void EmployeesDataPager_PageIndexChanging(object sender, PageIndexChangingEventArgs e)
         {
-            await UsePaginationForCompanies();
+            await UsePagination(CompaniesDataGrid);
         }
+
+        private async void CompaniesAccessDataPager_PageIndexChanged(object sender, PageIndexChangedEventArgs e)
+        {
+            await UsePagination(CompaniesAccessDataGrid);
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button { DataContext : Company company })
+                return;
+
+            if (EmployeesDataGrid.SelectedItem is not ApplicationUser applicationUser)
+                return;
+
+            applicationUser.Companies.Remove(company);
+
+            await UsePagination(CompaniesAccessDataGrid);
+        }
+
+        private async Task UsePagination(RadGridView table)
+        {
+            try
+            {
+                switch (table.Name)
+                {
+                    case nameof(CompaniesAccessDataGrid):
+                        {
+                            if (EmployeesDataGrid?.SelectedItem is not ApplicationUser applicationUser)
+                                return;
+
+                            if (CompaniesAccessSeachTxt is not RadWatermarkTextBox { Text: string value })
+                                return;
+
+                            int currentPage = CompaniesAccessDataPager.PageIndex;
+                            int pageSize = CompaniesAccessDataPager.PageSize;
+                            int skip = pageSize * currentPage;
+
+                            Func<Company, bool> filter = x =>
+                                string.IsNullOrEmpty(value)
+                                || (!string.IsNullOrEmpty(x.Name) && x.Name.Contains(value, StringComparison.OrdinalIgnoreCase))
+                                || (!string.IsNullOrEmpty(x.TaxRegistrationNumber) && x.TaxRegistrationNumber.Contains(value));
+
+                            var filteredCompanies = applicationUser.Companies.Where(filter).ToList();
+
+                            var pagedCompanies = filteredCompanies
+                                                   .Skip(skip)
+                                                   .Take(pageSize)
+                                                   .ToList();
+
+                            CompaniesAccessDataGrid.ItemsSource = pagedCompanies;
+                            CompaniesAccessDataPager.ItemCount = filteredCompanies.Count;
+                            break;
+                        }
+
+
+                    case nameof(EmployeesDataGrid):
+                        {
+                            int currentPage = EmployeesDataPager.PageIndex;
+                            int pageSize = EmployeesDataPager.PageSize;
+
+                            var result = await _manager.EmployeeService.GetAllAsync(currentPage, pageSize, null);
+
+                            if (!result.State)
+                            {
+                                DialogService.ShowError(result.Message);
+                                return;
+                            }
+
+                            EmployeesDataGrid.ItemsSource = result.Data.Items;
+                            EmployeesDataPager.ItemCount = result.Data.TotalCount;
+                            break;
+                        }
+
+                    case nameof(CompaniesDataGrid):
+                        {
+                            if (CompanySearchTxt is not RadWatermarkTextBox { Text: string value })
+                                return;
+
+
+                            int currentPage = CompaniesDataPager.PageIndex;
+                            int pageSize = CompaniesDataPager.PageSize;
+
+                            var result = await _manager.CompanyService.GetAllAsync(currentPage, pageSize, default, value);
+
+                            if (!result.State)
+                            {
+                                DialogService.ShowError(result.Message);
+                                return;
+                            }
+
+                            CompaniesDataGrid.ItemsSource = result.Data.Items;
+                            CompaniesDataPager.ItemCount = result.Data.TotalCount;
+                            break;
+                        }
+
+                    default:
+                        break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
+            }
+        }
+
+        
     }
 }

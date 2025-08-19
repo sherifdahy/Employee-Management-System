@@ -55,7 +55,7 @@ namespace MyApp.WPF.UserControls.Admin.Organizations
             if (!organizationVM.IsValid)
                 return;
 
-            var organization = organizationVM.ToModel();
+            var organization = organizationVM.ToModel(new());
             await _organizationService.CreateAsync(organization);
 
             DialogService.ShowSuccess("تم الاضافة بنجاح.");

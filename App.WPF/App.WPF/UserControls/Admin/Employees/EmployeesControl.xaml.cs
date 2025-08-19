@@ -1,4 +1,5 @@
 ﻿using App.BLL;
+using App.BLL.Manager;
 using App.Entities.Models;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,61 +28,76 @@ namespace MyApp.WPF.UserControls.Admin.Employees
     /// </summary>
     public partial class EmployeesControl : UserControl
     {
-        private readonly IEmployeeService _employeeService;
+        private readonly IBLayerManager _manager;
         private readonly IServiceProvider _serviceProvider;
-        public EmployeesControl(IEmployeeService employeeService,IServiceProvider serviceProvider)
+        public EmployeesControl(IBLayerManager manager,IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _employeeService = employeeService;
+            _manager = manager;
             _serviceProvider = serviceProvider;
         }
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                await UsePagination();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            await UsePagination();
         }
         private async Task UsePagination(int userId = 0, string value = null)
         {
-            var pageSize = EmployeeDataPager.PageSize;
-            var currentPage = EmployeeDataPager.PageIndex;
-            var paginationResult = await _employeeService.GetAllAsync(currentPage, pageSize, value);
-            EmployeesDataGrid.ItemsSource = paginationResult.Items;
-            EmployeeDataPager.ItemCount = paginationResult.TotalCount;
+            try
+            {
+                EmployeesDataGrid.IsBusy = true;
+
+                var pageSize = EmployeeDataPager.PageSize;
+                var currentPage = EmployeeDataPager.PageIndex;
+
+                var result = await _manager.EmployeeService.GetAllAsync(currentPage, pageSize, value);
+                if(!result.State)
+                {
+                    DialogService.ShowError(result.Message);
+                    return;
+                }
+
+                EmployeesDataGrid.ItemsSource = result.Data.Items;
+                EmployeeDataPager.ItemCount = result.Data.TotalCount;
+            }
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
+            }
+            finally
+            {
+                EmployeesDataGrid.IsBusy = false;
+            }
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn)
-            {
-                if (btn.DataContext is ApplicationUser model)
-                {
-                    this.Content = ActivatorUtilities.CreateInstance<EditEmployeeControl>(_serviceProvider, model.ToViewModel());
-                }
-            }
+            if (sender is not Button { DataContext : ApplicationUser model})
+                return;
+
+            this.Content = ActivatorUtilities.CreateInstance<EditEmployeeControl>(_serviceProvider, model.ToViewModel(new()));
         }
 
         private async void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn) { 
-                if(btn.DataContext is ApplicationUser model)
+            try
+            {
+                if (sender is not Button { DataContext: ApplicationUser model })
+                    return;
+
+                var result = await _manager.EmployeeService.DeleteAsync(model.Id);
+
+                if (!result.State)
                 {
-                    var result = await _employeeService.DeleteAsync(model.Id);
-                    if(!result.State)
-                    {
-                        DialogService.ShowError(result.Message);
-                    }
-                    else
-                    {
-                        this.UserControl_Loaded(sender, e);
-                    }
+                    DialogService.ShowError(result.Message);
+                    return;
                 }
+
+                this.UserControl_Loaded(sender, e);
+            }
+            catch (Exception ex)
+            {
+                DialogService.ShowError(ex.Message);
             }
         }
     }

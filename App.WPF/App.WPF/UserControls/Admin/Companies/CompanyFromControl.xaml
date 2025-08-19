@@ -1,120 +1,61 @@
-﻿<UserControl
-            FlowDirection="RightToLeft"
-            xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:localVM="clr-namespace:MyApp.WPF.ViewModels"
-            x:Class="MyApp.WPF.UserControls.Admin.Companies.CompanyFromControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MyApp.WPF.UserControls.Admin.Companies"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl FlowDirection="RightToLeft" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="MyApp.WPF.UserControls.Admin.Companies.CompanyFromControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="900">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-
-            <!-- Box 1: اسم الشركة -->
+            <!-- اسم الشركة -->
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
-                <TextBlock Text="اسم الشركة:" Margin="0,0,0,5"/>
-                <TextBox 
-    telerik:StyleManager.Theme="Fluent"
-    Style="{DynamicResource ValidationTextBoxStyle}" 
-    Text="{Binding Name, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True,UpdateSourceTrigger=PropertyChanged}"  />
+                <TextBlock Text="اسم الشركة" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox telerik:StyleManager.Theme="Fluent" Style="{DynamicResource ValidationTextBoxStyle}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-
-            <StackPanel Grid.Row="0" Grid.Column="1"  Margin="10">
-                <TextBlock Text="رقم التسجيل الضريبي:" Margin="0,0,0,5"/>
-                <TextBox 
-    Style="{DynamicResource ValidationTextBoxStyle}" 
-    telerik:StyleManager.Theme="Fluent"
-    x:Name="TaxRegistrationNumber" 
-    Text="{Binding TaxRegistrationNumber, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True,UpdateSourceTrigger=PropertyChanged}" 
-    MaxLength="9" 
-    DataObject.Pasting="TaxRegistrationNumber_Pasting" 
-    PreviewTextInput="TaxRegistrationNumber_PreviewTextInput"  />
+            <!-- رقم التسجيل الضريبي -->
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
+                <TextBlock Text="رقم التسجيل الضريبي" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox telerik:StyleManager.Theme="Fluent" Style="{DynamicResource ValidationTextBoxStyle}" Text="{Binding TaxRegistrationNumber, UpdateSourceTrigger=PropertyChanged}" MaxLength="9"/>
             </StackPanel>
-
-            <StackPanel Grid.Row="0" Grid.Column="2"  Margin="10">
-                <TextBlock Text="رقم الملف الضريبي:" Margin="0,0,0,5"/>
-                <TextBox 
-    Style="{DynamicResource ValidationTextBoxStyle}" 
-    telerik:StyleManager.Theme="Fluent"
-    Text="{Binding TaxFileNumber, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True,UpdateSourceTrigger=PropertyChanged}" />
+            <!-- رقم الملف الضريبي -->
+            <StackPanel Grid.Row="0" Grid.Column="2" Margin="10">
+                <TextBlock Text="رقم الملف الضريبي" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox telerik:StyleManager.Theme="Fluent" Style="{DynamicResource ValidationTextBoxStyle}" Text="{Binding TaxFileNumber, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-                <TextBlock Text="العنوان:" Margin="0,0,0,5"></TextBlock>
-                <TextBox 
-    Style="{DynamicResource ValidationTextBoxStyle}" 
-    telerik:StyleManager.Theme="Fluent"
-    Text="{Binding Address, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True,ValidatesOnDataErrors=True}"/>
+            <!-- العنوان -->
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="10">
+                <TextBlock Text="العنوان" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox telerik:StyleManager.Theme="Fluent" Style="{DynamicResource ValidationTextBoxStyle}" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"  Margin="10" >
-                <telerik:RadButton x:Name="AddCustomerBtn"  Style="{StaticResource BlueFlatButton}" HorizontalAlignment="Right" Margin="0,0,0,10" Content="اضافة عميل" Click="AddCustomerBtn_Click"/>
-                <telerik:RadGridView 
-                    x:Name="OwnersDataGrid"
-                    ItemsSource="{Binding Owners, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" 
-                    ShowGroupPanel="False"
-                    IsReadOnly="True"
-                    RowHeight="40"
-                    AlternationCount="2"
-                    telerik:StyleManager.Theme="Windows11"
-                    FontSize="14"
-                    CanUserResizeColumns="True"
-                    CanUserSortColumns="True"
-                    AutoGenerateColumns="False">
-
+            <!-- العملاء -->
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Margin="0,10,0,10">
+                <telerik:RadButton Content="➕ اضافة عميل" HorizontalAlignment="Right" Style="{StaticResource BlueFlatButton}" Margin="0,0,0,10" Click="AddCustomerBtn_Click"/>
+                <telerik:RadGridView x:Name="OwnersDataGrid" ItemsSource="{Binding Owners}" AutoGenerateColumns="False" ShowGroupPanel="False" IsReadOnly="True" RowHeight="40" AlternationCount="2" telerik:StyleManager.Theme="Windows11" FontSize="14">
                     <telerik:RadGridView.Columns>
-                        <!-- الاسم -->
-                        <telerik:GridViewDataColumn 
-                            Header="👤 الاسم"
-                            DataMemberBinding="{Binding Name}"
-                            Width="2*"/>
-
-                        <!-- الرقم القومي -->
-                        <telerik:GridViewDataColumn 
-                            Header="🆔 الرقم القومي"
-                            DataMemberBinding="{Binding NationalId}"
-                            Width="2*"/>
-
-                        <!-- الهاتف -->
-                        <telerik:GridViewDataColumn 
-                            Header="📞 رقم الهاتف"
-                            DataMemberBinding="{Binding PhoneNumber}"
-                            Width="1.5*"/>
-
-                        <!-- العنوان -->
-                        <telerik:GridViewDataColumn 
-                            Header="📍 العنوان"
-                            DataMemberBinding="{Binding Address}"
-                            Width="3*"/>
-
+                        <telerik:GridViewDataColumn Header="👤 الاسم" Width="2*" DataMemberBinding="{Binding Name}" />
+                        <telerik:GridViewDataColumn Header="🆔 الرقم القومي" Width="2*" DataMemberBinding="{Binding NationalId}" />
+                        <telerik:GridViewDataColumn Header="📞 الهاتف" Width="1.5*" DataMemberBinding="{Binding PhoneNumber}" />
+                        <telerik:GridViewDataColumn Header="📍 العنوان" Width="3*" DataMemberBinding="{Binding Address}" />
+                        <!-- Edit button -->
                         <telerik:GridViewDataColumn Width="auto">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button 
-                                        telerik:StyleManager.Theme="Crystal"
-                                        ToolTip="Edit"
-                                        x:Name="EditOwnerBtn"
-                                        Click="EditOwnerBtn_Click"
-                                        Cursor="Hand"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        Padding="5"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
+                                telerik:StyleManager.Theme="Crystal"
+                                Click="EditOwnerBtn_Click" 
+                                ToolTip="Edit"
+                                Cursor="Hand"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Padding="5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Image Source="/assets/icons/icons8-edit-64.png" Width="18" Height="18"/>
                                             <TextBlock Text="تعديل" Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -124,20 +65,21 @@
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
 
+                        <!-- Delete button -->
                         <telerik:GridViewDataColumn Width="auto">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button 
-                                        telerik:StyleManager.Theme="Crystal"
-                                        ToolTip="Delete"
-                                        x:Name="DeleteOwnerBtn"
-                                        Click="DeleteOwnerBtn_Click"
-                                        Cursor="Hand"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        Padding="5"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
+                                x:Name="deleteOwnerBtn"
+                                telerik:StyleManager.Theme="Crystal"
+                                Click="DeleteOwnerBtn_Click" 
+                                ToolTip="Delete"
+                                Cursor="Hand"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Padding="5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Image Source="/assets/icons/icons8-delete-96.png" Width="18" Height="18"/>
                                             <TextBlock Text="حذف" Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -146,62 +88,32 @@
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-
-
                     </telerik:RadGridView.Columns>
-
                 </telerik:RadGridView>
-
             </StackPanel>
-            <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3"  Margin="10" >
-                <telerik:RadButton x:Name="AddEmailBtn" Style="{StaticResource BlueFlatButton}" Content="اضافة حساب"  HorizontalAlignment="Right" Margin="0,0,0,10" Click="AddEmailBtn_Click" ></telerik:RadButton>
-                <telerik:RadGridView 
-                    Grid.Row="1"
-                    x:Name="EmailsDataGrid"
-                    ItemsSource="{Binding Emails}" 
-                    ShowGroupPanel="False"
-                    IsReadOnly="True"
-                    Margin="0"
-                    RowHeight="40"
-                    AlternationCount="2"
-                     telerik:StyleManager.Theme="Windows11"
-                    FontSize="14"
-                    CanUserResizeColumns="True"
-                    CanUserSortColumns="True"
-                    AutoGenerateColumns="False">
-
+            <!-- الايميلات -->
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Margin="0,10,0,10">
+                <telerik:RadButton Content="➕ اضافة حساب" HorizontalAlignment="Right" Style="{StaticResource BlueFlatButton}" Margin="0,0,0,10" Click="AddEmailBtn_Click"/>
+                <telerik:RadGridView x:Name="EmailsDataGrid" ItemsSource="{Binding Emails}" AutoGenerateColumns="False" ShowGroupPanel="False" IsReadOnly="True" RowHeight="40" AlternationCount="2" telerik:StyleManager.Theme="Windows11" FontSize="14">
                     <telerik:RadGridView.Columns>
-                        <!-- البريد الإلكتروني -->
-                        <telerik:GridViewDataColumn 
-                            Header="البريد الإلكتروني"
-                            DataMemberBinding="{Binding EmailAddress}"
-                            Width="*"/>
-
-                        <!-- كلمة المرور -->
-                        <telerik:GridViewDataColumn 
-                            Header="كلمة المرور"
-                            DataMemberBinding="{Binding Password}"
-                            Width="*" />
-
-                        <!-- الجهة -->
-                        <telerik:GridViewDataColumn 
-                            Header="رقم الجهة"
-                            DataMemberBinding="{Binding OrganizationId}"
-                            Width="*"/>
+                        <telerik:GridViewDataColumn Header="📧 البريد الإلكتروني" Width="*" DataMemberBinding="{Binding EmailAddress}" />
+                        <telerik:GridViewDataColumn Header="🔑 كلمة المرور" Width="*" DataMemberBinding="{Binding Password}" />
+                        <telerik:GridViewDataColumn Header="🏢 الجهة" Width="*" DataMemberBinding="{Binding OrganizationId}" />
+                        <!-- Edit/Delete -->
+                        <!-- Edit button -->
                         <telerik:GridViewDataColumn Width="auto">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button 
-                                        telerik:StyleManager.Theme="Crystal"
-                                        ToolTip="Edit"
-                                        x:Name="EditEmailBtn"
-                                        Click="EditEmailBtn_Click"
-                                        Cursor="Hand"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        Padding="5"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
+                                telerik:StyleManager.Theme="Crystal"
+                                Click="EditEmailBtn_Click" 
+                                ToolTip="Edit"
+                                Cursor="Hand"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Padding="5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Image Source="/assets/icons/icons8-edit-64.png" Width="18" Height="18"/>
                                             <TextBlock Text="تعديل" Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -211,20 +123,21 @@
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
 
+                        <!-- Delete button -->
                         <telerik:GridViewDataColumn Width="auto">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button 
-                                        telerik:StyleManager.Theme="Crystal"
-                                        ToolTip="Delete"
-                                        Cursor="Hand"
-                                        x:Name="DeleteEmailBtn"
-                                        Click="DeleteEmailBtn_Click"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        Padding="5"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
+                                x:Name="deleteOwnerBtn"
+                                telerik:StyleManager.Theme="Crystal"
+                                Click="DeleteEmailBtn_Click" 
+                                ToolTip="Delete"
+                                Cursor="Hand"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Padding="5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Image Source="/assets/icons/icons8-delete-96.png" Width="18" Height="18"/>
                                             <TextBlock Text="حذف" Margin="5,0,0,0" VerticalAlignment="Center" />

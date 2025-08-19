@@ -15,6 +15,10 @@ namespace MyApp.WPF.ViewModels
         string _name;
         string _url;
         #endregion
+
+
+        public Guid Guid { get; set; }
+
         [Required]
         public string Name { 
             get => _name; 

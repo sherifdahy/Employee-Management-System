@@ -8,7 +8,6 @@ namespace App.BLL.DTOs
 {
     public class AccountDTO
     {
-        public int Id { get; set; }
         public decimal Currency { get; set; }
     }
 }

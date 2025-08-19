@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250817112038_init")]
-    partial class init
+    [Migration("20250818132528_add-constrains_number_of_letter_to_taxregistration")]
+    partial class addconstrains_number_of_letter_to_taxregistration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,9 @@ namespace App.DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -78,12 +81,12 @@ namespace App.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5026),
+                            CreatedAt = new DateTime(2025, 8, 18, 13, 25, 27, 641, DateTimeKind.Utc).AddTicks(4559),
                             Email = "admin",
                             IsDeleted = false,
                             Name = "Sherif Dahy",
                             Password = "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=",
-                            UpdatedAt = new DateTime(2025, 8, 17, 11, 20, 37, 642, DateTimeKind.Utc).AddTicks(5029),
+                            UpdatedAt = new DateTime(2025, 8, 18, 13, 25, 27, 641, DateTimeKind.Utc).AddTicks(4561),
                             UserType = 2
                         });
                 });
@@ -118,14 +121,54 @@ namespace App.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaxRegistrationNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TaxRegistrationNumber")
+                        .IsUnique();
+
                     b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("App.Entities.Models.DailyTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("State")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("DailyTransactions");
                 });
 
             modelBuilder.Entity("App.Entities.Models.Email", b =>
@@ -143,7 +186,8 @@ namespace App.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("OrganizationId")
                         .HasColumnType("int");
@@ -160,6 +204,9 @@ namespace App.DAL.Migrations
 
                     b.HasIndex("OrganizationId");
 
+                    b.HasIndex("EmailAddress", "CompanyId")
+                        .IsUnique();
+
                     b.ToTable("Emails");
                 });
 
@@ -173,6 +220,9 @@ namespace App.DAL.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -209,7 +259,8 @@ namespace App.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NationalId")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -221,6 +272,9 @@ namespace App.DAL.Migrations
 
                     b.HasIndex("CompanyId");
 
+                    b.HasIndex("NationalId", "CompanyId")
+                        .IsUnique();
+
                     b.ToTable("Owners");
                 });
 
@@ -231,6 +285,9 @@ namespace App.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("OrganizationId")
                         .HasColumnType("int");
@@ -247,9 +304,35 @@ namespace App.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Guid")
+                        .IsUnique();
+
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("Selectors");
+                });
+
+            modelBuilder.Entity("App.Entities.Models.TransactionItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransactionItem");
                 });
 
             modelBuilder.Entity("ApplicationUserCompany", b =>
@@ -267,6 +350,21 @@ namespace App.DAL.Migrations
                     b.ToTable("ApplicationUserCompany");
                 });
 
+            modelBuilder.Entity("DailyTransactionTransactionItem", b =>
+                {
+                    b.Property<int>("DailyTransactionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransactionItemsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DailyTransactionsId", "TransactionItemsId");
+
+                    b.HasIndex("TransactionItemsId");
+
+                    b.ToTable("DailyTransactionTransactionItem");
+                });
+
             modelBuilder.Entity("App.Entities.Models.Account", b =>
                 {
                     b.HasOne("App.Entities.Models.ApplicationUser", "User")
@@ -276,6 +374,25 @@ namespace App.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("App.Entities.Models.DailyTransaction", b =>
+                {
+                    b.HasOne("App.Entities.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("DailyTransactions")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Entities.Models.Company", "Company")
+                        .WithMany("DailyTransactions")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("App.Entities.Models.Email", b =>
@@ -302,7 +419,7 @@ namespace App.DAL.Migrations
                     b.HasOne("App.Entities.Models.Company", "Company")
                         .WithMany("Owners")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Company");
@@ -330,14 +447,33 @@ namespace App.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DailyTransactionTransactionItem", b =>
+                {
+                    b.HasOne("App.Entities.Models.DailyTransaction", null)
+                        .WithMany()
+                        .HasForeignKey("DailyTransactionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Entities.Models.TransactionItem", null)
+                        .WithMany()
+                        .HasForeignKey("TransactionItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("App.Entities.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Account")
                         .IsRequired();
+
+                    b.Navigation("DailyTransactions");
                 });
 
             modelBuilder.Entity("App.Entities.Models.Company", b =>
                 {
+                    b.Navigation("DailyTransactions");
+
                     b.Navigation("Emails");
 
                     b.Navigation("Owners");

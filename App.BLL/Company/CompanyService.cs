@@ -2,14 +2,7 @@
 using App.Entities;
 using App.Entities.Models;
 using Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.BLL
 {
@@ -22,119 +15,107 @@ namespace App.BLL
             _unitOfWork = unitOfWork;
             _encryptionService = encryptionService;
         }
-        public async Task<OperationResult<bool, string>> CreateAsync(Company company)
+        public async Task<OperationResult<bool>> CreateAsync(Company company)
         {
-            try
-            {
-                if (!_unitOfWork.Companies.IsExist(x => x.TaxRegistrationNumber == company.TaxRegistrationNumber))
-                {
-                    foreach(var email in company.Emails)
-                    {
-                        email.Password = _encryptionService.Encrypt(email.Password);
-                    }
+            if (_unitOfWork.Companies.IsExist(x => x.TaxRegistrationNumber == company.TaxRegistrationNumber))
+                return OperationResult<bool>.Fail($"{ErrorCatalog.Database.UniqueConstraintViolation.Message} - {company.TaxRegistrationNumber}");
 
-                    await _unitOfWork.Companies.AddAsync(company);
-                    await _unitOfWork.SaveAsync();
-                    return OperationResult<bool, string>.Ok(true);
-                }
-                return OperationResult<bool, string>.Fail("رقم التسجيل الضريبي مسجل من قبل");
-            }
-            catch (Exception ex)
+            foreach (var email in company.Emails)
             {
-                return OperationResult<bool, string>.Fail("حدث خطأ أثناء الحفظ: " + ex.Message);
+                email.Password = _encryptionService.Encrypt(email.Password);
             }
+
+            await _unitOfWork.Companies.AddAsync(company);
+            await _unitOfWork.SaveAsync();
+
+            return OperationResult<bool>.Ok(true);
         }
 
-        public async Task<OperationResult<Company, string>> GetByIdAsync(int id)
+        public async Task<OperationResult<Company>> GetByIdAsync(int id)
         {
             var company = await _unitOfWork.Companies.GetByIdAsync(id);
-            if(company != null)
+            if (company != null)
             {
-                return OperationResult<Company, string>.Ok(company);
+                foreach (var email in company.Emails)
+                {
+                    email.Password = _encryptionService.Decrypt(email.Password);
+                }
+
+                return OperationResult<Company>.Ok(company);
             }
             else
             {
-                return OperationResult<Company, string>.Fail("Not Found");
+                return OperationResult<Company>.Fail(ErrorCatalog.Database.RecordNotFound.Message);
             }
         }
-        public async Task<OperationResult<string, string>> DeleteAsync(int id)
+        public async Task<OperationResult<string>> DeleteAsync(int id)
         {
             var companyResult = await GetByIdAsync(id);
-            if(companyResult.State)
-            {
-                companyResult.Data.IsDeleted = true;
-                _unitOfWork.Companies.Update(companyResult?.Data);
-                await _unitOfWork.SaveAsync();
-                return OperationResult<string,string>.Ok(string.Empty);
-            }
-            else
-            {
-                return OperationResult<string,string>.Fail(companyResult?.Message);
-            }
+            if (!companyResult.State)
+                return OperationResult<string>.Fail(companyResult.Message);
+
+            companyResult.Data.IsDeleted = true;
+
+            _unitOfWork.Companies.Update(companyResult.Data);
+            await _unitOfWork.SaveAsync();
+
+            return OperationResult<string>.Ok(string.Empty);
         }
 
-        public async Task<Pagination<Company>> GetAllAsync(int currentPage,int displayCount = 10,int userId = 0,string? value = null)
+        public async Task<OperationResult<Pagination<Company>>> GetAllAsync(int currentPage,int displayCount = 10,int userId = 0,string? value = null)
         {
             Expression<Func<Company, bool>> query = x =>
-                (userId == default || x.ApplicationUsers.Any(u => u.Id == userId)) &&
-                (string.IsNullOrEmpty(value) || x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value)) &&
-                (!x.IsDeleted);
+            (userId == default || x.ApplicationUsers.Any(u => u.Id == userId)) &&
+            (string.IsNullOrEmpty(value) || x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value)) &&
+            (!x.IsDeleted);
 
             var totalCount = await _unitOfWork.Companies.CountAsync(query);
             var skip = currentPage * displayCount;
+
             var companies = await _unitOfWork.Companies.FindAllAsync(query, skip, displayCount);
-            return new Pagination<Company>()
+
+            return OperationResult<Pagination<Company>>.Ok(new Pagination<Company>()
             {
                 TotalCount = totalCount,
                 Items = companies,
-            };
+            });
 
         }
 
-        public async Task<IEnumerable<Company>> GetRelatedCompaniesAsync(int userId)
+        public async Task<OperationResult<IEnumerable<Company>>> GetRelatedCompaniesAsync(int userId)
         {
-            var appUser = await _unitOfWork.ApplicationUsers.FindAsync(x=>x.Id == userId && !x.IsDeleted);
-            return appUser.Companies;
+            var appUser = await _unitOfWork.ApplicationUsers.FindAsync(x => x.Id == userId && !x.IsDeleted);
+            return OperationResult<IEnumerable<Company>>.Ok(appUser.Companies);
         }
 
-        public async Task<IEnumerable<Company>> SearchAsync(string value)
+        public async Task<OperationResult<IEnumerable<Company>>> SearchAsync(string value)
         {
             Expression<Func<Company, bool>> query = x =>
-                (string.IsNullOrEmpty(value) ? true : x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value)) && !x.IsDeleted;
+            (string.IsNullOrEmpty(value) ? true : x.Name.Contains(value) || x.TaxRegistrationNumber.Contains(value)) && !x.IsDeleted;
 
             var companies = await _unitOfWork.Companies.FindAllAsync(query);
-            return companies;
+                
+            return OperationResult<IEnumerable<Company>>.Ok(companies);
         }
 
-        public async Task<OperationResult<string, string>> UpdateAsync(Company company)
+        public async Task<OperationResult<string>> UpdateAsync(Company company)
         {
-            try
+            foreach(var email in company.Emails)
             {
-                foreach(var email in company.Emails)
-                {
-                    email.Password = _encryptionService.Encrypt(email.Password);
-                }
-                company.UpdatedAt = DateTime.UtcNow;
-                _unitOfWork.Companies.Update(company);
-                await _unitOfWork.SaveAsync();
-                return OperationResult<string, string>.Ok("تم الحفظ بنجاح");
+                email.Password = _encryptionService.Encrypt(email.Password);
             }
-            catch (Exception ex) {
-                return OperationResult<string, string>.Fail(ex.Message);
-            }
+            company.UpdatedAt = DateTime.UtcNow;
+                
+            _unitOfWork.Companies.Update(company);
+            await _unitOfWork.SaveAsync();
+
+            return OperationResult<string>.Ok(string.Empty);
         }
 
-        public async Task<OperationResult<IEnumerable<Company>,string>> GetAllAsync()
+        public async Task<OperationResult<IEnumerable<Company>>> GetAllAsync()
         {
-            try
-            {
-                var companies = await _unitOfWork.Companies.GetAllAsync();
-                return OperationResult<IEnumerable<Company>,string>.Ok(companies);
-            }
-            catch (Exception ex)
-            {
-                return OperationResult<IEnumerable<Company>,string>.Fail(ex.Message);
-            }
+            var companies = await _unitOfWork.Companies.GetAllAsync();
+            return OperationResult<IEnumerable<Company>>.Ok(companies);
         }
 
         

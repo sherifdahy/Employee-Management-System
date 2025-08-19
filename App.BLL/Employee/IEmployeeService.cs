@@ -10,11 +10,11 @@ namespace App.BLL
 {
     public interface IEmployeeService
     {
-        Task CreateAsync(ApplicationUser applicationUser);
-        Task<Pagination<ApplicationUser>> GetAllAsync(int currentPage, int pageSize, string value);
-        Task UpdateRangeAsync(IEnumerable<ApplicationUser> applicationUsers);
-        Task<OperationResult<bool, string>> DeleteAsync(int id);
-        Task<OperationResult<ApplicationUser,string>> GetByIdAsync(int id);
-        Task<OperationResult<bool, string>> UpdateAsync(ApplicationUser applicationUser);
+        Task<OperationResult<object>> CreateAsync(ApplicationUser applicationUser);
+        Task<OperationResult<Pagination<ApplicationUser>>> GetAllAsync(int currentPage, int pageSize, string value);
+        Task<OperationResult<object>> UpdateRangeAsync(IEnumerable<ApplicationUser> applicationUsers);
+        Task<OperationResult<object>> DeleteAsync(int id);
+        Task<OperationResult<ApplicationUser>> GetByIdAsync(int id);
+        Task<OperationResult<object>> UpdateAsync(ApplicationUser applicationUser);
     }
 }

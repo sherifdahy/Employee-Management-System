@@ -15,77 +15,77 @@ namespace App.BLL
             _unitOfWork = unitOfWork;
             _loggerService = loggerService;
         }
-        public async Task<OperationResult<bool, string>> CreateAsync(Organization organization)
+        public async Task<OperationResult<bool>> CreateAsync(Organization organization)
         {
             try
             {
                 await _unitOfWork.Organizations.AddAsync(organization);
                 await _unitOfWork.SaveAsync();
 
-                return OperationResult<bool, string>.Ok(true);
+                return OperationResult<bool>.Ok(true);
             }
             catch (Exception ex)
             {
                 _loggerService.LogError(ex);
-                return OperationResult<bool,string>.Fail(ErrorCatalog.Server.Unexpected.Message);
+                return OperationResult<bool>.Fail(ErrorCatalog.Server.Unexpected.Message);
             }
         }
 
-        public async Task<OperationResult<bool, string>> DeleteAsync(int id)
+        public async Task<OperationResult<bool>> DeleteAsync(int id)
         {
             try
             {
                 var result = await GetByIdAsync(id);
                 if (!result.State)
-                    return OperationResult<bool, string>.Fail(result.Message);
+                    return OperationResult<bool>.Fail(result.Message);
 
 
                 if (result.Data.Emails.Any())
-                    return OperationResult<bool, string>.Fail(ErrorCatalog.Database.ForeignKeyViolation.Message);
+                    return OperationResult<bool>.Fail(ErrorCatalog.Database.ForeignKeyViolation.Message);
 
                 _unitOfWork.Organizations.Delete(result.Data);
                 await _unitOfWork.SaveAsync();
-                return OperationResult<bool,string>.Ok(true);
+                return OperationResult<bool>.Ok(true);
             }
             catch (Exception ex)
             {
                 _loggerService?.LogError(ex);
-                return OperationResult<bool, string>.Fail(ErrorCatalog.Server.Unexpected.Message);
+                return OperationResult<bool>.Fail(ErrorCatalog.Server.Unexpected.Message);
             }
         }
 
-        public async Task<OperationResult<IEnumerable<Organization>,string>> GetAllAsync()
+        public async Task<OperationResult<IEnumerable<Organization>>> GetAllAsync()
         {
             try
             {
                 var organization = await _unitOfWork.Organizations.GetAllAsync();
-                return OperationResult<IEnumerable<Organization>,string>.Ok(organization);
+                return OperationResult<IEnumerable<Organization>>.Ok(organization);
             }
             catch (Exception ex)
             {
                 _loggerService.LogError(ex);
-                return OperationResult<IEnumerable<Organization>, string>.Fail(ErrorCatalog.Server.Unexpected.Message);
+                return OperationResult<IEnumerable<Organization>>.Fail(ErrorCatalog.Server.Unexpected.Message);
             }
         }
 
-        public async Task<OperationResult<Organization, string>> GetByIdAsync(int id)
+        public async Task<OperationResult<Organization>> GetByIdAsync(int id)
         {
             try
             {
                 var organization = await _unitOfWork.Organizations.GetByIdAsync(id);
                 if (organization == null)
-                    return OperationResult<Organization, string>.Fail(ErrorCatalog.Database.RecordNotFound.Message);
+                    return OperationResult<Organization>.Fail(ErrorCatalog.Database.RecordNotFound.Message);
 
-                return OperationResult<Organization,string>.Ok(organization);
+                return OperationResult<Organization>.Ok(organization);
             }
             catch (Exception ex)
             {
                 _loggerService.LogError(ex);
-                return OperationResult<Organization, string>.Fail(ErrorCatalog.Server.Unexpected.Message);
+                return OperationResult<Organization>.Fail(ErrorCatalog.Server.Unexpected.Message);
             }
         }
 
-        public async Task<OperationResult<Organization, string>> UpdateAsync(Organization organization)
+        public async Task<OperationResult<Organization>> UpdateAsync(Organization organization)
         {
             try
             {
@@ -93,12 +93,12 @@ namespace App.BLL
                 _unitOfWork.Organizations.Update(organization);
                 await _unitOfWork.SaveAsync();
 
-                return OperationResult<Organization, string>.Ok(organization);
+                return OperationResult<Organization>.Ok(organization);
             }
             catch (Exception ex)
             {
                 _loggerService.LogError(ex);
-                return OperationResult<Organization, string>.Fail(ErrorCatalog.Server.Unexpected.Message);
+                return OperationResult<Organization>.Fail(ErrorCatalog.Server.Unexpected.Message);
             }
         }
     }

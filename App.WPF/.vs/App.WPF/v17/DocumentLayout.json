@@ -1,26 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{3D65B28D-996D-4AA2-B4C6-D21A5476D452}|..\\App.BLL\\App.BLL.csproj|e:\\saber eid\\employee-management-system\\app.bll\\datasync\\datasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\mappers\\organizationmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\mappers\\organizationmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\viewmodels\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\viewmodels\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B4A4F79-8B16-5E27-63A5-6FF812BA1EE1}|..\\App.DAL\\App.DAL\\App.DAL.csproj|e:\\saber eid\\employee-management-system\\app.dal\\app.dal\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -28,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 238,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,71 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DataSync.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\DataSync\\DataSync.cs",
-              "RelativeDocumentMoniker": "..\\App.BLL\\DataSync\\DataSync.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.BLL\\DataSync\\DataSync.cs",
-              "RelativeToolTip": "..\\App.BLL\\DataSync\\DataSync.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAswJgAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T14:53:04.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OrganizationMapper.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\OrganizationMapper.cs",
-              "RelativeDocumentMoniker": "App.WPF\\Mappers\\OrganizationMapper.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\OrganizationMapper.cs",
-              "RelativeToolTip": "App.WPF\\Mappers\\OrganizationMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T14:52:53.662Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BaseViewModel.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\ViewModels\\BaseViewModel.cs",
-              "RelativeDocumentMoniker": "App.WPF\\ViewModels\\BaseViewModel.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\ViewModels\\BaseViewModel.cs",
-              "RelativeToolTip": "App.WPF\\ViewModels\\BaseViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T14:52:48.134Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\App.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\App.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\App.xaml.cs",
-              "RelativeToolTip": "App.WPF\\App.xaml.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T14:52:44.526Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "..\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "..\\App.DAL\\App.DAL\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T14:52:37.694Z",
-              "EditorCaption": ""
             }
           ]
         }

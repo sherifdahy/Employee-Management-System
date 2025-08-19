@@ -10,68 +10,74 @@ namespace App.BLL.Mappers
 {
     public static class EmailDtoMapper
     {
-        #region Model => ToDTO
-        public static EmailDTO ToDTO(this Email email)
+        #region Model => DTO
+        public static EmailDTO ToDTO(this Email email, EmailDTO emailDTO)
         {
-            if (email == null) return null;
+            if (email == null || emailDTO is null) return null;
 
-            return new EmailDTO()
-            {
-                Id = email.Id,
-                EmailAddress = email.EmailAddress,
-                Password = email.Password,
-                OrganizationId = email.OrganizationId,
-                CompanyId = email.CompanyId,
-            };
+            emailDTO.EmailAddress = email.EmailAddress;
+            emailDTO.Password = email.Password;
+            emailDTO.OrganizationId = email.OrganizationId;
+
+            return emailDTO;
         }
 
-        public static IEnumerable<EmailDTO> ToDTO(this IEnumerable<Email> emails)
+        public static ICollection<EmailDTO> ToDTO(this ICollection<Email> emails, ICollection<EmailDTO> emailDTOs)
         {
-            if (emails == null) throw new ArgumentNullException(nameof(emails));
+            if (emails == null || emailDTOs == null) return null;
 
-            return emails.Select(x => x.ToDTO());
+            var dtoDictionary = emailDTOs.ToDictionary(x => (x.EmailAddress,x.OrganizationId));
+
+            foreach (var email in emails)
+            {
+                if (!dtoDictionary.TryGetValue((email.EmailAddress,email.OrganizationId), out var dto))
+                {
+                    // new
+                    emailDTOs.Add(email.ToDTO(new EmailDTO()));
+                }
+                else
+                {
+                    // exist
+                    email.ToDTO(dto);
+                }
+            }
+
+            // remove not exist
+            foreach (var dto in emailDTOs.ToList())
+            {
+                if (!emails.Any(email => (email.EmailAddress,email.OrganizationId) == (dto.EmailAddress,dto.OrganizationId)))
+                {
+                    emailDTOs.Remove(dto);
+                }
+            }
+
+            return emailDTOs;
         }
         #endregion
 
         #region DTO => Model
-        public static Email ToModel(this EmailDTO emailDTO)
+        public static Email ToModel(this EmailDTO emailDTO, Email email)
         {
-            if (emailDTO == null) return null;
+            if (emailDTO is null || email is null) return null;
 
-            return new Email()
-            {
-                EmailAddress = emailDTO.EmailAddress,
-                Password = emailDTO.Password,
-                OrganizationId = emailDTO.OrganizationId,
-            };
-        }
-        public static List<Email> ToModel(this List<EmailDTO> emailDTOs)
-        {
-            if (emailDTOs == null) return null;
-
-            return emailDTOs.Select(x => ToModel(x)).ToList();
-        }
-
-
-        public static void ToModel(this EmailDTO emailDTO,Email email)
-        {
             email.EmailAddress = emailDTO.EmailAddress;
             email.Password = emailDTO.Password;
             email.OrganizationId = emailDTO.OrganizationId;
+
+            return email;
         }
 
-
-
-        public static void ToModel(this ICollection<EmailDTO> emailDTOs, ICollection<Email> emails)
+        public static ICollection<Email> ToModel(this ICollection<EmailDTO> emailDTOs, ICollection<Email> emails)
         {
+            if (emailDTOs is null || emails is null) return null;
 
-            var emailsDictionary = emails.ToDictionary(x => x.EmailAddress);
+            var emailsDictionary = emails.ToDictionary(x => (x.EmailAddress,x.OrganizationId));
             foreach (var emailDTO in emailDTOs)
             {
-                if (!emailsDictionary.TryGetValue(emailDTO.EmailAddress, out Email email))
+                if (!emailsDictionary.TryGetValue((emailDTO.EmailAddress,emailDTO.OrganizationId), out var email))
                 {
                     // new
-                    emails.Add(emailDTO.ToModel());
+                    emails.Add(emailDTO.ToModel(new Email()));
                 }
                 else
                 {
@@ -79,15 +85,19 @@ namespace App.BLL.Mappers
                     emailDTO.ToModel(email);
                 }
             }
+
             foreach (var email in emails.ToList())
             {
                 // remove not exist
-                if (!emailDTOs.Any(emailDTO => emailDTO.EmailAddress == email.EmailAddress))
+                if (!emailDTOs.Any(emailDTO => (emailDTO.EmailAddress,emailDTO.OrganizationId) == (email.EmailAddress,email.OrganizationId)))
                 {
                     emails.Remove(email);
                 }
             }
+
+            return emails;
         }
         #endregion
     }
+
 }

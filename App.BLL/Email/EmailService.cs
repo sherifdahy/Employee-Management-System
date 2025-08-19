@@ -15,23 +15,23 @@ namespace App.BLL
         {
             this._unitOfWork = unitOfWork;
         }
-        public Task<OperationResult<ICollection<Email>, string>> GetAllAsync()
+        public Task<OperationResult<ICollection<Email>>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<OperationResult<Email, string>> GetByIdAsync(int id)
+        public async Task<OperationResult<Email>> GetByIdAsync(int id)
         {
             try
             {
                 var email = await _unitOfWork.Emails.FindAsync(x => x.Id == id);
                 if (email is null) throw new InvalidOperationException("الحساب غير موجود");
 
-                return OperationResult<Email, string>.Ok(email);
+                return OperationResult<Email>.Ok(email);
             }
             catch (Exception ex) 
             {
-                return OperationResult<Email, string>.Fail(ex.Message);
+                return OperationResult<Email>.Fail(ex.Message);
             }
         }
     }

@@ -2,6 +2,7 @@
 using App.BLL.DataSync;
 using App.BLL.Dependencies.Implementations;
 using App.BLL.Dependencies.Interfaces;
+using App.BLL.Manager;
 using App.DAL.Data;
 using App.Entities.Helper;
 using Interfaces;
@@ -58,6 +59,9 @@ namespace MyApp.WPF
                     #endregion
 
                     #region Services Registration
+                    // managers
+                    services.AddTransient<IBLayerManager,BLayerManager>();
+                    
                     // Business Layer
                     services.AddTransient<IAuthService, AuthService>();
                     services.AddTransient<ICompanyService, CompanyService>();

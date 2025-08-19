@@ -11,62 +11,38 @@ namespace App.BLL.Mappers
     public static class ApplicationUserDtoMapper
     {
         #region Model => DTO
-        public static ApplicationUserDTO ToDTO(this ApplicationUser applicationUser)
+        public static ApplicationUserDTO ToDTO(this ApplicationUser applicationUser, ApplicationUserDTO applicationUserDTO)
         {
-            if (applicationUser == null) return null;
+            if (applicationUser == null || applicationUserDTO == null) return null;
 
-            return new ApplicationUserDTO()
-            {
-                Id = applicationUser.Id,
-                IsDeleted = applicationUser.IsDeleted,
-                Email = applicationUser.Email,
-                Name = applicationUser.Name,
-                Password = applicationUser.Password,
-                UserType = applicationUser.UserType,
-                //CreatedAt = applicationUser.CreatedAt,
-                //UpdatedAt = applicationUser.UpdatedAt,
-                Account = applicationUser.Account.ToDTO()
-            };
+            applicationUserDTO.IsDeleted = applicationUser.IsDeleted;
+            applicationUserDTO.Email = applicationUser.Email;
+            applicationUserDTO.Name = applicationUser.Name;
+            applicationUserDTO.Password = applicationUser.Password;
+            applicationUserDTO.UserType = applicationUser.UserType;
+
+            applicationUser.Account?.ToDTO(applicationUserDTO.Account);
+
+            return applicationUserDTO;
         }
-
-        public static IEnumerable<ApplicationUserDTO> ToDTO(this IEnumerable<ApplicationUser> applicationUsers)
-        {
-            if (applicationUsers == null) throw new ArgumentNullException(nameof(applicationUsers));
-
-            return applicationUsers.Select(x => ToDTO(x));
-        }
-
         #endregion
 
         #region DTO => Model
-        public static ApplicationUser ToModel(this ApplicationUserDTO applicationUserDTO)
+        public static ApplicationUser ToModel(this ApplicationUserDTO applicationUserDTO, ApplicationUser applicationUser)
         {
-            if (applicationUserDTO == null) return null;
-            
-            return new ApplicationUser()
-            {
-                Id = applicationUserDTO.Id,
-                //CreatedAt = applicationUserDTO.CreatedAt,
-                //UpdatedAt = applicationUserDTO.UpdatedAt,
-                Name = applicationUserDTO.Name,
-                Email = applicationUserDTO.Email,
-                Password = applicationUserDTO.Password,
-                IsDeleted = applicationUserDTO.IsDeleted,
-                UserType = applicationUserDTO.UserType,
-                Account = applicationUserDTO.Account.ToModel(),
-                
-            };
-        }
+            if (applicationUserDTO == null || applicationUser == null) return null;
 
-        public static void ToModel(this ApplicationUserDTO applicationUserDTO,ApplicationUser applicationUser)
-        {
             applicationUser.Name = applicationUserDTO.Name;
             applicationUser.IsDeleted = applicationUserDTO.IsDeleted;
             applicationUser.UserType = applicationUserDTO.UserType;
-            applicationUser.Account = applicationUserDTO.Account.ToModel();
             applicationUser.Email = applicationUserDTO.Email;
             applicationUser.Password = applicationUserDTO.Password;
+
+            applicationUserDTO.Account?.ToModel(applicationUser.Account);
+
+            return applicationUser;
         }
         #endregion
     }
+
 }

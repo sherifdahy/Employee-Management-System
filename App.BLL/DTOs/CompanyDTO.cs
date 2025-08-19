@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace App.BLL.DTOs
 {
-    public class CompanyDTO : BaseDTO   
+    public class CompanyDTO 
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string TaxRegistrationNumber { get; set; }
         public string TaxFileNumber { get; set; }

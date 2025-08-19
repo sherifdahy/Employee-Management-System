@@ -1,8 +1,10 @@
 ﻿using App.BLL;
+using App.BLL.Manager;
 using App.Entities.Models;
 using AutoMapper;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.WPF.Mappers;
 using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.ViewModels;
 using MyApp.WPF.Windows;
@@ -19,15 +21,13 @@ namespace MyApp.WPF.UserControls.Admin.Companies
 {
     public partial class NewCompanyControl : UserControl
     {
-        private readonly IMapper _mapper;
+        private readonly IBLayerManager _manager;
         private readonly IServiceProvider _serviceProvider;
-        private readonly ICompanyService _companyService;
-        public NewCompanyControl(ICompanyService companyService,IMapper mapper,IServiceProvider serviceProvider)
+        public NewCompanyControl(IBLayerManager manager,IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _mapper = mapper;
             _serviceProvider = serviceProvider;
-            _companyService = companyService;
+            _manager = manager;
             this.FormControl.DataContext = new CompanyViewModel();
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -38,31 +38,35 @@ namespace MyApp.WPF.UserControls.Admin.Companies
         {
             try
             {
-                var companyVM = this.FormControl.DataContext as CompanyViewModel;
+                if (FormControl.Content is not CompanyFromControl { DataContext : CompanyViewModel companyVM })
+                    return;
 
-                if (companyVM.IsValid)
+                if (!companyVM.IsValid)
                 {
-                    var result = await _companyService.CreateAsync(_mapper.Map<Company>(companyVM));
+                    DialogService.ShowError("من فضلك اكمل البيانات بشكل صحيح.");
+                    return;
+                }
 
-                    if (result.State)
-                    {
-                        DialogService.ShowSuccess("✅ تم حفظ بيانات الشركة بنجاح.");
-                        var control = this.FormControl.Content as CompanyFromControl;
-                        control.DataContext = new CompanyViewModel();
-                    }
-                    else
-                    {
-                        DialogService.ShowWarning(result.Message);
-                    }
+                var result = await _manager.CompanyService.CreateAsync(companyVM.ToModel(new Company()));
+
+                if (!result.State)
+                {
+                    DialogService.ShowError(result.Message);
+                    return;
+                }
+
+                DialogService.ShowSuccess("تم حفظ بيانات الشركة بنجاح.");
+
+                if (FormControl.Content is CompanyFromControl control)
+                {
+                    control.DataContext = new CompanyViewModel();
                 }
             }
             catch (Exception ex)
             {
-                DialogService.ShowError(ex.Message);
+                DialogService.ShowError("حدث خطأ غير متوقع: " + ex.Message);
             }
         }
 
-
-        
     }
 }

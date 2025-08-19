@@ -10,6 +10,7 @@ namespace App.Entities.Models
     public class Organization : BaseEntity
     {
         public int Id { get; set; }
+        public Guid Guid { get; set; } = Guid.NewGuid();
         public string? Name { get; set; }
         public string? URL { get; set; }
         public virtual ICollection<Email> Emails { get; set; } = new HashSet<Email>();

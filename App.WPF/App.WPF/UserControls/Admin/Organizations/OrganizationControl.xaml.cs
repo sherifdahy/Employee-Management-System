@@ -6,6 +6,7 @@ using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.WPF.Mappers;
 using MyApp.WPF.Services.Dialog;
+using MyApp.WPF.ViewModels;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ namespace MyApp.WPF.UserControls.Admin.Organizations
                 return;
             }
 
-            this.Content = ActivatorUtilities.CreateInstance<EditOrganizationControl>(_serviceProvider,org.ToViewModel());
+            this.Content = ActivatorUtilities.CreateInstance<EditOrganizationControl>(_serviceProvider,org.ToViewModel(new ()));
         }
     }
 }

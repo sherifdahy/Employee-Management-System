@@ -9,7 +9,7 @@ namespace App.BLL.DTOs
 {
     public class SelectorDTO 
     {
-        public int Id { get; set; }
+        public Guid Guid { get; set; }
         public string Value { get; set; }
         public SelectorType SelectorType { get; set; }
         public ContentType ContentType { get; set; }

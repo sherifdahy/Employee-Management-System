@@ -12,44 +12,33 @@ namespace MyApp.WPF.Mappers
     public static class ApplicationUserMapper
     {
         #region Model => ViewModel
-        public static ApplicationUserViewModel ToViewModel(this ApplicationUser user)
+        public static ApplicationUserViewModel ToViewModel(this ApplicationUser user,ApplicationUserViewModel applicationUserViewModel)
         {
-            if(user is null) throw new ArgumentNullException(nameof(user));
-            
-            return new ApplicationUserViewModel()
-            {
-                Id = user.Id,
-                Name = user.Name,
-                UserType = user.UserType,
-                Email = user.Email,
-                Password = user.Password,
-                ConfirmPassword = user.Password,
-            };
+
+            if(user is null || applicationUserViewModel is null) return null;
+
+            applicationUserViewModel.Id = user.Id;
+            applicationUserViewModel.Name = user.Name;
+            applicationUserViewModel.UserType = user.UserType;
+            applicationUserViewModel.Email = user.Email;
+            applicationUserViewModel.Password = user.Password;
+            applicationUserViewModel.ConfirmPassword = user.Password;
+
+            return applicationUserViewModel;
         }
         #endregion
 
         #region ViewModel => Model
-        public static void ToModel(this ApplicationUserViewModel from , ApplicationUser to)
+        public static ApplicationUser ToModel(this ApplicationUserViewModel from , ApplicationUser to)
         {
-            if (from == null) throw new ArgumentNullException(nameof(from));
-            if (to == null) throw new ArgumentNullException(nameof(to));
-        
+            if (from is null || to is null) return null;
+
             to.Email = from.Email;
             to.Password = from.Password;
             to.UserType = from.UserType;
             to.Name = from.Name;
-        }
-        public static ApplicationUser ToModel(this ApplicationUserViewModel vm)
-        {
-            if (vm == null) throw new ArgumentNullException(nameof(vm));
 
-            return new ApplicationUser()
-            {
-                Email = vm.Email,
-                Name = vm.Name,
-                Password = vm.Password,
-                UserType= vm.UserType,
-            };
+            return to;
         }
         #endregion
 

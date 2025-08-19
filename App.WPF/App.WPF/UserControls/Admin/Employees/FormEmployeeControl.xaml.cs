@@ -1,4 +1,5 @@
 ﻿using App.BLL;
+using App.BLL.Manager;
 using App.Entities.Enums;
 using App.Entities.Models;
 using AutoMapper;
@@ -26,34 +27,30 @@ namespace MyApp.WPF.UserControls.Admin.Employees
     /// </summary>
     public partial class FormEmployeeControl : UserControl
     {
-        private readonly IMapper _mapper;
-        private readonly IEmployeeService _employeeService;
         private readonly IServiceProvider _serviceProvider;
-        public FormEmployeeControl(IEmployeeService employeeService, IMapper mapper, IServiceProvider serviceProvider,ApplicationUserViewModel applicationUserViewModel)
+        private readonly IBLayerManager _manager;
+        public FormEmployeeControl(IBLayerManager manager, IServiceProvider serviceProvider,ApplicationUserViewModel applicationUserViewModel)
         {
             InitializeComponent();
-            _employeeService = employeeService;
-            _mapper = mapper;
+            _manager = manager;
             _serviceProvider = serviceProvider;
             this.DataContext = applicationUserViewModel;
         }
 
-
-        
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var roles = Enum.GetValues(typeof(UserType));
-                RoleComboBox.ItemsSource = roles;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "حدث خطأ ما.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            LoadRoles();
         }
 
+
+        private void LoadRoles()
+        {
+            var roles = Enum.GetValues(typeof(UserType));
+            
+            RoleComboBox.ItemsSource = roles;
+
+            RoleComboBox.SelectedIndex = 0;
+        }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {

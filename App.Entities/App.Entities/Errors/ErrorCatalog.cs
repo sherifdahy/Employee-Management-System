@@ -32,6 +32,7 @@ namespace App.Entities
             public static readonly ErrorInfo InvalidPhoneNumber = new("VALIDATION_004", "رقم الهاتف غير صحيح.");
             public static readonly ErrorInfo FieldLengthExceeded = new("VALIDATION_005", "تم تجاوز الحد الأقصى لطول الحقل.");
             public static readonly ErrorInfo FieldsDoNotMatch = new("VALIDATION_006", "الحقلان غير متطابقين.");
+            public static readonly ErrorInfo InvalidId = new("VALIDATION_007", "معرف المستخدم غير صالح.");
         }
 
         public static class Database

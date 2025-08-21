@@ -3,39 +3,36 @@
   "WorkspaceRootPath": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\employees\\employeeaccesscontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\employees\\employeeaccesscontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\dailytransactions\\formtransactioncontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\dailytransactions\\formtransactioncontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\companies\\companiescontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\companies\\companiescontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\mappers\\transactionitemmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\mappers\\transactionitemmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\employees\\employeeaccesscontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\employees\\employeeaccesscontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\viewmodels\\transactionitemviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\viewmodels\\transactionitemviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrif\\AppData\\Local\\SourceServer\\bd9971a28ab8e58ba1fb49d045c3df41422c02db91b14c2fdfec45945bed3890\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\mappers\\transactionmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\mappers\\transactionmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\employees\\employeescontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\employees\\employeescontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\dailytransactions\\newtransactioncontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\dailytransactions\\newtransactioncontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\employees\\editemployeecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\employees\\editemployeecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\dailytransactions\\formtransactioncontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\dailytransactions\\formtransactioncontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\employees\\formemployeecontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\employees\\formemployeecontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\dailytransactions\\transactionscontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\dailytransactions\\transactionscontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\employees\\formemployeecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\employees\\formemployeecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\employees\\newemployeecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\employees\\newemployeecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|e:\\saber eid\\employee-management-system\\app.wpf\\app.wpf\\usercontrols\\admin\\dailytransactions\\transactionscontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{143E6563-6A81-4833-9BCD-A3BD507E80D1}|App.WPF\\App.WPF.csproj|solutionrelative:app.wpf\\usercontrols\\admin\\dailytransactions\\transactionscontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -45,8 +42,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 238,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormTransactionControl.xaml.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml.cs",
+              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml.cs",
+              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAIwEgAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T18:08:13.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransactionItemViewModel.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\ViewModels\\TransactionItemViewModel.cs",
+              "RelativeDocumentMoniker": "App.WPF\\ViewModels\\TransactionItemViewModel.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\ViewModels\\TransactionItemViewModel.cs",
+              "RelativeToolTip": "App.WPF\\ViewModels\\TransactionItemViewModel.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T18:07:46.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TransactionItemMapper.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\TransactionItemMapper.cs",
+              "RelativeDocumentMoniker": "App.WPF\\Mappers\\TransactionItemMapper.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\TransactionItemMapper.cs",
+              "RelativeToolTip": "App.WPF\\Mappers\\TransactionItemMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T18:07:29.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TransactionMapper.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\TransactionMapper.cs",
+              "RelativeDocumentMoniker": "App.WPF\\Mappers\\TransactionMapper.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\Mappers\\TransactionMapper.cs",
+              "RelativeToolTip": "App.WPF\\Mappers\\TransactionMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T18:02:04.649Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -57,110 +106,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CompaniesControl.xaml",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Companies\\CompaniesControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-19T13:19:23.353Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EmployeeAccessControl.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\shrif\\AppData\\Local\\SourceServer\\bd9971a28ab8e58ba1fb49d045c3df41422c02db91b14c2fdfec45945bed3890\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml.cs",
-              "ToolTip": "C:\\Users\\shrif\\AppData\\Local\\SourceServer\\bd9971a28ab8e58ba1fb49d045c3df41422c02db91b14c2fdfec45945bed3890\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml.cs [Read Only]",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAmwIAAAAAIAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T12:51:52.608Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EmployeeAccessControl.xaml",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-19T12:37:59.487Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EmployeeAccessControl.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml.cs",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Employees\\EmployeeAccessControl.xaml.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAIwHcAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T10:51:28.135Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "EmployeesControl.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeesControl.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Employees\\EmployeesControl.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EmployeesControl.xaml.cs",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Employees\\EmployeesControl.xaml.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Title": "NewTransactionControl.xaml.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\NewTransactionControl.xaml.cs",
+              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\DailyTransactions\\NewTransactionControl.xaml.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\NewTransactionControl.xaml.cs",
+              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\DailyTransactions\\NewTransactionControl.xaml.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAADgv0AAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T10:51:22.951Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "FormEmployeeControl.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml.cs",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAQwDMAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T10:33:55.154Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FormEmployeeControl.xaml",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Employees\\FormEmployeeControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-19T10:33:39.226Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "NewEmployeeControl.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\NewEmployeeControl.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Employees\\NewEmployeeControl.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\NewEmployeeControl.xaml.cs",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Employees\\NewEmployeeControl.xaml.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T10:31:49.106Z"
+              "WhenOpened": "2025-08-21T12:13:06.299Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "EditEmployeeControl.xaml.cs",
-              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EditEmployeeControl.xaml.cs",
-              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\Employees\\EditEmployeeControl.xaml.cs",
-              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\Employees\\EditEmployeeControl.xaml.cs",
-              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\Employees\\EditEmployeeControl.xaml.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAA2wFUAAAAAAAAAAAAAAA==",
+              "Title": "FormTransactionControl.xaml",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml",
+              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml",
+              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\DailyTransactions\\FormTransactionControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-21T12:13:53.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TransactionsControl.xaml",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml",
+              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml",
+              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-21T12:13:41.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TransactionsControl.xaml.cs",
+              "DocumentMoniker": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml.cs",
+              "RelativeDocumentMoniker": "App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml.cs",
+              "ToolTip": "E:\\Saber Eid\\Employee-Management-System\\App.WPF\\App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml.cs",
+              "RelativeToolTip": "App.WPF\\UserControls\\Admin\\DailyTransactions\\TransactionsControl.xaml.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T10:31:46.018Z"
+              "WhenOpened": "2025-08-21T12:12:56.992Z"
             }
           ]
         }

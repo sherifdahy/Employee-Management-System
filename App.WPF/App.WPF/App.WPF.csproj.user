@@ -14,6 +14,18 @@
     <Compile Update="UserControls\Admin\Companies\NewCompanyControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Admin\DailyTransactions\EditTransactionControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\DailyTransactions\FormTransactionControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\DailyTransactions\NewTransactionControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Admin\DailyTransactions\TransactionsControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Admin\Employees\EditEmployeeControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +98,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\Admin\Companies\NewCompanyControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\DailyTransactions\EditTransactionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\DailyTransactions\FormTransactionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\DailyTransactions\NewTransactionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Admin\DailyTransactions\TransactionsControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\Admin\Employees\EditEmployeeControl.xaml">

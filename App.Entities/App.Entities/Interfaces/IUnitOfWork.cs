@@ -10,9 +10,12 @@ namespace Interfaces
         public IRepository<Owner> Owners { get; }
         public IRepository<Email> Emails { get;}
         public IRepository<Organization> Organizations { get; }
+        public IRepository<DailyTransaction> Transactions { get;}
+        public IRepository<TransactionItemCategory> TransactionItemCategories { get;}
+
         Task<int> SaveAsync();
 
-        public void Dispose();
+        void Dispose();
 
 	}
 }

@@ -30,7 +30,7 @@ namespace MyApp.WPF.UserControls.Admin.Organizations
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IOrganizationService _organizationService;
-        public NewOrganizationControl(IOrganizationService organizationService,IMapper mapper,IServiceProvider serviceProvider)
+        public NewOrganizationControl(IOrganizationService organizationService,IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;

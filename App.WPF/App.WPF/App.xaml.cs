@@ -3,8 +3,11 @@ using App.BLL.DataSync;
 using App.BLL.Dependencies.Implementations;
 using App.BLL.Dependencies.Interfaces;
 using App.BLL.Manager;
+using App.BLL.TransactionItemCategoryService;
+using App.BLL.Transactions;
 using App.DAL.Data;
 using App.Entities.Helper;
+using App.Entities.Models;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using MyApp.WPF.ApplicationConfiguration;
 using MyApp.WPF.Services.State;
 using MyApp.WPF.UserControls.Admin.Companies;
+using MyApp.WPF.UserControls.Admin.DailyTransactions;
 using MyApp.WPF.UserControls.Admin.Employees;
 using MyApp.WPF.UserControls.Admin.Organizations;
 using MyApp.WPF.UserControls.Shared;
@@ -68,6 +72,8 @@ namespace MyApp.WPF
                     services.AddTransient<IOrganizationService, OrganizationService>();
                     services.AddTransient<IEmployeeService, EmployeeService>();
                     services.AddTransient<IDataSync, DataSync>();
+                    services.AddTransient<ITransactionService, TransactionService>();
+                    services.AddTransient<ITransactionItemCategoryService, TransactionItemCategoryService>();
 
                     // Application Layer
                     services.AddSingleton<IStateService, StateService>();
@@ -81,10 +87,6 @@ namespace MyApp.WPF
 
                     // Logger
                     services.AddScoped<ILoggerService, LoggerService>();
-                    #endregion
-
-                    #region AutoMapper
-                    services.AddAutoMapper(typeof(AutoMapperProfile));
                     #endregion
 
                     #region Windows
@@ -110,6 +112,9 @@ namespace MyApp.WPF
                     services.AddTransient<DisplayCompanyControl>();
                     services.AddTransient<SettingsControl>();
                     services.AddTransient<FormOrganizationControl>();
+                    services.AddTransient<TransactionsControl>();
+                    services.AddTransient<NewTransactionControl>();
+                    services.AddTransient<EditTransactionControl>();
                     #endregion
 
                 })

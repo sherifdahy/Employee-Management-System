@@ -18,7 +18,7 @@ namespace App.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserType = table.Column<int>(type: "int", nullable: false),
@@ -37,7 +37,7 @@ namespace App.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaxRegistrationNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TaxRegistrationNumber = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
                     TaxFileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EntityType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaxOfficeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -76,7 +76,8 @@ namespace App.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FileUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -132,7 +133,6 @@ namespace App.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     State = table.Column<byte>(type: "tinyint", nullable: false),
-                    FileUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     ApplicationUserId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -187,7 +187,7 @@ namespace App.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmailAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrganizationId = table.Column<int>(type: "int", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -259,12 +259,18 @@ namespace App.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
                 columns: new[] { "Id", "CreatedAt", "Email", "IsDeleted", "Name", "Password", "UpdatedAt", "UserType" },
-                values: new object[] { 1, new DateTime(2025, 8, 17, 21, 53, 49, 10, DateTimeKind.Utc).AddTicks(9813), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 17, 21, 53, 49, 10, DateTimeKind.Utc).AddTicks(9815), 2 });
+                values: new object[] { 1, new DateTime(2025, 8, 19, 18, 40, 55, 374, DateTimeKind.Utc).AddTicks(677), "admin", false, "Sherif Dahy", "G2Po4Wgp2rqN2Aflcd61PwfgSPy8v0D37XXNFFZzhWk=", new DateTime(2025, 8, 19, 18, 40, 55, 374, DateTimeKind.Utc).AddTicks(679), 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUserCompany_CompaniesId",
                 table: "ApplicationUserCompany",
                 column: "CompaniesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicationUsers_Email",
+                table: "ApplicationUsers",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_TaxRegistrationNumber",
@@ -293,9 +299,9 @@ namespace App.DAL.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Emails_EmailAddress_CompanyId",
+                name: "IX_Emails_EmailAddress_CompanyId_OrganizationId",
                 table: "Emails",
-                columns: new[] { "EmailAddress", "CompanyId" },
+                columns: new[] { "EmailAddress", "CompanyId", "OrganizationId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(

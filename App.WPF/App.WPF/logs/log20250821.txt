@@ -1,0 +1,146 @@
+2025-08-21 12:53:51.153 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-08-21 12:53:51.515 +03:00 [DBG] The index {'ApplicationUsersId'} was not created on entity type 'ApplicationUserCompany (Dictionary<string, object>)' as the properties are already covered by the index {'ApplicationUsersId', 'CompaniesId'}.
+2025-08-21 12:53:51.640 +03:00 [DBG] The property 'DailyTransaction.CompanyId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:51.641 +03:00 [DBG] The property 'Selector.OrganizationId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:51.641 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).ApplicationUsersId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:51.875 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).CompaniesId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:51.895 +03:00 [WRN] No store type was specified for the decimal property 'Currency' on entity type 'Account'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-21 12:53:51.895 +03:00 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'TransactionItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-21 12:53:52.013 +03:00 [DBG] Entity Framework Core 8.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.0' with options: using lazy loading proxies 
+2025-08-21 12:53:52.057 +03:00 [DBG] The index {'ApplicationUsersId'} was not created on entity type 'ApplicationUserCompany (Dictionary<string, object>)' as the properties are already covered by the index {'ApplicationUsersId', 'CompaniesId'}.
+2025-08-21 12:53:52.077 +03:00 [DBG] The property 'DailyTransaction.CompanyId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:52.077 +03:00 [DBG] The property 'Selector.OrganizationId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:52.077 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).ApplicationUsersId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:52.077 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).CompaniesId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:53:52.081 +03:00 [WRN] No store type was specified for the decimal property 'Currency' on entity type 'Account'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-21 12:53:52.082 +03:00 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'TransactionItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-21 12:53:52.584 +03:00 [DBG] 'ApplicationDbContext' disposed.
+2025-08-21 12:57:45.337 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-08-21 12:57:45.710 +03:00 [DBG] The index {'ApplicationUsersId'} was not created on entity type 'ApplicationUserCompany (Dictionary<string, object>)' as the properties are already covered by the index {'ApplicationUsersId', 'CompaniesId'}.
+2025-08-21 12:57:46.212 +03:00 [DBG] The property 'DailyTransaction.CompanyId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:57:46.212 +03:00 [DBG] The property 'Selector.OrganizationId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:57:46.212 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).ApplicationUsersId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:57:46.212 +03:00 [DBG] The property 'ApplicationUserCompany (Dictionary<string, object>).CompaniesId' was created in shadow state because there are no eligible CLR members with a matching name.
+2025-08-21 12:57:46.233 +03:00 [WRN] No store type was specified for the decimal property 'Currency' on entity type 'Account'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-21 12:57:46.234 +03:00 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'TransactionItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-08-21 12:57:46.356 +03:00 [DBG] Entity Framework Core 8.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.0' with options: using lazy loading proxies 
+2025-08-21 12:57:46.367 +03:00 [DBG] Creating DbConnection.
+2025-08-21 12:57:46.371 +03:00 [DBG] Created DbConnection. (1ms).
+2025-08-21 12:57:46.373 +03:00 [DBG] Migrating using database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.376 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.380 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.387 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-21 12:57:46.391 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (4ms).
+2025-08-21 12:57:46.392 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (8ms).
+2025-08-21 12:57:46.399 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-21 12:57:46.411 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-21 12:57:46.414 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.419 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (1ms).
+2025-08-21 12:57:46.422 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2025-08-21 12:57:46.422 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2025-08-21 12:57:46.422 +03:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (0ms).
+2025-08-21 12:57:46.422 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.423 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.423 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-21 12:57:46.433 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-21 12:57:46.433 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.433 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-21 12:57:46.434 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.434 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.435 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-21 12:57:46.435 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:46.435 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:46.435 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-21 12:57:46.436 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-21 12:57:46.436 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.436 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-21 12:57:46.436 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2025-08-21 12:57:46.437 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2025-08-21 12:57:46.437 +03:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (0ms).
+2025-08-21 12:57:46.437 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.437 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.437 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-21 12:57:46.437 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-21 12:57:46.684 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.684 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-21 12:57:46.694 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.694 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.694 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-08-21 12:57:46.694 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2025-08-21 12:57:46.694 +03:00 [DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+2025-08-21 12:57:46.695 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-08-21 12:57:46.701 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-08-21 12:57:46.703 +03:00 [DBG] Closing data reader to 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.704 +03:00 [DBG] A data reader for 'MyAppDb' on server '.' is being disposed after spending 1ms reading results.
+2025-08-21 12:57:46.704 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.704 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-21 12:57:46.710 +03:00 [INF] Applying migration '20250821095352_update_column'.
+2025-08-21 12:57:46.764 +03:00 [DBG] Opening connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.764 +03:00 [DBG] Opened connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:46.765 +03:00 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-08-21 12:57:46.768 +03:00 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-08-21 12:57:46.769 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-21 12:57:46.769 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:46.770 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:46.770 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP INDEX [IX_DailyTransactions_TransactionNumber] ON [DailyTransactions];
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DailyTransactions]') AND [c].[name] = N'TransactionNumber');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [DailyTransactions] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [DailyTransactions] ALTER COLUMN [TransactionNumber] nvarchar(450) NOT NULL;
+CREATE UNIQUE INDEX [IX_DailyTransactions_TransactionNumber] ON [DailyTransactions] ([TransactionNumber]);
+2025-08-21 12:57:46.804 +03:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP INDEX [IX_DailyTransactions_TransactionNumber] ON [DailyTransactions];
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DailyTransactions]') AND [c].[name] = N'TransactionNumber');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [DailyTransactions] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [DailyTransactions] ALTER COLUMN [TransactionNumber] nvarchar(450) NOT NULL;
+CREATE UNIQUE INDEX [IX_DailyTransactions_TransactionNumber] ON [DailyTransactions] ([TransactionNumber]);
+2025-08-21 12:57:48.078 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-21 12:57:48.078 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:48.078 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:48.078 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [ApplicationUsers] SET [CreatedAt] = '2025-08-21T09:53:52.0558567Z', [UpdatedAt] = '2025-08-21T09:53:52.0558569Z'
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+2025-08-21 12:57:48.080 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [ApplicationUsers] SET [CreatedAt] = '2025-08-21T09:53:52.0558567Z', [UpdatedAt] = '2025-08-21T09:53:52.0558569Z'
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+2025-08-21 12:57:48.080 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-08-21 12:57:48.081 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:48.081 +03:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+2025-08-21 12:57:48.081 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20250821095352_update_column', N'8.0.0');
+2025-08-21 12:57:48.082 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20250821095352_update_column', N'8.0.0');
+2025-08-21 12:57:48.083 +03:00 [DBG] Committing transaction.
+2025-08-21 12:57:48.090 +03:00 [DBG] Committed transaction.
+2025-08-21 12:57:48.091 +03:00 [DBG] Disposing transaction.
+2025-08-21 12:57:48.091 +03:00 [DBG] Closing connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:48.092 +03:00 [DBG] Closed connection to database 'MyAppDb' on server '.' (0ms).
+2025-08-21 12:57:48.093 +03:00 [DBG] 'ApplicationDbContext' disposed.
+2025-08-21 12:57:48.094 +03:00 [DBG] Disposing connection to database 'MyAppDb' on server '.'.
+2025-08-21 12:57:48.094 +03:00 [DBG] Disposed connection to database '' on server '' (0ms).

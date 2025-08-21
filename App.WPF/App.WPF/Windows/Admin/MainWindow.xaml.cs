@@ -6,9 +6,11 @@ using MyApp.WPF.Services.State;
 using MyApp.WPF.UserControls;
 using MyApp.WPF.UserControls.Admin;
 using MyApp.WPF.UserControls.Admin.Companies;
+using MyApp.WPF.UserControls.Admin.DailyTransactions;
 using MyApp.WPF.UserControls.Admin.Employees;
 using MyApp.WPF.UserControls.Admin.Organizations;
 using MyApp.WPF.UserControls.Shared;
+using MyApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,7 +121,19 @@ namespace MyApp.WPF.Windows.Admin
             SetActiveButton((Button)sender);
 
         }
+        private void TransactionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainSection.Content = _serviceProvider.GetRequiredService<TransactionsControl>();
+            CurrentPageName.Text = "العهد";
+            SetActiveButton((Button)sender);
 
+        }
+        private void NewTransactionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainSection.Content = ActivatorUtilities.CreateInstance<NewTransactionControl>(_serviceProvider);
+            CurrentPageName.Text = "انشاء عهدة";
+            SetActiveButton((Button)sender);
+        }
         private void SettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             MainSection.Content = _serviceProvider.GetRequiredService<SettingsControl>();

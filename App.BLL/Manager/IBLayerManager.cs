@@ -1,5 +1,7 @@
 ﻿using App.BLL.DataSync;
 using App.BLL.Dependencies.Interfaces;
+using App.BLL.TransactionItemCategoryService;
+using App.BLL.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,8 @@ namespace App.BLL.Manager
         IEncryptionService EncryptionService { get; }
         IOrganizationService OrganizationService { get; }
         IBrowserService BrowserService { get; }
+        ITransactionService TransactionService { get; }
+        ITransactionItemCategoryService TransactionItemCategoryService { get; }
 
     }
 }

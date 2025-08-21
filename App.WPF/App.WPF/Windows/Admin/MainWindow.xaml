@@ -96,7 +96,7 @@
 
 
         <!-- Sidebar -->
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="DarkCyan" BorderThickness="0,0,1,0" Background="White" Width="200" x:Name="SidebarBorder">
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="#0057f6" BorderThickness="0,0,1,0" Background="White" Width="200" x:Name="SidebarBorder">
             <!-- Sidebar Content -->
             <StackPanel  x:Name="SidebarContent">
                 <Button Style="{StaticResource MainButtonStyle}" Name="HomePageBtn" 
@@ -132,8 +132,14 @@
                              Style="{StaticResource SubButtonStyle}"/>
                     </StackPanel>
                 </telerik:RadExpander>
-
-                <Button Style="{StaticResource MainButtonStyle}" Content="العهد"/>
+                <telerik:RadExpander Header="العهد" telerik:StyleManager.Theme="Fluent" IsExpanded="False" Margin="0,5">
+                    <StackPanel>
+                        <Button Content="عرض الكل" Click="TransactionsBtn_Click"
+                             Style="{StaticResource SubButtonStyle}"/>
+                        <Button Content="إنشاء جديد" Click="NewTransactionBtn_Click"
+                            Style="{StaticResource SubButtonStyle}"/>
+                    </StackPanel>
+                </telerik:RadExpander>
                 <Button x:Name="SettingsBtn" Style="{StaticResource MainButtonStyle}" Content="الاعدادات" Click="SettingsBtn_Click" />
             </StackPanel>
         </Border>

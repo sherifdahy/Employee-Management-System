@@ -2,6 +2,8 @@
 using App.Entities.Models;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
+using MyApp.WPF.Mappers;
+using MyApp.WPF.Services.Dialog;
 using MyApp.WPF.Services.State;
 using MyApp.WPF.ViewModels;
 using System;
@@ -28,13 +30,11 @@ namespace MyApp.WPF.UserControls.Shared
     public partial class SettingsControl : UserControl
     {
         private readonly IAuthService _authService;
-        private readonly IMapper _mapper;
         private readonly IStateService _stateService;
-        public SettingsControl(IAuthService authService,IMapper mapper,IStateService stateService)
+        public SettingsControl(IAuthService authService,IStateService stateService)
         {
             InitializeComponent();
             _authService = authService;
-            _mapper = mapper;
             _stateService = stateService;
         }
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -44,17 +44,18 @@ namespace MyApp.WPF.UserControls.Shared
                 var result = await _authService.GetByIdAsync(_stateService.UserId);
                 if(result.State)
                 {
-                    this.DataContext = _mapper.Map<ApplicationUserViewModel>(result.Data);
+                    
+                    this.DataContext = result.Data.ToViewModel(new ApplicationUserViewModel());
                     return;
                 }
                 else
                 {
-                    MessageBox.Show(result.Message, "Ooopss.", MessageBoxButton.OK, MessageBoxImage.Error);
+                    DialogService.ShowError(result.Message);
                 }
             }
             catch (Exception ex)
             {
-
+                DialogService.ShowError(ex.Message);
             }
         }
 
@@ -70,7 +71,8 @@ namespace MyApp.WPF.UserControls.Shared
                         var result = await _authService.GetByIdAsync(_stateService.UserId);
                         if (result.State)
                         {
-                            await _authService.UpdateAsync(_mapper.Map(vm, result.Data));
+                            vm.ToModel(result.Data);
+                            await _authService.UpdateAsync(result.Data);
                             MessageBox.Show("تم الحفظ بنجاح", "عملية ناجة", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
@@ -87,6 +89,7 @@ namespace MyApp.WPF.UserControls.Shared
             }
             catch (Exception ex)
             {
+                DialogService.ShowError(ex.Message);
 
             }
         }

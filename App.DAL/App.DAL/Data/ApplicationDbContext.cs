@@ -23,6 +23,7 @@ namespace App.DAL.Data
         public virtual DbSet<Selector> Selectors { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<DailyTransaction> DailyTransactions { get; set; }
+        public virtual DbSet<TransactionItemCategory> TransactionItemCategories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,6 +64,19 @@ namespace App.DAL.Data
                 .HasIndex(x=> new { x.Email })
                 .IsUnique();
 
+            modelBuilder.Entity<DailyTransaction>()
+                .HasIndex(x => x.TransactionNumber)
+                .IsUnique();
+            #endregion
+
+            #region Sequence
+            modelBuilder.HasSequence<long>("TransactionNumberSequence")
+                    .StartsAt(1)
+                    .IncrementsBy(1);
+
+            modelBuilder.Entity<DailyTransaction>()
+                .Property(t => t.TransactionNumber)
+                .HasDefaultValueSql("NEXT VALUE FOR TransactionNumberSequence"); 
             #endregion
 
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser()

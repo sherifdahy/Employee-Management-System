@@ -42,6 +42,18 @@
   <Page Include="UserControls\Admin\Companies\NewCompanyControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
+  <Page Include="UserControls\Admin\DailyTransactions\EditTransactionControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\DailyTransactions\FormTransactionControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\DailyTransactions\NewTransactionControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="UserControls\Admin\DailyTransactions\TransactionsControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="UserControls\Admin\Employees\EditEmployeeControl.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
@@ -115,6 +127,8 @@
   <Compile Include="Mappers\OrganizationMapper.cs" />
   <Compile Include="Mappers\OwnerMapper.cs" />
   <Compile Include="Mappers\SelectorMapper.cs" />
+  <Compile Include="Mappers\TransactionItemMapper.cs" />
+  <Compile Include="Mappers\TransactionMapper.cs" />
   <Compile Include="Services\Dialog\DialogService.cs" />
   <Compile Include="Services\State\IStateService.cs" />
   <Compile Include="Services\State\StateService.cs" />
@@ -122,6 +136,10 @@
   <Compile Include="UserControls\Admin\Companies\CompanyFromControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Companies\EditCompaniesControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Companies\NewCompanyControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\DailyTransactions\EditTransactionControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\DailyTransactions\FormTransactionControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\DailyTransactions\NewTransactionControl.xaml.cs" />
+  <Compile Include="UserControls\Admin\DailyTransactions\TransactionsControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Employees\EditEmployeeControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Employees\EmployeeAccessControl.xaml.cs" />
   <Compile Include="UserControls\Admin\Employees\EmployeesControl.xaml.cs" />
@@ -145,6 +163,8 @@
   <Compile Include="ViewModels\OwnerViewModel.cs" />
   <Compile Include="ViewModels\ApplicationUserViewModel.cs" />
   <Compile Include="ViewModels\SelectorViewModel.cs" />
+  <Compile Include="ViewModels\TransactionItemViewModel.cs" />
+  <Compile Include="ViewModels\TransactionViewModel.cs" />
   <Compile Include="Windows\Admin\AddSelectorWindow.xaml.cs" />
   <Compile Include="Windows\Employee\MainWindow.xaml.cs" />
   <Compile Include="Windows\Identity\LoginWindow.xaml.cs" />
@@ -168,6 +188,10 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\App.BLL\App.BLL.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="upload\" />
   </ItemGroup>
 
 </Project>

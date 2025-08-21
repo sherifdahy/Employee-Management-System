@@ -1,5 +1,7 @@
 ﻿using App.BLL.DataSync;
 using App.BLL.Dependencies.Interfaces;
+using App.BLL.TransactionItemCategoryService;
+using App.BLL.Transactions;
 using App.Entities.Helper;
 using Interfaces;
 using Microsoft.Extensions.Options;
@@ -21,8 +23,11 @@ namespace App.BLL.Manager
             IEmployeeService employeeService,
             IEncryptionService encryptionService,
             IOrganizationService organizationService,
-            IBrowserService browserService)
+            IBrowserService browserService,
+            ITransactionService transactionService,
+            ITransactionItemCategoryService transactionItemCategoryService)
         {
+            TransactionService = transactionService;
             DataSync = dataSync;
             BrowserService = browserService;
             CompanyService = companyService;
@@ -31,6 +36,7 @@ namespace App.BLL.Manager
             EmployeeService = employeeService;
             EncryptionService = encryptionService;
             OrganizationService = organizationService;
+            TransactionItemCategoryService = transactionItemCategoryService;
         }
 
         public IDataSync DataSync { get; }
@@ -41,5 +47,7 @@ namespace App.BLL.Manager
         public IEncryptionService EncryptionService { get; }
         public IOrganizationService OrganizationService { get; }
         public IBrowserService BrowserService { get; }
+        public ITransactionService TransactionService { get; }
+        public ITransactionItemCategoryService TransactionItemCategoryService{ get; }
     }
 }
